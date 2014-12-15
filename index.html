@@ -5,9 +5,7 @@
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta http-equiv="Content-Language" content="zh-CN">
-
-
-    <title>GitHub Hunter | Made By numbbbbb</title>
+    <title>GitHuber.info | 打造最好用的GitHub人才挖掘工具</title>
     <link rel="apple-touch-icon" sizes="57x57" href="/static/img/icon.png">
     <link rel="apple-touch-icon" sizes="114x114" href="/static/img/icon.png">
     <link rel="apple-touch-icon" sizes="72x72" href="/static/img/icon.png">
@@ -20,50 +18,121 @@
     <script src="/static/js/oauth.min.js"></script>
     <script src="/static/js/jquery-2.1.1.min.js"></script>
     <script src="/static/js/bootstrap.min.js"></script>
+    <style>
+    .table td,
+    .table th {
+        text-align: center;
+    }
+    </style>
 </head>
 
-<body>
-    <div class="fluid-container">
-    	<div class="row">
-    		<div class="col-lg-2 col-lg-offset-1">
-    			<img src="" alt="用户头像" id="avatar" class="img-responsive">
-    		</div>
-    		<div class="col-lg-2">
-				<table class="table">
-					<tbody>
-						<tr><td>姓名</td><td><span id="name" class="personalInfo"></span></td></tr>
-						<tr><td>用户名</td><td><span id="username" class="personalInfo"></span></td></tr>
-						<tr><td>博客地址</td><td><span id="blog" class="personalInfo"></span></td></tr>
-						<tr><td>公司</td><td><span id="company" class="personalInfo"></span></td></tr>
-						<tr><td>创建时间</td><td><span id="created_at" class="personalInfo"></span></td></tr>
-						<tr><td>email</td><td><span id="email" class="personalInfo"></span></td></tr>
-						<tr><td>粉丝数</td><td><span id="followers" class="personalInfo"></span></td></tr>
-						<tr><td>关注数</td><td><span id="following" class="personalInfo"></span></td></tr>
-						<tr><td>位置</td><td><span id="location" class="personalInfo"></span></td></tr>
-						<tr><td>公共Gist数量</td><td><span id="public_gists" class="personalInfo"></span></td></tr>
-						<tr><td>公共Repo</td><td><span id="public_repos" class="personalInfo"></span></td></tr>
-					</tbody>
-				</table>
-    		</div>
-    		<div class="col-lg-7"></div>
-    	</div>
+<body style="background-image:url('/static/img/bg.png');">
+    <nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">GitHuber.info</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="margin-left:15%;">
+                <form class="navbar-form navbar-left" role="search">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="输入用户名">
+                    </div>
+                    <button type="submit" class="btn btn-default">搜索</button>
+                </form>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#">打赏</a>
+                    </li>
+                    <li><a href="#">关于</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+    <div class="container-fluid" style="margin-top:50px;">
+        <div class="row">
+            <div class="col-lg-2">
+                <!-- <div class="row" style="margin-top:50px;">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div style="border:2px solid #666666;border-radius:5px 5px 0 0;width:100%;text-align:center;font-size:20px;font-weight:700;padding:10px;">待选列表</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <table class="table" style="border-bottom-style:none;">
+                            <tbody>
+                                <tr>
+                                    <td style="border:2px solid #666666;border-top-style:none;width:100%;">梁杰</td>
+                                </tr>
+                                <tr>
+                                    <td style="border:2px solid #666666;border-top-style:none;width:100%;">梁杰</td>
+                                </tr>
+                                <tr>
+                                    <td style="border:2px solid #666666;border-top-style:none;width:100%;">梁杰</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div> -->
+
+            </div>
+            <div class="col-lg-6 col-lg-offset-1" style="margin-top:30px;background: none repeat scroll 0% 0% #FFF;box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.15), -1px 0px 0px rgba(0, 0, 0, 0.03), 1px 0px 0px rgba(0, 0, 0, 0.03), 0px 1px 0px rgba(0, 0, 0, 0.12);">
+                <h2 style="margin:0px;margin-left:-15px;padding:5px;background-color:black;width:12%;text-align:center;color:white;font-size:18px;">个人信息</h2>
+                <div class="row" style="margin-top:30px;padding:30px;">
+                    <div class="col-lg-2 col-lg-offset-1">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <img src="https://octodex.github.com/images/kimonotocat.png" alt="" class="img-responsive">
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top:5px;">
+                            <div class="col-lg-12">
+                                <button class="btn btn-large btn-success btn-block">加入待选列表</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <ul class="list-unstyled" style="margin-top:40px;">
+                            <li>
+                                <h4>梁杰（numbbbbb）</h4>
+                            </li>
+                            <li>就职于xxx公司</li>
+                            <li>lj925184928@gmail.com</li>
+                            <li>梁杰.com</li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-4 col-lg-offset-2">
+                        <ul class="list-unstyled" style="margin-top:20px;">
+                            <li>
+                                梁杰有<span style="font-size:34px;">500</span>个粉丝
+                            </li>
+                            <li><span style="font-size:34px;">20</span>个项目</li>
+                            <li>总计编写了<span style="font-size:34px;">300000</span>行代码</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <script type="text/javascript">
     $(function() {
-        OAuth.initialize("sGKS5HvngIOeFDkWtsGIpEGuWAU");
-        OAuth.popup('github').done(function(github) {
-            $.ajax({
-            	url: "https://api.github.com/users/numbbbbb",
-            	dataType: "json"
-            }).always(function(data) {
-            	$("#avatar").attr("src", data.avatar_url);
-            	$(".personalInfo").each(function() {
-            		$(this).text(data[$(this).attr("id")]);
-            	})
-            });
-        }).fail(function(err) {
-        	alert("false");
-        });
+        // OAuth.initialize("sGKS5HvngIOeFDkWtsGIpEGuWAU");
+        // OAuth.popup('github').done(function(github) {
+        //     $.ajax({
+        //      url: "https://api.github.com/users/numbbbbb",
+        //      dataType: "json"
+        //     }).always(function(data) {
+        //      $("#avatar").attr("src", data.avatar_url);
+        //      $(".personalInfo").each(function() {
+        //          $(this).text(data[$(this).attr("id")]);
+        //      })
+        //     });
+        // }).fail(function(err) {
+        //  alert("false");
+        // });
     })
     </script>
 </body>
