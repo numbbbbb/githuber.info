@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Language" content="zh-CN">
+
+
+    <title>GitHub Hunter | Made By numbbbbb</title>
+    <link rel="apple-touch-icon" sizes="57x57" href="/static/img/icon.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/static/img/icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/static/img/icon.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/static/img/icon.png">
+    <link rel="icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <meta name="description" content="帮助你更好更快地发掘出GitHub上的人才">
+    <meta name="keywords" content="GitHub,招聘,人才">
+    <meta name="author" content="梁杰,numbbbbb,@梁杰_numbbbbb">
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <script src="/static/js/oauth.min.js"></script>
+    <script src="/static/js/jquery-2.1.1.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div class="fluid-container">
+    	<div class="row">
+    		<div class="col-lg-2 col-lg-offset-1">
+    			<img src="" alt="用户头像" id="avatar" class="img-responsive">
+    		</div>
+    		<div class="col-lg-2">
+				<table class="table">
+					<tbody>
+						<tr><td>姓名</td><td><span id="name" class="personalInfo"></span></td></tr>
+						<tr><td>用户名</td><td><span id="username" class="personalInfo"></span></td></tr>
+						<tr><td>博客地址</td><td><span id="blog" class="personalInfo"></span></td></tr>
+						<tr><td>公司</td><td><span id="company" class="personalInfo"></span></td></tr>
+						<tr><td>创建时间</td><td><span id="created_at" class="personalInfo"></span></td></tr>
+						<tr><td>email</td><td><span id="email" class="personalInfo"></span></td></tr>
+						<tr><td>粉丝数</td><td><span id="followers" class="personalInfo"></span></td></tr>
+						<tr><td>关注数</td><td><span id="following" class="personalInfo"></span></td></tr>
+						<tr><td>位置</td><td><span id="location" class="personalInfo"></span></td></tr>
+						<tr><td>公共Gist数量</td><td><span id="public_gists" class="personalInfo"></span></td></tr>
+						<tr><td>公共Repo</td><td><span id="public_repos" class="personalInfo"></span></td></tr>
+					</tbody>
+				</table>
+    		</div>
+    		<div class="col-lg-7"></div>
+    	</div>
+    </div>
+    <script type="text/javascript">
+    $(function() {
+        OAuth.initialize("sGKS5HvngIOeFDkWtsGIpEGuWAU");
+        OAuth.popup('github').done(function(github) {
+            $.ajax({
+            	url: "https://api.github.com/users/numbbbbb",
+            	dataType: "json"
+            }).always(function(data) {
+            	$("#avatar").attr("src", data.avatar_url);
+            	$(".personalInfo").each(function() {
+            		$(this).text(data[$(this).attr("id")]);
+            	})
+            });
+        }).fail(function(err) {
+        	alert("false");
+        });
+    })
+    </script>
+</body>
+
+</html>
