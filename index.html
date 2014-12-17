@@ -157,70 +157,177 @@
     </div>
     <script type="text/javascript">
     $(function() {
-        issues = [];
+        var Barrier = function() { // 用于等待多个ajax完成
+            this.barrierNumber = 0
+            this.checkFinish = function(cb) {
+                that = this
+                var clock = function() {
+                    if (that.barrierNumber === 1) {
+                        cb()
+                    } else {
+                        setTimeout(clock, 200)
+                    }
+                }
+                setTimeout(clock, 200)
+            }
+        }
+        languageBytesInOwnedRepos = {} // 自己repo的语言字节数统计 注意这里是字节数不是行数 GitHub不提供行数
+        languageOfStarredRepos = {} // star repo的语言统计 只统计个数 比如Python的repo 100个
+        ownedRepoStars = {} // TODO：自己的repo被star的次数以及repo的信息，比如title description以及readme 之后鼠标移动到repo上会显示这些信息
+        contributionBytes = 0 // 自己给其他repo贡献的字节数
         $(".nav-pills a").css({
             "borderRadius": "0px",
         })
-        OAuth.initialize("sGKS5HvngIOeFDkWtsGIpEGuWAU");
+        OAuth.initialize("sGKS5HvngIOeFDkWtsGIpEGuWAU")
         OAuth.popup('github').done(function(github) {
-            // $.ajax({
-            //  url: "https://api.github.com/users/numbbbbb",
-            //  dataType: "json"
-            // }).always(function(data) {
-
-            // });
-            // $.ajax({
-            //     url: "https://api.github.com/users/numbbbbb/repos?page=1&per_page=10000",
+            // 获取个人信息
+            // github.get({
+            //     url: "https://api.github.com/users/numbbbbb",
             //     dataType: "json"
             // }).always(function(data) {
-            //     console.log(data);
-            // })
-            $.when(
+            //     console.log(data)
+            // });
+            // 获取readme和issue内容
+            // github.get({
+            //         url: "https://api.github.com/repos/numbbbbb/the-swift-programming-language-in-chinese/readme",
+            //         dataType: "json"
+            //     }).always(function(data) {
+            //         readme = decodeURIComponent(escape(window.atob(data.content)));
+            //     }),
+            //     github.get({
+            //         url: "https://api.github.com/repos/numbbbbb/the-swift-programming-language-in-chinese/issues?page=1&per_page=10000",
+            //         data: {
+            //             state: "all"
+            //         },
+            //         dataType: "json"
+            //     }).always(function(data) {
+            //         for (var i in data) {
+            //             var issue = []
+            //             issue.title = data[i].title;
+            //             issue.body = data[i].body;
+            //             issue.comments = data[i].comments;
+            //             issue.comments_url = data[i].comments_url;
+            //             issue.comments_body = [];
+            //             issues.push(issue);
+            //         }
+            //         $.map(issues, function(issue, i) {
+            //             if (issue.comments > 0) {
+            //                 github.get({
+            //                     url: issue.comments_url + "?page=1&per_page=10000",
+            //                     dataType: "json"
+            //                 }).always(function(data) {
+            //                     for (var index in data) {
+            //                         issues[i].comments_body.push(data[index].body);
+            //                     }
+            //                 })
+            //             }
+            //         })
+
+            //     })
+
+            // 获取自己的repo并统计代码字节数
+            github.get({
+                url: "https://api.github.com/users/numbbbbb/repos?page=1&per_page=10000",
+                dataType: "json"
+            }).done(function(data) {
+                var barrier = new Barrier()
+                barrier.barrierNumber = data.length
+                $.map(data, function(repo, i) {
+                    github.get({
+                        url: "https://api.github.com/repos/numbbbbb/" + repo.name + "/languages",
+                        dataType: "json"
+                    }).done(function(data) {
+                        barrier.barrierNumber--
+                            if ("status" in data || $.isEmptyObject(data)) {
+                                return
+                            }
+                        $.each(data, function(language, lines) {
+                            if (isNaN(lines)) {
+                                return
+                            }
+                            if (!(language in languageBytesInOwnedRepos)) {
+                                languageBytesInOwnedRepos[language] = 0
+                            }
+                            languageBytesInOwnedRepos[language] += lines
+                        })
+                    })
+                })
+                barrier.checkFinish(function() {
+                    console.log(languageBytesInOwnedRepos)
+                })
+            })
+
+            // 获取star的repo并统计语言
+            var getStarredInfo = function(pageNumber) {
                 github.get({
-                    url: "https://api.github.com/repos/numbbbbb/the-swift-programming-language-in-chinese/readme",
+                    url: "https://api.github.com/users/numbbbbb/starred?page=" + pageNumber + "&per_page=100",
                     dataType: "json"
-                }).always(function(data) {
-                    readme = decodeURIComponent(escape(window.atob(data.content)));
-                }),
-                github.get({
-                    url: "https://api.github.com/repos/numbbbbb/the-swift-programming-language-in-chinese/issues?page=1&per_page=10000",
-                    data: {
-                        state: "all"
-                    },
-                    dataType: "json"
-                }).always(function(data) {
-                    for (var i in data) {
-                        var issue = []
-                        issue.title = data[i].title;
-                        issue.body = data[i].body;
-                        issue.comments = data[i].comments;
-                        issue.comments_url = data[i].comments_url;
-                        issue.comments_body = [];
-                        issues.push(issue);
+                }).done(function(data) {
+                    $.map(data, function(repo, i) {
+                        if (repo.language) {
+                            if (!(repo.language in languageOfStarredRepos)) {
+                                languageOfStarredRepos[repo.language] = 0
+                            }
+                            languageOfStarredRepos[repo.language] += 1
+                        }
+                    })
+                    if (data.length === 100) {
+                        getStarredInfo(pageNumber + 1)
+                    } else {
+                        console.log(languageOfStarredRepos)
                     }
-                    $.map(issues, function(issue, i) {
-                        if (issue.comments > 0) {
+                })
+            }
+            getStarredInfo(1)
+
+            // 获取fork的repo并统计自己在其中的贡献字节数
+            github.get({
+                url: "https://api.github.com/users/numbbbbb/repos?page=1&per_page=10000",
+                dataType: "json"
+            }).done(function(data) {
+                var barrier = new Barrier()
+                barrier.barrierNumber = data.length
+                $.map(data, function(repo, i) {
+                    github.get({
+                        url: "https://api.github.com/repos/numbbbbb/" + repo.name,
+                        dataType: "json"
+                    }).done(function(data) {
+                        if (!("parent" in data) || $.isEmptyObject(data)) {
+                            barrier.barrierNumber--
+                                return
+                        }
+                        var getContributionInfo = function(pageNumber) {
                             github.get({
-                                url: issue.comments_url + "?page=1&per_page=10000",
+                                url: "https://api.github.com/repos/" + data.parent.owner.login + "/" + data.name + "/stats/contributors?page=" + pageNumber + "&per_page=100",
                                 dataType: "json"
-                            }).always(function(data) {
-                                for (var index in data) {
-                                    issues[i].comments_body.push(data[index].body);
+                            }).done(function(data) {
+                                var findUser = false
+                                $.map(data, function(contribution, i) {
+                                    if (contribution.author.login === "numbbbbb") {
+                                        findUser = true
+                                        $.map(contribution.weeks, function(week, i) {
+                                            contributionBytes += week.a + week.d + week.c
+                                        })
+                                    }
+                                })
+                                if (findUser) {
+                                    barrier.barrierNumber--
+                                } else if (data.length === 100 && pageNumber < 10) {
+                                    getContributionInfo(pageNumber + 1)
+                                } else {
+                                    barrier.barrierNumber--
                                 }
                             })
                         }
+                        getContributionInfo(1)
                     })
-
-                })).then(function() {
-                all_content = '';
-                for (var i in issues) {
-                    all_content += issues[i].title + issues[i].body + issues[i].comments_body.join();
-                }
-                // all_content += readme;
-                console.log(all_content);
-            });
+                })
+                barrier.checkFinish(function() {
+                    console.log(contributionBytes)
+                })
+            })
         }).fail(function(err) {
-            alert("false");
+            alert("false")
         });
     })
     </script>
