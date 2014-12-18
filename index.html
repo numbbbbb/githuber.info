@@ -17,11 +17,13 @@
     <link rel="stylesheet" href="/static/css/bootstrap.min.css">
     <script src="/static/js/oauth.min.js"></script>
     <script src="/static/js/jquery-2.1.1.min.js"></script>
-    <script src="/static/js/bootstrap.min.js"></script>
     <style>
     .table td,
     .table th {
         text-align: center;
+    }
+    .readme-btn {
+        margin-bottom: 20px;
     }
     </style>
 </head>
@@ -96,9 +98,9 @@
                 </div>
 
             </div>
-            <div class="col-lg-6 col-lg-offset-1">
+            <div class="col-lg-8">
                 <div class="row">
-                    <div class="col-lg-12" style="margin-top:30px;background: none repeat scroll 0% 0% #FFF;box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.15), -1px 0px 0px rgba(0, 0, 0, 0.03), 1px 0px 0px rgba(0, 0, 0, 0.03), 0px 1px 0px rgba(0, 0, 0, 0.12);">
+                    <div class="col-lg-10 col-lg-offset-1" style="margin-top:30px;background: none repeat scroll 0% 0% #FFF;box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.15), -1px 0px 0px rgba(0, 0, 0, 0.03), 1px 0px 0px rgba(0, 0, 0, 0.03), 0px 1px 0px rgba(0, 0, 0, 0.12);">
                         <h2 style="margin:0px;margin-left:-15px;padding:5px;background-color:black;width:12%;text-align:center;color:white;font-size:18px;">个人信息</h2>
                         <div class="row" style="margin-top:30px;padding:30px;">
                             <div class="col-lg-2 col-lg-offset-1">
@@ -136,7 +138,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-lg-12" style="margin-top:30px;background: none repeat scroll 0% 0% #FFF;box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.15), -1px 0px 0px rgba(0, 0, 0, 0.03), 1px 0px 0px rgba(0, 0, 0, 0.03), 0px 1px 0px rgba(0, 0, 0, 0.12);">
+                    <div class="col-lg-10 col-lg-offset-1" style="margin-top:30px;background: none repeat scroll 0% 0% #FFF;box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.15), -1px 0px 0px rgba(0, 0, 0, 0.03), 1px 0px 0px rgba(0, 0, 0, 0.03), 0px 1px 0px rgba(0, 0, 0, 0.12);">
                         <h2 style="margin:0px;margin-left:-15px;padding:5px;background-color:black;width:12%;text-align:center;color:white;font-size:18px;">特性分析</h2>
                         <div class="row" style="margin-top:30px;padding:30px;">
                             <div class="col-lg-12" id="byte-chart">
@@ -148,6 +150,16 @@
 
                             </div>
                             <div class="col-lg-6" style="height:600px;" id="contribution-chart">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-10 col-lg-offset-1" style="margin-top:30px;background: none repeat scroll 0% 0% #FFF;box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.15), -1px 0px 0px rgba(0, 0, 0, 0.03), 1px 0px 0px rgba(0, 0, 0, 0.03), 0px 1px 0px rgba(0, 0, 0, 0.12);">
+                        <h2 style="margin:0px;margin-left:-15px;padding:5px;background-color:black;width:12%;text-align:center;color:white;font-size:18px;">项目统计</h2>
+                        <div class="row" style="margin-top:30px;padding:30px;">
+                            <div class="col-lg-12" id="repo-details">
 
                             </div>
                         </div>
@@ -174,7 +186,7 @@
             languageBytesInOwnedRepos = {} // 自己repo的语言字节数统计 注意这里是字节数不是行数 GitHub不提供行数
             totalBytesInOwnedRepos = 0
             languageOfStarredRepos = {} // star repo的语言统计 只统计个数 比如Python的repo 100个
-            ownedRepoStars = {} // TODO：自己的repo被star的次数以及repo的信息，比如title description以及readme 之后鼠标移动到repo上会显示这些信息
+            ownedRepoInfos = {} // TODO：自己的repo被star的次数以及repo的信息，比如title description以及readme 之后鼠标移动到repo上会显示这些信息
             contributionBytes = 0 // 自己给其他repo贡献的字节数
             $(".nav-pills a").css({
                 "borderRadius": "0px",
@@ -229,21 +241,30 @@
                 //     })
 
                 // 获取自己的repo并统计代码字节数
-                github.get({
-                    url: "https://api.github.com/users/numbbbbb/repos?page=1&per_page=10000",
-                    dataType: "json"
-                }).done(function(data) {
+                github.get(
+                    "/users/numbbbbb/repos?page=1&per_page=10000"
+                ).done(function(data) {
                     var barrier = new Barrier()
-                    barrier.barrierNumber = data.length
+                    barrier.barrierNumber = data.length * 2
                     $.map(data, function(repo, i) {
-                        github.get({
-                            url: "https://api.github.com/repos/numbbbbb/" + repo.name + "/languages",
-                            dataType: "json"
-                        }).done(function(data) {
+                        ownedRepoInfos[repo.id] = {
+                            description: repo.description,
+                            name: repo.name,
+                            stars: repo.stargazers_count,
+                        }
+                        github.get(
+                            "/repos/numbbbbb/" + repo.name + "/readme"
+                        ).done(function(data) {
+                            ownedRepoInfos[repo.id].readme = decodeURIComponent(escape(window.atob(data.content)))
                             barrier.barrierNumber--
-                                if ("status" in data || $.isEmptyObject(data)) {
+                        })
+                        github.get(
+                            "/repos/numbbbbb/" + repo.name + "/languages"
+                        ).done(function(data) {
+                            if ("status" in data || $.isEmptyObject(data)) {
+                                barrier.barrierNumber--
                                     return
-                                }
+                            }
                             $.each(data, function(language, bytes) {
                                 if (isNaN(bytes)) {
                                     return
@@ -254,9 +275,28 @@
                                 languageBytesInOwnedRepos[language] += bytes
                                 totalBytesInOwnedRepos += bytes
                             })
+                            barrier.barrierNumber--
                         })
                     })
                     barrier.checkFinish(function() {
+                        var allRepos = []
+                        $.each(ownedRepoInfos, function(id, repo) {
+                            repo.id = id
+                            allRepos.push(repo)
+                        })
+                        allRepos.sort(function(a, b) {
+                            return b.stars - a.stars
+                        })
+                        $.map(allRepos, function(repo, i) {
+                            $("#repo-details").append('<div class="row">' +
+                                '<div class="col-lg-10 col-lg-offset-1" style="border-bottom-width:1px;border-bottom-style:solid;border-bottom-color:#E8E8E8;">' +
+                                '<h2>' + repo.name + ' <span class="label label-default">' + repo.stars + ' Stars</span></h2>' +
+                                '<p style="font-size:16px;">' + repo.description + '</p>' +
+                                '<button type="button" class="btn btn-default readme-btn" data-id="' + repo.id + '">查看readme</button>' +
+                                '</div>' +
+                                '</div>')
+                        })
+                        $(".readme-btn:last").closest("div").css("border-bottom", "none")
                         var data = []
                         $.each(languageBytesInOwnedRepos, function(language, bytes) {
                             data.push({
@@ -302,10 +342,9 @@
 
                 // 获取star的repo并统计语言
                 var getStarredInfo = function(pageNumber) {
-                    github.get({
-                        url: "https://api.github.com/users/numbbbbb/starred?page=" + pageNumber + "&per_page=100",
-                        dataType: "json"
-                    }).done(function(data) {
+                    github.get(
+                        "/users/numbbbbb/starred?page=" + pageNumber + "&per_page=100"
+                    ).done(function(data) {
                         $.map(data, function(repo, i) {
                             if (repo.language) {
                                 if (!(repo.language in languageOfStarredRepos)) {
@@ -349,26 +388,23 @@
                 getStarredInfo(1)
 
                 // 获取fork的repo并统计自己在其中的贡献字节数
-                github.get({
-                    url: "https://api.github.com/users/numbbbbb/repos?page=1&per_page=10000",
-                    dataType: "json"
-                }).done(function(data) {
+                github.get(
+                    "/users/numbbbbb/repos?page=1&per_page=10000"
+                ).done(function(data) {
                     var barrier = new Barrier()
                     barrier.barrierNumber = data.length
                     $.map(data, function(repo, i) {
-                        github.get({
-                            url: "https://api.github.com/repos/numbbbbb/" + repo.name,
-                            dataType: "json"
-                        }).done(function(data) {
+                        github.get(
+                            "/repos/numbbbbb/" + repo.name
+                        ).done(function(data) {
                             if (!("parent" in data) || $.isEmptyObject(data)) {
                                 barrier.barrierNumber--
                                     return
                             }
                             var getContributionInfo = function(pageNumber) {
-                                github.get({
-                                    url: "https://api.github.com/repos/" + data.parent.owner.login + "/" + data.name + "/stats/contributors?page=" + pageNumber + "&per_page=100",
-                                    dataType: "json"
-                                }).done(function(data) {
+                                github.get(
+                                    "/repos/" + data.parent.owner.login + "/" + data.name + "/stats/contributors?page=" + pageNumber + "&per_page=100"
+                                ).done(function(data) {
                                     var findUser = false
                                     $.map(data, function(contribution, i) {
                                         if (contribution.author.login === "numbbbbb") {
@@ -418,11 +454,45 @@
                         drawChart("contribution-chart", option, "pie")
                     })
                 })
+                $("#repo-details").on("click", ".readme-btn", function() {
+                    repo = ownedRepoInfos[$(this).data("id")]
+                    $("#repo-modal-name").html(repo.name)
+                    $("#repo-modal-content").html("README内容载入中，请稍后......")
+                    github.post("/markdown", {
+                        data: JSON.stringify({
+                            "text": repo.readme,
+                            "mode": "markdown"
+                        })
+                    }).done(function(data) {
+                        $("#repo-modal-content").html(data)
+                    })
+                    $("#repo-modal").modal("show")
+                })
             }).fail(function(err) {
                 alert("false")
             });
         })
         </script>
+        <script src="/static/js/bootstrap.min.js"></script>
+
+        <div class="modal fade" id="repo-modal">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">关闭</span>
+                        </button>
+                        <h4 class="modal-title" id="repo-modal-name"></h4>
+                    </div>
+                    <div class="modal-body" id="repo-modal-content">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 </body>
 
 </html>
