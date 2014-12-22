@@ -307,4 +307,6 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
         });
     }
     $scope.searchUser();
+}]).controller('navCtl', ['$scope', function($scope) {
+
 }]);
