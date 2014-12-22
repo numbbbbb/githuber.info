@@ -24,17 +24,17 @@
         background: none repeat scroll 0% 0% #FFF;
         box-shadow: 2px 3px 1px rgba(0, 0, 0, 0.15), -1px 0px 0px rgba(0, 0, 0, 0.03), 1px 0px 0px rgba(0, 0, 0, 0.03), 0px 1px 0px rgba(0, 0, 0, 0.12);
         border: 1px solid #e6e8e9;
-        margin-top:30px;
+        margin-top: 30px;
     }
     .infoNoteLabel {
-        margin:0px;
-        margin-left:-15px;
-        padding:5px;
-        background-color:black;
-        width:12%;
-        text-align:center;
-        color:white;
-        font-size:18px;
+        margin: 0px;
+        margin-left: -15px;
+        padding: 5px;
+        background-color: black;
+        width: 12%;
+        text-align: center;
+        color: white;
+        font-size: 18px;
     }
     #codeChart {
         width: 800px;
@@ -53,23 +53,23 @@
     .searchBar button {
         height: 40px;
     }
-    .devAvater{
+    .devAvater {
         border: solid 1px;
         margin: 40px 40px 20px 40px;
         height: 160px;
     }
-    .devIntro{
+    .devIntro {
         border: solid 1px;
         margin: 20px 40px 40px 40px;
         padding: 10px;
         min-height: 120px;
     }
-    .devInfo{
+    .devInfo {
         border: solid 1px;
         margin: 40px 40px 40px 0px;
         min-height: 350px;
     }
-    .donateNotice{
+    .donateNotice {
         border: solid 1px #eee;
         padding: 10px;
         box-shadow: 2px 3px 1px rgba(0, 0, 0, 0.15), -1px 0px 0px rgba(0, 0, 0, 0.03), 1px 0px 0px rgba(0, 0, 0, 0.03), 0px 1px 0px rgba(0, 0, 0, 0.12);
@@ -80,12 +80,11 @@
     }
     .hidden {
         display: none;
-
     }
     </style>
 </head>
 
-<body style="background-image:url('/static/img/bg.png');" >
+<body style="background-image:url('/static/img/bg.png');">
     <script src="/static/js/echarts.js"></script>
     <script type="text/javascript">
     require.config({
@@ -93,6 +92,7 @@
             echarts: '/static/js'
         }
     })
+
     function drawChart(id, option, type) {
         require(
             [
@@ -118,7 +118,9 @@
                     <div class="form-group">
                         <input type="text" class="form-control" placeholder="输入用户名" ng-model="sw">
                     </div>
-                    <a ng-href="#/search/{{sw}}"><button type="submit" class="btn btn-default" >搜索</button></a>
+                    <a ng-href="#/search/{{sw}}">
+                        <button type="submit" class="btn btn-default">搜索</button>
+                    </a>
                 </form>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="#/donate">打赏</a>
@@ -133,13 +135,14 @@
 
 
     <script src="static/js/jquery-2.1.1.min.js"></script>
-    <script src="static/js/oauth.min.js"></script>
     <script src="static/js/angular.min.js"></script>
     <script src="static/js/angular-route.min.js"></script>
     <script src="static/js/echarts-all.js"></script>
+    <script src="/static/js/localDB.min.js"></script>
     <script src="static/js/app.js"></script>
     <script src="static/js/controllers.js"></script>
     <script src="/static/js/bootstrap.min.js"></script>
+
 </body>
 
 </html>
