@@ -21,6 +21,7 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
     $scope.languageBytesInOwnedRepos = {} // 自己repo的语言字节数统计 注意这里是字节数不是行数 GitHub不提供行数
     $scope.languageOfStarredRepos = {} // star repo的语言统计 只统计个数 比如Python的repo 100个
     $scope.ownedRepoInfos = {} // TODO：自己的repo被star的次数以及repo的信息，比如title description以及readme 之后鼠标移动到repo上会显示这些信息
+    $scope.totalBytes = 0
     $scope.githuber = {
         // login: "id",
         // avatar_url : "https://avatars.githubusercontent.com/u/2572987?v=3",
@@ -153,6 +154,7 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
                         categories.push(data[i].name);
                         values.push(data[i].value);
                     }
+                    $scope.githuber.codings = values.reduce(function(x, y){return x + y}, 0)
                     var option = {
                         title: {
                             text: '代码量统计',
