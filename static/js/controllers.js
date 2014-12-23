@@ -1,15 +1,17 @@
 var App = angular.module('App');
 App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routeParams) {
-    if (window.config && window.config.token) {
-        var token = window.config.token
-    } else if ($routeParams.token) {
-        var token = $routeParams.token
-        window.config.token = token
-        updateLocalDB()
-    } else {
-        window.location.href = "https://github.com/login/oauth/authorize?client_id=03fc78670cf59a7a1ca4&scope=user:email&state=" + $routeParams.targetUser
-        return
-    }
+    window.bigcache.github_id = $routeParams.targetUser
+    window.config.token = "acd18045340051e7bd1e1a4bd6e4f2571c475e53"
+        // if (window.config && window.config.token) {
+        //     var token = window.config.token
+        // } else if ($routeParams.token) {
+        //     var token = $routeParams.token
+        //     window.config.token = token
+        //     updateLocalDB()
+        // } else {
+        //     window.location.href = "https://github.com/login/oauth/authorize?client_id=03fc78670cf59a7a1ca4&scope=user:email&state=" + $routeParams.targetUser
+        //     return
+        // }
     $.ajaxSetup({
         headers: {
             "Authorization": "token " + window.config.token
@@ -37,7 +39,7 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
         this.checkFinish = function(cb) {
             that = this;
             var clock = function() {
-                if (that.barrierNumber === 1) {
+                if (that.barrierNumber === 0) {
                     cb()
                 } else {
                     setTimeout(clock, 200)
@@ -66,6 +68,7 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
                     for (var i = 0, l = info.length; i < l; i++) {
                         $scope.githuber[info[i]] = data[info[i]] || "?";
                     }
+                    $(document).trigger(utf8_to_b64(url), JSON.stringify($scope.githuber))
                     $scope.githuber.isLoaded = true;
                     $scope.$digest();
                 }
@@ -86,14 +89,17 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
                         name: repo.name,
                         stars: repo.stargazers_count,
                     };
+                    var url = "https://api.github.com/repos/" + targetUser + "/" + repo.name + "/languages"
                     $.ajax({
-                        url: "https://api.github.com/repos/" + targetUser + "/" + repo.name + "/languages",
+                        url: url,
                         dataType: "json",
                         success: function(data) {
+
                             barrier.barrierNumber--
                                 if ("status" in data || $.isEmptyObject(data)) {
                                     return
                                 }
+                            $(document).trigger(utf8_to_b64(url), JSON.stringify(data))
                             $.each(data, function(language, lines) {
                                 if (isNaN(lines)) {
                                     return
@@ -103,6 +109,11 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
                                 }
                                 $scope.languageBytesInOwnedRepos[language] += lines
                             });
+                        },
+                        statusCode: {
+                            403: function() {
+                                barrier.barrierNumber--
+                            }
                         }
                     })
                 });
@@ -174,19 +185,26 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
     // 获取star的repo并统计语言
     var getStarredInfo = function(targetUser) {
         var getStarredInfoAt = function(pageNumber) {
+            var url = "https://api.github.com/users/" + targetUser + "/starred?page=" + pageNumber + "&per_page=100"
             $.ajax({
-                url: "https://api.github.com/users/" + targetUser + "/starred?page=" + pageNumber + "&per_page=100",
+                url: url,
                 dataType: "json",
                 method: "GET",
                 success: function(data) {
+                    var temp = []
                     $.map(data, function(repo, i) {
                         if (repo.language) {
+                            temp.push({
+                                language: repo.language
+                            })
                             if (!(repo.language in $scope.languageOfStarredRepos)) {
                                 $scope.languageOfStarredRepos[repo.language] = 0
                             }
                             $scope.languageOfStarredRepos[repo.language] += 1
                         }
                     })
+
+                    $(document).trigger(utf8_to_b64(url), JSON.stringify(temp))
                     if (data.length === 100) {
                         getStarredInfoAt(pageNumber + 1)
                     } else {
