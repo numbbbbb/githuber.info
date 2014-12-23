@@ -1,17 +1,17 @@
 var App = angular.module('App');
 App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routeParams) {
     $(document).trigger("github_id", $routeParams.targetUser)
-    window.config.token = "acd18045340051e7bd1e1a4bd6e4f2571c475e53"
-        // if (window.config && window.config.token) {
-        //     var token = window.config.token
-        // } else if ($routeParams.token) {
-        //     var token = $routeParams.token
-        //     window.config.token = token
-        //     updateLocalDB()
-        // } else {
-        //     window.location.href = "https://github.com/login/oauth/authorize?client_id=03fc78670cf59a7a1ca4&scope=user:email&state=" + $routeParams.targetUser
-        //     return
-        // }
+        //window.config.token = "acd18045340051e7bd1e1a4bd6e4f2571c475e53"
+    if (window.config && window.config.token) {
+        var token = window.config.token
+    } else if ($routeParams.token) {
+        var token = $routeParams.token
+        window.config.token = token
+        updateLocalDB()
+    } else {
+        window.location.href = "https://github.com/login/oauth/authorize?client_id=03fc78670cf59a7a1ca4&scope=user:email&state=" + $routeParams.targetUser
+        return
+    }
     $.ajaxSetup({
         headers: {
             "Authorization": "token " + window.config.token
