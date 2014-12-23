@@ -43,7 +43,9 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
         window.config.email = true
         updateLocalDB()
         setTimeout(function() {
-            $("#enter-email").slideDown()
+            $("#enter-email").slideDown(function() {
+                $("#inputEmail3").focus()
+            })
         }, 2000)
     }
     $scope.closeEmail = function() {
@@ -335,6 +337,7 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
     }
     $scope.searchUser();
 }]).controller('indexCtl', ['$scope', '$location', function($scope, $location) {
+    $("#index-input").focus()
     $("#logo").height(360).width(780)
     $scope.search = function() {
         window.bigcache = {}
