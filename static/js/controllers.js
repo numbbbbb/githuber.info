@@ -56,7 +56,6 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
         $(document).trigger("emailAddr", $("#inputEmail3").val());
     };
     $scope.searchUser = function() {
-        console.log("start");
         getUserInfo($scope.targetUser);
         getCodeLines($scope.targetUser);
         getStarredInfo($scope.targetUser);
