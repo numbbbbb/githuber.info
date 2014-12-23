@@ -1,16 +1,15 @@
 var App = angular.module('App', ['ngRoute']);
-var db = new LocalDB("githuber.info")
-var collection = db.collection("userInfo")
-
+var db = new LocalDB("githuber.info");
+var collection = db.collection("userInfo");
 function updateLocalDB() {
-    collection.drop()
-    collection.insert(window.config)
+    collection.drop();
+    collection.insert(window.config);
 }
 collection.find().then(function(data) {
     if (data.length) {
-        window.config = data[0]
+        window.config = data[0];
     } else {
-        window.config = {}
+        window.config = {};
     }
 })
 
@@ -24,6 +23,7 @@ function b64_to_utf8(str) {
 App.config(['$routeProvider', function($routeProvider) {
     $routeProvider.
     when('/index', {
+    	controller : 'indexCtl',
         templateUrl: '/static/tpl/index.html'
     }).
     when('/about', {

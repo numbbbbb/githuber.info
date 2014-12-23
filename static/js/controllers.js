@@ -23,15 +23,6 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
     $scope.ownedRepoInfos = {} // TODO：自己的repo被star的次数以及repo的信息，比如title description以及readme 之后鼠标移动到repo上会显示这些信息
     $scope.totalBytes = 0
     $scope.githuber = {
-        // login: "id",
-        // avatar_url : "https://avatars.githubusercontent.com/u/2572987?v=3",
-        // name: "test",
-        // company: "buaa",
-        // email: "xxxx@xxx.com",
-        // page: "numbbbbb.com",
-        // followers: 5020,
-        // public_repos: 20,
-        // codings: 50000
     };
     $scope.byteChart = {};
     $scope.starChart = {};
@@ -49,6 +40,18 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
             setTimeout(clock, 200)
         }
     }
+    if (window.config && window.config.token) {
+        $scope.emailHidden = false;
+    } else {
+        $scope.emailHidden = true;
+    }
+    $scope.closeEmail = function() {
+        $scope.emailHidden = true;
+    };
+    $scope.saveEmail = function() {
+        $scope.emailHidden = true;
+        /*保存邮箱信息*/
+    };
     $scope.searchUser = function() {
         console.log("start");
         getUserInfo($scope.targetUser);
@@ -329,6 +332,12 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
         });
     }
     $scope.searchUser();
-}]).controller('navCtl', ['$scope', function($scope) {
-
+}]).controller('indexCtl', ['$scope', '$location', function($scope, $location) {
+    $scope.search = function() {
+        $location.path("/search/" + $scope.sw);
+    };
+}]).controller('navCtl', ['$scope', '$location', function($scope, $location) {
+    $scope.search = function() {
+        $location.path("/search/" + $scope.sw);
+    };
 }]);
