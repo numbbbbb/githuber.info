@@ -81,6 +81,15 @@
     .hidden {
         display: none;
     }
+    .emailHint {
+        text-align: center;
+        padding: 10px;
+        border-radius: 5px;
+        margin-top:10px;
+    }
+    .emailHint .row{
+        margin-bottom: 5px;
+    }
     </style>
 </head>
 
@@ -114,13 +123,11 @@
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="margin-left:15%;">
-                <form class="navbar-form navbar-left" role="search">
+                <form class="navbar-form navbar-left" role="search" ng-submit="search()">
                     <div class="form-group">
                         <input type="text" class="form-control" placeholder="输入用户名" ng-model="sw">
                     </div>
-                    <a ng-href="#/search/{{sw}}">
-                        <button type="submit" class="btn btn-default">搜索</button>
-                    </a>
+                    <button type="submit" class="btn btn-default">搜索</button>
                 </form>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="#/donate">打赏</a>
@@ -142,7 +149,7 @@
     <script src="static/js/app.js"></script>
     <script src="static/js/controllers.js"></script>
     <script src="/static/js/bootstrap.min.js"></script>
-    
+
 </body>
 
 </html>
