@@ -1,5 +1,5 @@
-    <div class="container-fluid" style="margin-top:50px;">
- <!--        <div class="col-lg-2 pickList">
+<div class="container-fluid" style="margin-top:50px;">
+    <!--        <div class="col-lg-2 pickList">
             <div class="row" style="margin-top:50px;">
                 <div class="col-lg-8 col-lg-offset-4">
                     <div style="background-color:#5CB85C;color:white;width:100%;text-align:center;font-size:20px;font-weight:700;padding:10px;">待选列表</div>
@@ -18,111 +18,117 @@
                 </div>
             </div>
         </div> -->
-        <div class="slide row" >
-            <div class="col-lg-8 col-lg-offset-2">
-                <div class="col-lg-10 col-lg-offset-1 bg-info emailHint">
-                    <div class="row">我们希望您留下您的邮箱，以便本站有更新时能第一时间通知您。</div>
-                    <div class="form-group form-horizontal">
-                        <label for="inputEmail3" class="col-lg-2 control-label">Email</label>
-                        <div class="col-lg-6">
-                          <input type="email" ng-model="userEmail"class="form-control" id="inputEmail3" placeholder="Email">
-                        </div>
-                        <div class="col-lg-3">
-                            <button class="btn btn-success" ng-click="saveEmail()">提交邮箱</button>
-                            <button class="btn btn-danger" ng-click="closeEmail()">残忍拒绝</button>
+    <div class="row" id="enter-email" style="display:none;">
+        <div class="col-lg-12 bg-info emailHint">
+            <div class="row">
+                <div class="col-lg-6 col-lg-offset-3">
+                    <div class="row">
+                        <div class="form-group form-horizontal">
+                            <label for="inputEmail3" class="col-lg-4 control-label">请留下邮箱：</label>
+                            <div class="col-lg-4">
+                                <input type="email" ng-model="userEmail" class="form-control" id="inputEmail3">
+                            </div>
+                            <div class="col-lg-2">
+                                <button class="btn btn-success btn-block" ng-click="saveEmail()">确定</button>
+                                
+                            </div>
+                            <div class="col-lg-2">
+                                <button class="btn btn-danger btn-block" ng-click="closeEmail()">残忍拒绝</button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2">
-                <div class="row">
-                    <div class="col-lg-10 col-lg-offset-1 infoNote">
-                        <h2 class="infoNoteLabel">个人信息</h2>
-                        <div class="row" ng-class="{loading : !githuber.isLoaded} "></div>
-                        <div class="row" ng-class="{hidden : !githuber.isLoaded}" style="margin-top:30px;padding:30px;">
-                            <div class="col-lg-2 col-lg-offset-1">
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <img src="{{githuber.avatar_url}}" alt="" class="img-responsive">
-                                    </div>
-                                </div>
-                                <div class="row" style="margin-top:5px;">
-                                    <div class="col-lg-12">
-                                        <button class="btn btn-large btn-success btn-block">加入待选列表</button>
-                                    </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-2">
+            <div class="row">
+                <div class="col-lg-10 col-lg-offset-1 infoNote">
+                    <h2 class="infoNoteLabel">个人信息</h2>
+                    <div class="row" ng-class="{loading : !githuber.isLoaded, hidden : githuber.isLoaded}"><div class="loader"></div></div>
+                    <div class="row" ng-class="{hidden : !githuber.isLoaded}" style="margin-top:30px;padding:30px;">
+                        <div class="col-lg-2 col-lg-offset-1">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <img src="{{githuber.avatar_url}}" alt="" class="img-responsive">
                                 </div>
                             </div>
-                            <div class="col-lg-4">
-                                <ul class="list-unstyled">
-                                    <li>
-                                        <h4>{{githuber.name || ""}}（{{githuber.login}}）</h4>
-                                    </li>
-                                    <li>公司：{{githuber.company || "无"}}</li>
-                                    <li>邮箱：{{githuber.email || "无"}}</li>
+                            <div class="row" style="margin-top:5px;">
+                                <div class="col-lg-12">
+                                    <button class="btn btn-large btn-success btn-block">加入待选列表</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <ul class="list-unstyled">
+                                <li>
+                                    <h4>{{githuber.name || ""}}（{{githuber.login}}）</h4>
+                                </li>
+                                <li>公司：{{githuber.company || "无"}}</li>
+                                <li>邮箱：{{githuber.email || "无"}}</li>
 
-                                </ul>
-                            </div>
-                            <div class="col-lg-4">
-                                <ul class="list-unstyled" style="margin-top:-10px">
-                                    <li>
-                                        {{githuber.name || githuber.login}}有<span style="font-size:34px;">{{githuber.followers}}</span>个粉丝
-                                    </li>
-                                    <li><span style="font-size:34px;">{{githuber.public_repos}}</span>个项目</li>
-                                    <li><span style="font-size:34px;">{{githuber.codings}}</span>比特代码</li>
-                                </ul>
-                            </div>
+                            </ul>
+                        </div>
+                        <div class="col-lg-4">
+                            <ul class="list-unstyled" style="margin-top:-10px">
+                                <li>
+                                    {{githuber.name || githuber.login}}有<span style="font-size:34px;">{{githuber.followers}}</span>个粉丝
+                                </li>
+                                <li><span style="font-size:34px;">{{githuber.public_repos}}</span>个项目</li>
+                                <li><span style="font-size:34px;">{{githuber.codings}}</span>比特代码</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-lg-10 col-lg-offset-1 infoNote">
+            </div>
+            <div class="row">
+                <div class="col-lg-10 col-lg-offset-1 infoNote">
 
-                        <h2 class="infoNoteLabel">特性分析</h2>
-                        <div class="row" style="margin-top:30px;padding:30px;">
-                            <div class="row" ng-class="{loading : !byteChart.isLoaded}"></div>
-                            <div class="col-lg-12" id="byte-chart" ng-class="{hidden : !byteChart.isLoaded}">
-                            </div>
+                    <h2 class="infoNoteLabel">特性分析</h2>
+                    <div class="row" style="margin-top:30px;padding:30px;">
+                        <div class="row" ng-class="{loading : !githuber.isLoaded, hidden : githuber.isLoaded}"><div class="loader"></div></div>
+                        <div class="col-lg-12" id="byte-chart" ng-class="{hidden : !byteChart.isLoaded}">
                         </div>
-                        <div class="row">
-                            <div class="row" ng-class="{loading : !starChart.isLoaded}"></div>
-                            <div class="col-lg-12" style="height:600px;" id="star-chart" ng-class="{hidden : !starChart.isLoaded}">
-                            </div>
-                          <!--   <div class="col-lg-6" style="height:600px;" id="contribution-chart">
+                    </div>
+                    <div class="row">
+                        <div class="row" ng-class="{loading : !githuber.isLoaded, hidden : githuber.isLoaded}"><div class="loader"></div></div>
+                        <div class="col-lg-12" style="height:600px;" id="star-chart" ng-class="{hidden : !starChart.isLoaded}">
+                        </div>
+                        <!--   <div class="col-lg-6" style="height:600px;" id="contribution-chart">
                             </div> -->
 
-                        </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-lg-10 col-lg-offset-1 infoNote">
-                        <h2 class="infoNoteLabel">项目统计</h2>
-                        <div class="row" style="margin-top:30px;padding:30px;">
-                            <div class="row" ng-class="{loading : !byteChart.isLoaded}"></div>
-                            <div class="col-lg-12" id="repo-details" ng-class="{hidden : !byteChart.isLoaded}">
+            </div>
+            <div class="row">
+                <div class="col-lg-10 col-lg-offset-1 infoNote">
+                    <h2 class="infoNoteLabel">项目统计</h2>
+                    <div class="row" style="margin-top:30px;padding:30px;">
+                        <div class="row" ng-class="{loading : !githuber.isLoaded, hidden : githuber.isLoaded}"><div class="loader"></div></div>
+                        <div class="col-lg-12" id="repo-details" ng-class="{hidden : !byteChart.isLoaded}">
 
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-        <div class="modal fade" id="repo-modal">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
+</div>
+<div class="modal fade" id="repo-modal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
 
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">关闭</span>
-                    </button>
-                    <h4 class="modal-title" id="repo-modal-name"></h4>
-                </div>
-                <div class="modal-body" id="repo-modal-content">
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                </div>
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">关闭</span>
+                </button>
+                <h4 class="modal-title" id="repo-modal-name"></h4>
+            </div>
+            <div class="modal-body" id="repo-modal-content">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
             </div>
         </div>
     </div>
+</div>

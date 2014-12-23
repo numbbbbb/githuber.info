@@ -16,6 +16,10 @@
     <meta name="author" content="@梁杰_numbbbbb,@NatsuDawn">
     <link rel="stylesheet" href="/static/css/bootstrap.min.css">
     <style>
+    p,
+    li {
+        font-size: 18px;
+    }
     .table td,
     .table th {
         text-align: center;
@@ -48,35 +52,114 @@
         margin-bottom: 20px;
     }
     .searchBar input {
+        -webkit-transition: all 0.30s ease-in-out;
+        -moz-transition: all 0.30s ease-in-out;
+        -ms-transition: all 0.30s ease-in-out;
+        -o-transition: all 0.30s ease-in-out;
+        outline: none;
+        padding: 3px 0px 3px 12px;
+        border: 1px solid #DDDDDD;
         height: 40px;
+    }
+    input:focus,
+    input:hover,
+    textarea:focus {
+        box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+        padding: 3px 12px 3px 12px;
+        border: 1px solid rgba(81, 203, 238, 1);
     }
     .searchBar button {
+        background-color: rgba(81, 203, 238, 1);
+        border-radius: 0;
+        border-color: rgba(81, 203, 238, 1);
+        font-size: 18px;
         height: 40px;
     }
-    .devAvater {
-        border: solid 1px;
-        margin: 40px 40px 20px 40px;
-        height: 160px;
-    }
-    .devIntro {
-        border: solid 1px;
-        margin: 20px 40px 40px 40px;
-        padding: 10px;
-        min-height: 120px;
-    }
-    .devInfo {
-        border: solid 1px;
-        margin: 40px 40px 40px 0px;
-        min-height: 350px;
+    .searchBar button:hover {
+        background-color: rgba(81, 203, 238, 1);
+        border-radius: 0;
+        border-color: rgba(81, 203, 238, 1);
     }
     .donateNotice {
-        border: solid 1px #eee;
-        padding: 10px;
-        box-shadow: 2px 3px 1px rgba(0, 0, 0, 0.15), -1px 0px 0px rgba(0, 0, 0, 0.03), 1px 0px 0px rgba(0, 0, 0, 0.03), 0px 1px 0px rgba(0, 0, 0, 0.12);
+        padding: 0px 13px;
+        font-size: 13px;
+        line-height: 17px;
+        color: #333;
+        font-weight: normal;
+        background-color: #F0F0F0;
+        position: relative;
+        border-bottom: 1px solid #DDD;
+        border-right: 1px solid #DDD;
     }
     .loading {
         min-height: 400px;
-        background: url("static/img/loading.gif") center center;
+    }
+    .loader {
+        font-size: 90px;
+        text-indent: -9999em;
+        overflow: hidden;
+        width: 1em;
+        height: 1em;
+        border-radius: 50%;
+        margin: 0.8em auto;
+        position: relative;
+        -webkit-transform: translateZ(0);
+        -ms-transform: translateZ(0);
+        transform: translateZ(0);
+        -webkit-animation: load6 1.7s infinite ease;
+        animation: load6 1.7s infinite ease;
+    }
+    @-webkit-keyframes load6 {
+        0% {
+            -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+            box-shadow: 0 -0.83em 0 -0.4em #000000, 0 -0.83em 0 -0.42em #000000, 0 -0.83em 0 -0.44em #000000, 0 -0.83em 0 -0.46em #000000, 0 -0.83em 0 -0.477em #000000;
+        }
+        5%,
+        95% {
+            box-shadow: 0 -0.83em 0 -0.4em #000000, 0 -0.83em 0 -0.42em #000000, 0 -0.83em 0 -0.44em #000000, 0 -0.83em 0 -0.46em #000000, 0 -0.83em 0 -0.477em #000000;
+        }
+        10%,
+        59% {
+            box-shadow: 0 -0.83em 0 -0.4em #000000, -0.087em -0.825em 0 -0.42em #000000, -0.173em -0.812em 0 -0.44em #000000, -0.256em -0.789em 0 -0.46em #000000, -0.297em -0.775em 0 -0.477em #000000;
+        }
+        20% {
+            box-shadow: 0 -0.83em 0 -0.4em #000000, -0.338em -0.758em 0 -0.42em #000000, -0.555em -0.617em 0 -0.44em #000000, -0.671em -0.488em 0 -0.46em #000000, -0.749em -0.34em 0 -0.477em #000000;
+        }
+        38% {
+            box-shadow: 0 -0.83em 0 -0.4em #000000, -0.377em -0.74em 0 -0.42em #000000, -0.645em -0.522em 0 -0.44em #000000, -0.775em -0.297em 0 -0.46em #000000, -0.82em -0.09em 0 -0.477em #000000;
+        }
+        100% {
+            -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+            box-shadow: 0 -0.83em 0 -0.4em #000000, 0 -0.83em 0 -0.42em #000000, 0 -0.83em 0 -0.44em #000000, 0 -0.83em 0 -0.46em #000000, 0 -0.83em 0 -0.477em #000000;
+        }
+    }
+    @keyframes load6 {
+        0% {
+            -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+            box-shadow: 0 -0.83em 0 -0.4em #000000, 0 -0.83em 0 -0.42em #000000, 0 -0.83em 0 -0.44em #000000, 0 -0.83em 0 -0.46em #000000, 0 -0.83em 0 -0.477em #000000;
+        }
+        5%,
+        95% {
+            box-shadow: 0 -0.83em 0 -0.4em #000000, 0 -0.83em 0 -0.42em #000000, 0 -0.83em 0 -0.44em #000000, 0 -0.83em 0 -0.46em #000000, 0 -0.83em 0 -0.477em #000000;
+        }
+        10%,
+        59% {
+            box-shadow: 0 -0.83em 0 -0.4em #000000, -0.087em -0.825em 0 -0.42em #000000, -0.173em -0.812em 0 -0.44em #000000, -0.256em -0.789em 0 -0.46em #000000, -0.297em -0.775em 0 -0.477em #000000;
+        }
+        20% {
+            box-shadow: 0 -0.83em 0 -0.4em #000000, -0.338em -0.758em 0 -0.42em #000000, -0.555em -0.617em 0 -0.44em #000000, -0.671em -0.488em 0 -0.46em #000000, -0.749em -0.34em 0 -0.477em #000000;
+        }
+        38% {
+            box-shadow: 0 -0.83em 0 -0.4em #000000, -0.377em -0.74em 0 -0.42em #000000, -0.645em -0.522em 0 -0.44em #000000, -0.775em -0.297em 0 -0.46em #000000, -0.82em -0.09em 0 -0.477em #000000;
+        }
+        100% {
+            -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+            box-shadow: 0 -0.83em 0 -0.4em #000000, 0 -0.83em 0 -0.42em #000000, 0 -0.83em 0 -0.44em #000000, 0 -0.83em 0 -0.46em #000000, 0 -0.83em 0 -0.477em #000000;
+        }
     }
     .hidden {
         display: none;
@@ -84,11 +167,6 @@
     .emailHint {
         text-align: center;
         padding: 10px;
-        border-radius: 5px;
-        margin-top:10px;
-    }
-    .emailHint .row{
-        margin-bottom: 5px;
     }
     </style>
 </head>
