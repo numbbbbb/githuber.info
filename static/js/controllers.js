@@ -338,14 +338,17 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
 }]).controller('indexCtl', ['$scope', '$location', function($scope, $location) {
     $("#logo").height(360).width(780)
     $scope.search = function() {
+        window.bigcache = {}
         $location.path("/search/" + $scope.sw);
     };
 }]).controller('navCtl', ['$scope', '$location', function($scope, $location) {
     $scope.search = function() {
+        window.bigcache = {}
         $location.path("/search/" + $scope.sw);
     };
 }]).controller('aboutCtl', ['$scope', '$location', function($scope, $location) {
     $scope.search = function() {
+        window.bigcache = {}
         $location.path("/search/" + $scope.sw);
     };
     $(".label-info").hover(function() {
