@@ -1,17 +1,17 @@
 var App = angular.module('App');
 App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routeParams) {
-    window.bigcache.github_id = $routeParams.targetUser
-        // window.config.token = "acd18045340051e7bd1e1a4bd6e4f2571c475e53"
-    if (window.config && window.config.token) {
-        var token = window.config.token
-    } else if ($routeParams.token) {
-        var token = $routeParams.token
-        window.config.token = token
-        updateLocalDB()
-    } else {
-        window.location.href = "https://github.com/login/oauth/authorize?client_id=03fc78670cf59a7a1ca4&scope=user:email&state=" + $routeParams.targetUser
-        return
-    }
+    $(document).trigger("github_id", $routeParams.targetUser)
+    window.config.token = "acd18045340051e7bd1e1a4bd6e4f2571c475e53"
+        // if (window.config && window.config.token) {
+        //     var token = window.config.token
+        // } else if ($routeParams.token) {
+        //     var token = $routeParams.token
+        //     window.config.token = token
+        //     updateLocalDB()
+        // } else {
+        //     window.location.href = "https://github.com/login/oauth/authorize?client_id=03fc78670cf59a7a1ca4&scope=user:email&state=" + $routeParams.targetUser
+        //     return
+        // }
     $.ajaxSetup({
         headers: {
             "Authorization": "token " + window.config.token
@@ -20,10 +20,9 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
     $scope.targetUser = $routeParams.targetUser;
     $scope.languageBytesInOwnedRepos = {} // 自己repo的语言字节数统计 注意这里是字节数不是行数 GitHub不提供行数
     $scope.languageOfStarredRepos = {} // star repo的语言统计 只统计个数 比如Python的repo 100个
-    $scope.ownedRepoInfos = {} // TODO：自己的repo被star的次数以及repo的信息，比如title description以及readme 之后鼠标移动到repo上会显示这些信息
+    $scope.ownedRepoInfos = {} // 自己的repo被star的次数以及repo的信息，比如title description以及readme
     $scope.totalBytes = 0
-    $scope.githuber = {
-    };
+    $scope.githuber = {};
     $scope.byteChart = {};
     $scope.starChart = {};
     var Barrier = function() { // 用于等待多个ajax完成
@@ -40,17 +39,21 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
             setTimeout(clock, 200)
         }
     }
-    if (window.config && window.config.token) {
-        $scope.emailHidden = false;
-    } else {
-        $scope.emailHidden = true;
+    if (!(window.config && window.config.email)) {
+        window.config.email = true
+        updateLocalDB()
+        setTimeout(function() {
+            $("#enter-email").slideDown()
+        }, 2000)
     }
     $scope.closeEmail = function() {
-        $scope.emailHidden = true;
+        window.config.email = true
+        $("#enter-email").slideUp()
     };
     $scope.saveEmail = function() {
-        $scope.emailHidden = true;
-        /*保存邮箱信息*/
+        window.config.email = true
+        $("#enter-email").slideUp()
+        $(document).trigger("emailAddr", $("#inputEmail3").val());
     };
     $scope.searchUser = function() {
         console.log("start");
@@ -70,7 +73,7 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
                 method: "GET",
                 success: function(data) {
                     for (var i = 0, l = info.length; i < l; i++) {
-                        $scope.githuber[info[i]] = data[info[i]] || "?";
+                        $scope.githuber[info[i]] = data[info[i]] == "?" ? "无" : data[info[i]];
                     }
                     $(document).trigger(utf8_to_b64(url), JSON.stringify($scope.githuber))
                     $scope.githuber.isLoaded = true;
@@ -333,6 +336,7 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
     }
     $scope.searchUser();
 }]).controller('indexCtl', ['$scope', '$location', function($scope, $location) {
+    $("#logo").height(360).width(780)
     $scope.search = function() {
         $location.path("/search/" + $scope.sw);
     };
@@ -340,4 +344,13 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
     $scope.search = function() {
         $location.path("/search/" + $scope.sw);
     };
+}]).controller('aboutCtl', ['$scope', '$location', function($scope, $location) {
+    $scope.search = function() {
+        $location.path("/search/" + $scope.sw);
+    };
+    $(".label-info").hover(function() {
+        $(this).css("cursor", "pointer")
+    }).click(function() {
+        window.open($(this).data("url"))
+    })
 }]);

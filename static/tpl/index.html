@@ -1,14 +1,21 @@
-
-    <div class="container-fluid" style="margin-top:50px;" >
-        <div class="row">
-        	<div class="col-lg-8 col-lg-offset-2">
-        		<img src="static/img/logo.png">
-        	</div>
-        	<div class="col-lg-8 col-lg-offset-2 searchBar">
-                <form ng-submit="search()">
-            		<input class="col-lg-9" ng-model="sw">
-            		<button type="submit" class="col-lg-3 btn-success">搜索</button>
-            	</form>
+<div class="container-fluid" style="margin-top:8%;">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="row">
+                <div class="col-lg-12">
+                    <img class="img-responsive" style="margin: 0 auto;" id="logo" src="static/img/logo.png">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-lg-offset-4 searchBar">
+                    <div class="row">
+                        <form ng-submit="search()">
+                            <input class="col-lg-9" ng-model="sw">
+                            <button type="submit" class="col-lg-3 btn-success btn">搜索</button>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+</div>
