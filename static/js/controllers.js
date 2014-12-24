@@ -1,5 +1,9 @@
 var App = angular.module('App');
 App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routeParams) {
+    var smallWindow = $(window).width() < 768
+    if (!smallWindow) {
+        $("#spec-info").css("padding", "30px")
+    }
     $(document).trigger("github_id", $routeParams.targetUser)
     if (!window.config) {
         window.config = {}
@@ -160,7 +164,7 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
                     });
                     var categories = [];
                     var values = [];
-                    var smallWindow = $(window).width() < 768
+                    
                     for (var i = 0; i < data.length; i++) {
                         categories.push(data[i].name);
                         if (smallWindow) {
@@ -169,7 +173,6 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
                             values.push(data[i].value);
                         }
                     }
-
                     $scope.githuber.codings = values.reduce(function(x, y) {
                         return x + y
                     }, 0)
