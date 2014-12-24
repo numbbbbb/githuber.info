@@ -1,7 +1,10 @@
 var App = angular.module('App');
 App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routeParams) {
     $(document).trigger("github_id", $routeParams.targetUser)
-        //window.config.token = "acd18045340051e7bd1e1a4bd6e4f2571c475e53"
+    if (!window.config) {
+        window.config = {}
+    }
+    //window.config.token = "acd18045340051e7bd1e1a4bd6e4f2571c475e53"
     if (window.config && window.config.token) {
         var token = window.config.token
     } else if ($routeParams.token) {
@@ -157,10 +160,16 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
                     });
                     var categories = [];
                     var values = [];
+                    var smallWindow = $(window).width() < 768
                     for (var i = 0; i < data.length; i++) {
                         categories.push(data[i].name);
-                        values.push(data[i].value);
+                        if (smallWindow) {
+                            values.push(data[i].value / 1000);
+                        } else {
+                            values.push(data[i].value);
+                        }
                     }
+
                     $scope.githuber.codings = values.reduce(function(x, y) {
                         return x + y
                     }, 0)
@@ -173,8 +182,18 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
                             trigger: 'axis'
                         },
                         xAxis: [{
+                            axisLabel: {
+                                formatter: function(value) {
+                                    if (smallWindow) {
+                                        return value + "K"
+                                    } else {
+                                        return value
+                                    }
+                                },
+                                rotate: $(window).width() < 768 ? -45 : 0
+                            },
                             type: 'value',
-                            boundaryGap: [0, 0.01]
+                            boundaryGap: [0, 0],
                         }],
                         yAxis: [{
                             type: 'category',
@@ -339,6 +358,10 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
 }]).controller('indexCtl', ['$scope', '$location', function($scope, $location) {
     $("#index-input").focus()
     $("#logo").height(360).width(780)
+    $("#slogan").parent().height($(window).height() / 3)
+    for (var i = 0; i < $(window).width() / 55; i++) {
+        $("#slogan").prepend("&nbsp;")
+    }
     $scope.search = function() {
         window.bigcache = {}
         $location.path("/search/" + $scope.sw);

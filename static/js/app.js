@@ -1,7 +1,6 @@
 var App = angular.module('App', ['ngRoute']);
 var db = new LocalDB("githuber.info");
 var collection = db.collection("userInfo");
-
 function updateLocalDB() {
     collection.drop();
     collection.insert(window.config);
