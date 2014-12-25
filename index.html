@@ -211,27 +211,6 @@
 </head>
 
 <body style="background-image:url('/static/img/bg.png');">
-    <script src="/static/js/echarts.js"></script>
-    <script type="text/javascript">
-    require.config({
-        paths: {
-            echarts: '/static/js'
-        }
-    })
-
-    function drawChart(id, option, type) {
-        require(
-            [
-                'echarts',
-                'echarts/chart/' + type
-            ],
-            function(ec) {
-                var myChart = ec.init(document.getElementById(id))
-                myChart.setOption(option)
-            }
-        )
-    }
-    </script>
     <div style="overflow:hidden;width:100%;">
         <nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation" ng-controller="navCtl">
             <div class="container-fluid">
@@ -263,17 +242,37 @@
             </div>
         </nav>
         <div ng-view></div>
-
-        <script src="static/js/jquery-2.1.1.min.js"></script>
-        <script src="/static/js/bigcache/av-mini.js"></script>
-        <script src="/static/js/bigcache/bigcache.js"></script>
-        <script src="static/js/angular.min.js"></script>
-        <script src="static/js/angular-route.min.js"></script>
-        <script src="/static/js/localDB.min.js"></script>
-        <script src="static/js/app.js"></script>
-        <script src="static/js/controllers.js"></script>
-        <script src="/static/js/bootstrap.min.js"></script>
     </div>
+    <script src="/static/js/echarts.js"></script>
+    <script type="text/javascript">
+    require.config({
+        paths: {
+            echarts: '/static/js'
+        }
+    })
+
+    function drawChart(id, option, type) {
+        require(
+            [
+                'echarts',
+                'echarts/chart/' + type
+            ],
+            function(ec) {
+                var myChart = ec.init(document.getElementById(id))
+                myChart.setOption(option)
+            }
+        )
+    }
+    </script>
+    <script src="static/js/jquery-2.1.1.min.js"></script>
+    <script src="/static/js/bigcache/av-mini.js"></script>
+    <script src="/static/js/bigcache/bigcache.js"></script>
+    <script src="static/js/angular.min.js"></script>
+    <script src="static/js/angular-route.min.js"></script>
+    <script src="/static/js/localDB.min.js"></script>
+    <script src="static/js/app.js"></script>
+    <script src="static/js/controllers.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
 </body>
 
 </html>
