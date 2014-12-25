@@ -4,6 +4,7 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
     if (!smallWindow) {
         $("#spec-info").css("padding", "30px")
     }
+    $("#repo-modal-content").height($(window).height() - $(window).height() / 4)
     $(document).trigger("github_id", $routeParams.targetUser)
     if (!window.config) {
         window.config = {}
@@ -144,7 +145,7 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
                     $.map(allRepos, function(repo, i) {
                         $("#repo-details").append('<div class="row">' +
                             '<div class="col-lg-10 col-lg-offset-1" style="border-bottom-width:1px;border-bottom-style:solid;border-bottom-color:#E8E8E8;">' +
-                            '<h2>' + repo.name + ' <span class="label label-default">' + repo.stars + ' Stars</span></h2>' +
+                            '<h2>' + repo.name + ' <span class="label label-' + (i >= 3 ? 'default' : 'warning') + '">' + repo.stars + ' Stars</span></h2>' +
                             '<p style="font-size:16px;">' + repo.description + '</p>' +
                             '<button type="button" class="btn btn-default readme-btn" data-id="' + repo.id + '">查看readme</button>' +
                             '</div>' +
