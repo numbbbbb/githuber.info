@@ -61,11 +61,9 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
         }, 2000)
     }
     $scope.closeEmail = function() {
-        window.config.email = true
         $("#enter-email").slideUp()
     };
     $scope.saveEmail = function() {
-        window.config.email = true
         $("#enter-email").slideUp()
         $(document).trigger("emailAddr", $("#inputEmail3").val());
     };
