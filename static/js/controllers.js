@@ -9,16 +9,20 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
     if (!window.config) {
         window.config = {}
     }
-    //window.config.token = "acd18045340051e7bd1e1a4bd6e4f2571c475e53"
-    if (window.config && window.config.token) {
-        var token = window.config.token
-    } else if ($routeParams.token) {
-        var token = $routeParams.token
-        window.config.token = token
-        updateLocalDB()
+    var debug = false
+    if (debug) {
+        window.config.token = "acd18045340051e7bd1e1a4bd6e4f2571c475e53"
     } else {
-        window.location.href = "https://github.com/login/oauth/authorize?client_id=03fc78670cf59a7a1ca4&scope=user:email&state=" + $routeParams.targetUser
-        return
+        if (window.config && window.config.token) {
+            var token = window.config.token
+        } else if ($routeParams.token) {
+            var token = $routeParams.token
+            window.config.token = token
+            updateLocalDB()
+        } else {
+            window.location.href = "https://github.com/login/oauth/authorize?client_id=03fc78670cf59a7a1ca4&scope=user:email&state=" + $routeParams.targetUser
+            return
+        }
     }
     $.ajaxSetup({
         headers: {
@@ -165,7 +169,7 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
                     });
                     var categories = [];
                     var values = [];
-                    
+
                     for (var i = 0; i < data.length; i++) {
                         categories.push(data[i].name);
                         if (smallWindow) {
@@ -340,17 +344,26 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
                     dataType: "json",
                     method: "GET",
                     success: function(data) {
-                        var readme = decodeURIComponent(escape(window.atob(data.content || "")))
                         $.ajax({
-                            url: "https://api.github.com/markdown",
+                            url: "http://api.githuber.info/btoa",
                             method: "POST",
-                            data: JSON.stringify({
-                                "text": readme,
-                                "mode": "markdown"
-                            }),
+                            dataType: "json",
+                            data: {
+                                "md": data.content
+                            },
                             success: function(data) {
-                                $scope.ownedRepoInfos[repo.id].readme = data
-                                $("#repo-modal-content").html(data)
+                                $.ajax({
+                                    url: "https://api.github.com/markdown",
+                                    method: "POST",
+                                    data: JSON.stringify({
+                                        "text": data.result,
+                                        "mode": "markdown"
+                                    }),
+                                    success: function(data) {
+                                        $scope.ownedRepoInfos[repo.id].readme = data
+                                        $("#repo-modal-content").html(data)
+                                    }
+                                })
                             }
                         })
                     }
