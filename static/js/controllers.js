@@ -376,7 +376,7 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
 }]).controller('indexCtl', ['$scope', '$location', function($scope, $location) {
     $("#index-input").focus()
     $("#logo").height(360).width(780)
-    $("#slogan").parent().height($(window).height() / 3)
+    $("#slogan").parent().height($(window).height() / 4)
     for (var i = 0; i < $(window).width() / 55; i++) {
         $("#slogan").prepend("&nbsp;")
     }
