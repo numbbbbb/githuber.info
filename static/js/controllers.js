@@ -177,6 +177,9 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
                     $scope.githuber.codings = values.reduce(function(x, y) {
                         return x + y
                     }, 0)
+                    if (smallWindow) {
+                        $scope.githuber.codings = $scope.githuber.codings * 1000
+                    }
                     var option = {
                         title: {
                             text: '代码量统计',
