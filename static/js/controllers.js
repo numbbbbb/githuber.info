@@ -1,5 +1,8 @@
 var App = angular.module('App');
 App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routeParams) {
+    $(".bdshare-slide-button-box").remove()
+    window._bd_share_is_recently_loaded = false
+    window._bd_share_main = null
     window.forShare = $routeParams.forShare || 0
     if (window.forShare) {
         window.config.token = $routeParams.token
@@ -84,10 +87,14 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
             dataType: "json",
             method: "GET",
             success: function(data) {
+                $(".bdshare-slide-button-box").remove()
+                window._bd_share_is_recently_loaded = false
+                window._bd_share_main = null
                 window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"我在#GitHuber.info#发现牛人一枚，其名曰" + $routeParams.targetUser + "，其详如图，你也来试试吧！@GitHuber点info","bdMini":"1","bdMiniList":["weixin","tsina","qzone","sqq","douban","renren","huaban","youdao","mail","linkedin","copy"],"bdPic":data.url,"bdStyle":"0","bdSize":"16"},"slide":{"type":"slide","bdImg":"0","bdPos":"right","bdTop":"150.5"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
             }
         })
     }
+    $scope.generateShareImg();
 
     var getUserInfo = function(targetUser) {
         var info = ['login', 'avatar_url', 'name', 'company', 'email', 'followers', 'public_repos'];
@@ -387,7 +394,7 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
             $("#repo-modal").modal("show");
         });
     }
-    $scope.generateShareImg();
+
     $scope.searchUser();
 }]).controller('indexCtl', ['$scope', '$location', function($scope, $location) {
     $("#index-input").focus()
