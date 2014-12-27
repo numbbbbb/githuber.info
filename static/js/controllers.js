@@ -256,10 +256,10 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
                 success: function(data) {
                     var temp = []
                     $.map(data, function(repo, i) {
-                        if (repo.language) {
-                            temp.push({
+                        temp.push({
                                 language: repo.language
-                            })
+                        })
+                        if (repo.language) {
                             if (!(repo.language in $scope.languageOfStarredRepos)) {
                                 $scope.languageOfStarredRepos[repo.language] = 0
                             }
