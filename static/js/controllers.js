@@ -76,9 +76,6 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
     };
     $scope.searchUser = function() {
         getUserInfo($scope.targetUser);
-        getCodeLines($scope.targetUser);
-        getStarredInfo($scope.targetUser);
-        repoInitial($scope.targetUser);
     };
 
     $scope.generateShareImg = function() {
@@ -94,7 +91,7 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
             }
         })
     }
-    
+
     var getUserInfo = function(targetUser) {
         var info = ['login', 'avatar_url', 'name', 'company', 'email', 'followers', 'public_repos'];
         if ($scope.targetUser != "") {
@@ -104,7 +101,12 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
                 dataType: "json",
                 method: "GET",
                 success: function(data) {
-                    $scope.generateShareImg()
+                    if (!window.forShare) {
+                        $scope.generateShareImg()
+                    }
+                    getCodeLines($scope.targetUser);
+                    getStarredInfo($scope.targetUser);
+                    repoInitial($scope.targetUser);
                     for (var i = 0, l = info.length; i < l; i++) {
                         $scope.githuber[info[i]] = data[info[i]] == "?" ? "无" : data[info[i]];
                     }
