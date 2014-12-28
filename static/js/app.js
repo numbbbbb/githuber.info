@@ -1,6 +1,7 @@
-var App = angular.module('App', ['ngRoute']);
+// init
 var db = new LocalDB("githuber.info");
 var collection = db.collection("userInfo");
+
 function updateLocalDB() {
     collection.drop();
     collection.insert(window.config);
@@ -28,6 +29,42 @@ Object.size = function(obj) {
     }
     return size;
 };
+
+$(function() {
+    $("#feedback-title").click(function() {
+        $target = $(this).parent()
+        $target.stop()
+        if ($target.css("bottom") != "0px") {
+            $target.animate({
+                "bottom": "0px"
+            })
+        } else {
+            $target.animate({
+                "bottom": "-340px"
+            }, function() {
+                $("#feedback-gangnam-style").hide(0);
+                $("#feedback-email, #feedback-content").val("")
+                $("#feedback-main").show(0);
+                setTimeout(function() {
+                    $("#feedback-btn").one("click", triggerFeedback)
+                }, 5000)
+            })
+        }
+    })
+    var triggerFeedback = function() {
+        $(document).trigger("feedback", [$("#feedback-email").val(), $("#feedback-content").val()])
+        $("#feedback-main").hide(0);
+        $("#feedback-gangnam-style").show(0);
+        setTimeout(function() {
+            $("#feedback-title").trigger("click")
+        }, 2000)
+    }
+    $("#feedback-btn").one("click", triggerFeedback)
+})
+
+
+// Angular app
+var App = angular.module('App', ['ngRoute']);
 App.config(['$routeProvider', function($routeProvider) {
     $routeProvider.
     when('/index', {
@@ -35,7 +72,7 @@ App.config(['$routeProvider', function($routeProvider) {
         templateUrl: '/static/tpl/index.html'
     }).
     when('/about', {
-    	controller: 'aboutCtl',
+        controller: 'aboutCtl',
         templateUrl: '/static/tpl/about.html'
     }).
     when('/donate', {

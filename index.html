@@ -61,10 +61,14 @@
         height: 40px;
     }
     input:focus,
-    input:hover,
-    textarea:focus {
+    input:hover{
         box-shadow: 0 0 5px rgba(81, 203, 238, 1);
         padding: 3px 12px 3px 12px;
+        border: 1px solid rgba(81, 203, 238, 1);
+    }
+    textarea:focus {
+        box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+        padding: 6px 12px 6px 12px;
         border: 1px solid rgba(81, 203, 238, 1);
     }
     .searchBar button {
@@ -207,6 +211,31 @@
             display: none;
         }
     }
+    #feedback-div {
+        position: fixed;
+        bottom: -340px;
+        right: 20px;
+        width: 200px;
+        height: 380px;
+        background-color: #666;
+        color: white;
+        border-radius: 10px 10px 0 0;
+    }
+    #feedback-div:hover {
+        cursor: pointer;
+        bottom: -335px;
+    }
+    #feedback-title {
+        border-bottom: 1px solid #ccc;
+        text-align: center;
+        padding: 5px 20px 10px 20px;
+        font-size: 20px;
+    }
+    .feedback-part {
+        width: 90%;
+        margin: 0 auto;
+        margin-top: 8px;
+    }
     </style>
 </head>
 
@@ -242,6 +271,20 @@
             </div>
         </nav>
         <div ng-view></div>
+    </div>
+    <div id="feedback-div">
+        <p id="feedback-title">提点建议</p>
+        <div id="feedback-main">
+            <input type="text" class="form-control feedback-part" id="feedback-email" style="margin-top:0px;" placeholder="请留下您的邮箱">
+            <textarea class="form-control feedback-part" id="feedback-content" cols="30" rows="10" style="resize: none;" placeholder="请输入您的意见建议，我们会认真阅读并一一回复的(๑>◡<๑) "></textarea>
+            <div class="feedback-part">
+                <button class="btn btn-info btn-block" id="feedback-btn">提交</button>
+            </div>
+        </div>
+        <div id="feedback-gangnam-style" style="display:none;">
+            <img src="/static/img/gangnam-style.png" alt="" style="display:block;height:320px;width:90%;margin:0 auto;"/>
+        </div>
+
     </div>
     <script src="http://cdn.staticfile.org/jquery/2.1.1-rc2/jquery.min.js"></script>
     <script src="http://cdn.staticfile.org/angular.js/1.3.0-beta.13/angular.min.js"></script>
@@ -286,7 +329,8 @@
         m.parentNode.insertBefore(a, m)
     })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
-    ga('create', 'UA-58000212-1', 'auto');
+    ga('create', 'UA-58000212-1', 'auto');.
+
     ga('send', 'pageview');
     </script>
 </body>
