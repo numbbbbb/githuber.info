@@ -45,9 +45,6 @@ $(function() {
                 $("#feedback-gangnam-style").hide(0);
                 $("#feedback-email, #feedback-content").val("")
                 $("#feedback-main").show(0);
-                setTimeout(function() {
-                    $("#feedback-btn").one("click", triggerFeedback)
-                }, 5000)
             })
         }
     })
@@ -57,6 +54,9 @@ $(function() {
         $("#feedback-gangnam-style").show(0);
         setTimeout(function() {
             $("#feedback-title").trigger("click")
+            setTimeout(function() {
+                $("#feedback-btn").one("click", triggerFeedback)
+            }, 5000)
         }, 2000)
     }
     $("#feedback-btn").one("click", triggerFeedback)
