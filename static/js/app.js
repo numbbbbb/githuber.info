@@ -48,6 +48,15 @@ $(function() {
             })
         }
     })
+    $("#feedback-div").mouseover(function() {
+        if ($(this).css("bottom") == "-340px") {
+            $(this).css("bottom", "-335px")
+        }
+    }).mouseleave(function() {
+        if ($(this).css("bottom") == "-335px") {
+            $(this).css("bottom", "-340px")
+        }
+    })
     var triggerFeedback = function() {
         $(document).trigger("feedback", [$("#feedback-email").val(), $("#feedback-content").val()])
         $("#feedback-main").hide(0);
