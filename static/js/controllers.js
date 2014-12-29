@@ -426,22 +426,28 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
     $("#index-input").focus()
     $("#logo").height(360).width(780)
     $("#slogan").parent().height($(window).height() / 4)
-    for (var i = 0; i < $(window).width() / 55; i++) {
+    for (var i = 0; i < $(window).width() / 70; i++) {
         $("#slogan").prepend("&nbsp;")
     }
     $scope.search = function() {
-        window.bigcache = {}
-        $location.path("/search/" + $scope.sw);
+        if ($scope.sw.replace(/\s/g, "") != "") {
+            window.bigcache = {}
+            $location.path("/search/" + $scope.sw);
+        }
     };
 }]).controller('navCtl', ['$scope', '$location', function($scope, $location) {
     $scope.search = function() {
-        window.bigcache = {}
-        $location.path("/search/" + $scope.sw);
+        if ($scope.sw.replace(/\s/g, "") != "") {
+            window.bigcache = {}
+            $location.path("/search/" + $scope.sw);
+        }
     };
 }]).controller('aboutCtl', ['$scope', '$location', function($scope, $location) {
     $scope.search = function() {
-        window.bigcache = {}
-        $location.path("/search/" + $scope.sw);
+        if ($scope.sw.replace(/\s/g, "") != "") {
+            window.bigcache = {}
+            $location.path("/search/" + $scope.sw);
+        }
     };
     $(".label-info").hover(function() {
         $(this).css("cursor", "pointer")
