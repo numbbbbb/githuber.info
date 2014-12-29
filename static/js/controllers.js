@@ -59,8 +59,6 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
         }
     }
     if (!(window.config && window.config.email) && !window.forShare) {
-        window.config.email = true
-        updateLocalDB()
         setTimeout(function() {
             $("#enter-email").slideDown(function() {
                 $("#inputEmail3").focus()
@@ -68,9 +66,13 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
         }, 2000)
     }
     $scope.closeEmail = function() {
+        window.config.email = true
+        updateLocalDB()
         $("#enter-email").slideUp()
     };
     $scope.saveEmail = function() {
+        window.config.email = true
+        updateLocalDB()
         $("#enter-email").slideUp()
         $(document).trigger("emailAddr", $("#inputEmail3").val());
     };
@@ -87,7 +89,7 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
                 $(".bdshare-slide-button-box").remove()
                 window._bd_share_is_recently_loaded = false
                 window._bd_share_main = null
-                window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"我在#GitHuber.info#发现牛人一枚，其名曰" + $routeParams.targetUser + "，其详如图，你也来试试吧！@GitHuber点info","bdMini":"1","bdMiniList":["weixin","tsina","qzone","sqq","douban","renren","huaban","youdao","mail","linkedin","copy"],"bdPic":data.url,"bdStyle":"0","bdSize":"16"},"slide":{"type":"slide","bdImg":"0","bdPos":"right","bdTop":"150.5"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"我在#GitHuber.info#发现牛人一枚，其名曰" + $routeParams.targetUser + "，其详如图，你也来试试吧！http://githuber.info @GitHuber点info","bdMini":"1","bdMiniList":["weixin","tsina","qzone","sqq","douban","renren","huaban","youdao","mail","linkedin","copy"],"bdPic":data.url,"bdStyle":"0","bdSize":"16"},"slide":{"type":"slide","bdImg":"0","bdPos":"right","bdTop":"150.5"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
             }
         })
     }
@@ -108,10 +110,16 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
                     getStarredInfo($scope.targetUser);
                     repoInitial($scope.targetUser);
                     for (var i = 0, l = info.length; i < l; i++) {
-                        $scope.githuber[info[i]] = data[info[i]] == "?" ? "无" : data[info[i]];
+                        $scope.githuber[info[i]] = data[info[i]] == "?" ? undefined : data[info[i]];
                     }
                     $(document).trigger(utf8_to_b64(url), JSON.stringify($scope.githuber))
                     $scope.githuber.isLoaded = true;
+                    $scope.githuber.isSuccessLoaded = true;
+                    $scope.$digest();
+                },
+                error: function(data) {
+                    $scope.githuber.isLoaded = true;
+                    $scope.githuber.isErrorLoaded = true;
                     $scope.$digest();
                 }
             });
@@ -123,6 +131,11 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
             dataType: "json",
             method: "GET",
             success: function(data) {
+                if (data == "") {
+                    $scope.byteChart.isLoaded = true;
+                    $scope.byteChart.isErrorLoaded = true;
+                    $scope.$digest();
+                }
                 var barrier = new Barrier();
                 barrier.barrierNumber = data.length;
                 $.map(data, function(repo, i) {
@@ -239,6 +252,7 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
                         }]
                     };
                     $scope.byteChart.isLoaded = true;
+                    $scope.byteChart.isSuccessLoaded = true;
                     $scope.$digest();
                     drawChart("byte-chart", option, "bar");
                 });
@@ -254,10 +268,15 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
                 dataType: "json",
                 method: "GET",
                 success: function(data) {
+                    if (pageNumber == 1 && data == "") {
+                        $scope.starChart.isLoaded = true;
+                        $scope.starChart.isErrorLoaded = true;
+                        $scope.$digest();
+                    }
                     var temp = []
                     $.map(data, function(repo, i) {
                         temp.push({
-                                language: repo.language
+                            language: repo.language
                         })
                         if (repo.language) {
                             if (!(repo.language in $scope.languageOfStarredRepos)) {
@@ -297,15 +316,17 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
                             }]
                         };
                         $scope.starChart.isLoaded = true;
+                        $scope.starChart.isSuccessLoaded = true;
                         $scope.$digest();
                         drawChart("star-chart", option, "pie");
 
                     }
-                }
+                },
             })
         };
         getStarredInfoAt(1);
     };
+
 
     // var getContributionInfo = function(targetUser) {
     //     // 获取fork的repo并统计自己在其中的贡献字节数
@@ -415,7 +436,6 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
         $location.path("/search/" + $scope.sw);
     };
 }]).controller('aboutCtl', ['$scope', '$location', function($scope, $location) {
-    $(".navbar-toggle").not(".collapsed").click()
     $scope.search = function() {
         window.bigcache = {}
         $location.path("/search/" + $scope.sw);
