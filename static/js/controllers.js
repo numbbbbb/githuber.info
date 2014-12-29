@@ -1,5 +1,8 @@
 var App = angular.module('App');
 App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routeParams) {
+    $("#new-feature").click(function() {
+        $("#new-feature-modal").modal("show")
+    })
     $(".bdshare-slide-button-box").remove()
     window._bd_share_is_recently_loaded = false
     window._bd_share_main = null
