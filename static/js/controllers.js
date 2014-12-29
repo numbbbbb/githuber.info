@@ -415,6 +415,7 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
         $location.path("/search/" + $scope.sw);
     };
 }]).controller('aboutCtl', ['$scope', '$location', function($scope, $location) {
+    $(".navbar-toggle").not(".collapsed").click()
     $scope.search = function() {
         window.bigcache = {}
         $location.path("/search/" + $scope.sw);

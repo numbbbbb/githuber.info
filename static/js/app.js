@@ -31,6 +31,9 @@ Object.size = function(obj) {
 };
 
 $(function() {
+    $(".navbar a").click(function() {
+        $(".navbar-toggle").not(".collapsed").click()
+    })
     $("#feedback-title").click(function() {
         $target = $(this).parent()
         $target.stop()
