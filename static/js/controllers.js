@@ -423,12 +423,32 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
 
     $scope.searchUser();
 }]).controller('indexCtl', ['$scope', '$location', function($scope, $location) {
-    $("#index-input").focus()
-    $("#logo").height(360).width(780)
+    $.fn.textWidth = function() {
+        var html_org = $(this).html();
+        var html_calc = '<span>' + html_org + '</span>';
+        $(this).html(html_calc);
+        var width = $(this).find('span:first').width();
+        $(this).html(html_org);
+        return width;
+    };
     $("#slogan").parent().height($(window).height() / 4)
-    for (var i = 0; i < $(window).width() / 70; i++) {
-        $("#slogan").prepend("&nbsp;")
-    }
+    $("#slogan").css({
+        "paddingLeft": ($("#our-name").textWidth() - $("#slogan").textWidth() - 3) + "px"
+    })
+    $("#index-input").on("focus", function() {
+        $("#hint").stop().animate({
+            "opacity": "1",
+            "margin-top": "-" + ($("#hint").outerHeight() - $("#index-input").outerHeight()) + "px"
+        })
+    }).on("blur", function() {
+        $("#hint").stop().animate({
+            "opacity": "0",
+            "margin-top": "0px"
+        })
+    })
+    $("#hint").load(function() {
+        $("#index-input").trigger("focus")
+    })
     $scope.search = function() {
         if ($scope.sw.replace(/\s/g, "") != "") {
             window.bigcache = {}
