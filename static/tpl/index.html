@@ -10,10 +10,13 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-4 col-lg-offset-4 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1 searchBar">
+                <div class="col-lg-2 col-lg-offset-2 col-md-2 col-md-offset-1 col-xs-1">
+                    <img src="/static/img/hint.png" alt="" class="img-responsive" style="opacity:0;" id="hint">
+                </div>
+                <div class="col-lg-4  col-sm-6 col-xs-10 col-xs-offset-0 searchBar">
                     <div class="row">
                         <form ng-submit="search()">
-                            <input class="col-xs-9" ng-model="sw" id="index-input" placeholder="请输入目标GitHub用户名">
+                            <input class="col-xs-9" ng-model="sw" id="index-input" placeholder="请输入GitHub用户名">
                             <button type="submit" class="col-xs-3 btn-success btn">搜索</button>
                         </form>
                     </div>
