@@ -22,7 +22,7 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
     if (!window.config) {
         window.config = {}
     }
-    var debug = false
+    var debug = true
     if (debug) {
         window.config.token = "acd18045340051e7bd1e1a4bd6e4f2571c475e53"
     } else {
@@ -122,6 +122,8 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
                     $(document).trigger(utf8_to_b64(url), JSON.stringify($scope.githuber))
                     $scope.githuber.isLoaded = true;
                     $scope.githuber.isSuccessLoaded = true;
+                    $scope.githuber.followers = $.digits($scope.githuber.followers)
+                    $scope.githuber.public_repos = $.digits($scope.githuber.public_repos)
                     $scope.$digest();
                 },
                 error: function(data) {
@@ -226,6 +228,7 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
                     if (smallWindow) {
                         $scope.githuber.codings = $scope.githuber.codings * 1000
                     }
+                    $scope.githuber.codings = $.digits($scope.githuber.codings)
                     var option = {
                         title: {
                             text: '代码量统计',
