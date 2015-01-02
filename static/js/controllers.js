@@ -440,9 +440,9 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
         "paddingLeft": ($("#our-name").textWidth() - $("#slogan").textWidth() - 3) + "px"
     })
     $scope.search = function() {
-        if ($scope.sw.replace(/\s/g, "") != "") {
+        if ($('#index-input').typeahead('val').replace(/\s/g, "") != "") {
             window.bigcache = {}
-            $location.path("/search/" + $scope.sw);
+            $location.path("/search/" + $('#index-input').typeahead('val').replace(/\s/g, ""));
         }
     };
     var stid
@@ -499,7 +499,7 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
                     }
                 })
             }
-            stid = setTimeout(searchFullname, 300)
+            stid = setTimeout(searchFullname, 200)
             nowFunc = searchFullname
         }
         else {
@@ -560,7 +560,7 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
     });
     setTimeout(function() {
         $("#index-input").trigger("focus")
-    }, 200)
+    }, 300)
 
 }]).controller('navCtl', ['$scope', '$location', function($scope, $location) {
     $scope.search = function() {
