@@ -61,7 +61,7 @@
         height: 40px;
     }
     input:focus,
-    input:hover{
+    input:hover {
         box-shadow: 0 0 3px rgba(81, 203, 238, 1);
         padding: 3px 12px 3px 12px;
         border: 1px solid rgba(81, 203, 238, 1);
@@ -236,7 +236,48 @@
         margin-top: 8px;
     }
     .label {
-        text-shadow:none;
+        text-shadow: none;
+    }
+    .twitter-typeahead {
+        width: 100%;
+    }
+    .tt-hint {
+        color: #999;
+        width: 100%;
+    }
+    .tt-input {
+        width: 100%;
+    }
+    .tt-dropdown-menu {
+        width: 100%;
+        margin-top: 12px;
+        padding: 8px 0;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border: 1px solid rgba(0, 0, 0, 0.2);
+        -webkit-border-radius: 8px;
+        -moz-border-radius: 8px;
+        border-radius: 8px;
+        -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+        -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+        box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+    }
+    .tt-suggestion {
+        padding: 3px 20px;
+        font-size: 18px;
+        line-height: 24px;
+    }
+    .tt-suggestion.tt-cursor {
+        color: #fff;
+        background-color: #0097cf;
+    }
+    .tt-suggestion p {
+        margin: 0;
+    }
+    .search-avatar {
+        height: 40px;
+        width: 40px;
+        margin-right: 10px;
     }
     </style>
 </head>
@@ -261,32 +302,39 @@
                         <div class="form-group">
                             <input type="text" class="form-control" placeholder="输入用户名" ng-model="sw">
                         </div>
-                        <button type="submit" class="btn btn-default">搜索</button>
+                        <button type="submit" class="btn btn-default">查看</button>
                     </form>
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="#/donate">打赏</a>
                         </li>
                         <li><a href="#/about">关于</a>
                         </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">提点建议</a>
+
+                            <ul class="dropdown-menu" role="menu">
+                                <li>
+                                    <div>
+                                        <div id="feedback-main">
+                                            <input type="text" class="form-control feedback-part" id="feedback-email" style="margin-top:0px;" placeholder="请留下您的邮箱">
+                                            <textarea class="form-control feedback-part" id="feedback-content" cols="30" rows="10" style="resize: none;" placeholder="请输入您的意见建议，我们会认真阅读并一一回复的(๑>◡<๑) "></textarea>
+                                            <div class="feedback-part">
+                                                <button class="btn btn-info btn-block" id="feedback-btn">提交</button>
+                                            </div>
+                                        </div>
+                                        <div id="feedback-gangnam-style" style="display:none;">
+                                            <img src="/static/img/gangnam-style.png" alt="" style="display:block;height:320px;width:90%;margin:0 auto;" />
+                                        </div>
+
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
                     </ul>
                 </div>
             </div>
         </nav>
         <div ng-view></div>
-    </div>
-    <div id="feedback-div">
-        <p id="feedback-title">提点建议</p>
-        <div id="feedback-main">
-            <input type="text" class="form-control feedback-part" id="feedback-email" style="margin-top:0px;" placeholder="请留下您的邮箱">
-            <textarea class="form-control feedback-part" id="feedback-content" cols="30" rows="10" style="resize: none;" placeholder="请输入您的意见建议，我们会认真阅读并一一回复的(๑>◡<๑) "></textarea>
-            <div class="feedback-part">
-                <button class="btn btn-info btn-block" id="feedback-btn">提交</button>
-            </div>
-        </div>
-        <div id="feedback-gangnam-style" style="display:none;">
-            <img src="/static/img/gangnam-style.png" alt="" style="display:block;height:320px;width:90%;margin:0 auto;"/>
-        </div>
-
     </div>
     <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
     <script src="http://cdn.bootcss.com/angular.js/1.3.0-beta.13/angular.min.js"></script>
@@ -299,6 +347,7 @@
     <script src="http://cdn.bootcss.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
     <script src="http://numbbbbb.qiniudn.com/jscdnecharts.js"></script>
     <!-- <script src="/static/js/echarts.js"></script> -->
+    <script src="http://cdn.bootcss.com/typeahead.js/0.10.5/typeahead.jquery.min.js"></script>
     <script type="text/javascript">
     require.config({
         paths: {

@@ -34,42 +34,20 @@ $(function() {
     $(".navbar a").click(function() {
         $(".navbar-toggle").not(".collapsed").click()
     })
-    $("#feedback-title").click(function() {
-        $target = $(this).parent()
-        $target.stop()
-        if ($target.css("bottom") != "0px") {
-            $target.animate({
-                "bottom": "0px"
-            })
-        } else {
-            $target.animate({
-                "bottom": "-340px"
-            }, function() {
-                $("#feedback-gangnam-style").hide(0);
-                $("#feedback-email, #feedback-content").val("")
-                $("#feedback-main").show(0);
-            })
-        }
-    })
-    $("#feedback-div").mouseover(function() {
-        if ($(this).css("bottom") == "-340px") {
-            $(this).css("bottom", "-335px")
-        }
-    }).mouseleave(function() {
-        if ($(this).css("bottom") == "-335px") {
-            $(this).css("bottom", "-340px")
-        }
-    })
     var triggerFeedback = function() {
         $(document).trigger("feedback", [$("#feedback-email").val(), $("#feedback-content").val()])
         $("#feedback-main").hide(0);
         $("#feedback-gangnam-style").show(0);
         setTimeout(function() {
-            $("#feedback-title").trigger("click")
+            $("#feedback-btn").trigger("click")
+            $("#feedback-gangnam-style").hide(0);
+            $("#feedback-email, #feedback-content").val("")
+            $("#feedback-main").show(0);
             setTimeout(function() {
                 $("#feedback-btn").one("click", triggerFeedback)
             }, 5000)
         }, 2000)
+        return false
     }
     $("#feedback-btn").one("click", triggerFeedback)
 })

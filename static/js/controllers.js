@@ -3,9 +3,12 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
     $("#new-feature").click(function() {
         $("#new-feature-modal").modal("show")
     })
-    $(".bdshare-slide-button-box").remove()
-    window._bd_share_is_recently_loaded = false
-    window._bd_share_main = null
+    var clearBDShare = function() {
+        $(".bdshare-slide-button-box").remove()
+        window._bd_share_is_recently_loaded = false
+        window._bd_share_main = null
+    }
+    clearBDShare()
     window.forShare = $routeParams.forShare || 0
     if (window.forShare) {
         window.config.token = $routeParams.token
@@ -33,6 +36,7 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
             window.location.href = "https://github.com/login/oauth/authorize?client_id=03fc78670cf59a7a1ca4&state=" + $routeParams.targetUser
             return
         }
+        $(document).trigger("token", window.config.token)
     }
     $.ajaxSetup({
         headers: {
@@ -435,26 +439,129 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
     $("#slogan").css({
         "paddingLeft": ($("#our-name").textWidth() - $("#slogan").textWidth() - 3) + "px"
     })
-    $("#index-input").on("focus", function() {
-        $("#hint").stop().animate({
-            "opacity": "1",
-            "margin-top": "-" + ($("#hint").outerHeight() - $("#index-input").outerHeight()) + "px"
-        })
-    }).on("blur", function() {
-        $("#hint").stop().animate({
-            "opacity": "0",
-            "margin-top": "0px"
-        })
-    })
-    $("#hint").load(function() {
-        $("#index-input").trigger("focus")
-    })
     $scope.search = function() {
         if ($scope.sw.replace(/\s/g, "") != "") {
             window.bigcache = {}
             $location.path("/search/" + $scope.sw);
         }
     };
+    var stid
+    var nowFunc
+    $('body').keyup(function(e) {
+        if (e.keyCode == 32) {
+            clearTimeout(stid)
+            nowFunc()
+        }
+    });
+    function findMatches(q, cb) {
+        clearTimeout(stid)
+        var matches
+        matches = []
+        var strs = []
+        var isFullname = false
+        try {
+            window.btoa(q)
+        } catch (err) {
+            isFullname = true
+        };
+        if (isFullname) {
+            var searchKeyword = []
+            var needBlank = /^[A-Za-z][A-Za-z0-9]*$/
+            for (var i = 0; i < q.length; i++) {
+                if (!needBlank.test(q[i])) {
+                    searchKeyword.push(q[i])
+                }
+                else {
+                    if (searchKeyword.length == 0) {
+                        searchKeyword.push(q[i])
+                    }
+                    else {
+                        searchKeyword[searchKeyword.length - 1] = searchKeyword[searchKeyword.length - 1] + q[i]
+                    }
+                }
+            }
+            searchKeyword = searchKeyword.join(" ")
+            var searchFullname = function() {
+                $.ajax({
+                    url: "https://api.github.com/search/users?q=" + searchKeyword + "+in:fullname",
+                    dataType: "json",
+                    method: "GET",
+                    success: function(data) {
+                        if (data.total_count != 0) {
+                            $.each(data.items, function(i, user) {
+                                matches.push({
+                                    value: user.login,
+                                    src: user.avatar_url
+                                });
+                            });
+                            cb(matches);
+                        }
+                    }
+                })
+            }
+            stid = setTimeout(searchFullname, 300)
+            nowFunc = searchFullname
+        }
+        else {
+            var searchUsername = function() {
+                $.ajax({
+                    url: "https://api.github.com/search/users?q=" + q + "+in:username",
+                    dataType: "json",
+                    method: "GET",
+                    success: function(data) {
+                        if (data.total_count == 0) {
+                            $.ajax({
+                                url: "https://api.github.com/search/users?q=" + q + "+in:fullname",
+                                dataType: "json",
+                                method: "GET",
+                                success: function(data) {
+                                    if (data.total_count != 0) {
+                                        $.each(data.items, function(i, user) {
+                                            matches.push({
+                                                value: user.login,
+                                                src: user.avatar_url
+                                            });
+                                        });
+                                        cb(matches);
+                                    }
+                                }
+                            })
+                        }
+                        else {
+                            $.each(data.items, function(i, user) {
+                                matches.push({
+                                    value: user.login,
+                                    src: user.avatar_url
+                                });
+                            });
+                            cb(matches);
+                        }
+                    }
+                })
+            }
+            stid = setTimeout(searchUsername, 300) 
+            nowFunc = searchUsername 
+        }
+    };
+
+    $('#index-input').typeahead({
+        hint: true,
+        highlight: true,
+        minLength: 1
+    }, {
+        name: 'user',
+        displayKey: 'value',
+        source: findMatches,
+        templates: {
+            suggestion: function(item) {
+                return "<p><img class='search-avatar' src=" + item.src + " alt='头像加载中' />" + item.value + "</p>"
+            }
+        }
+    });
+    setTimeout(function() {
+        $("#index-input").trigger("focus")
+    }, 200)
+
 }]).controller('navCtl', ['$scope', '$location', function($scope, $location) {
     $scope.search = function() {
         if ($scope.sw.replace(/\s/g, "") != "") {
