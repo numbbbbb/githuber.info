@@ -1,14 +1,14 @@
 var App = angular.module('App');
-App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routeParams) {
-    $("#new-feature").click(function() {
-        $("#new-feature-modal").modal("show")
-    })
-    var clearBDShare = function() {
+var clearBDShare = function() {
         $(".bdshare-slide-button-box").remove()
         window._bd_share_is_recently_loaded = false
         window._bd_share_main = null
     }
+App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routeParams) {
     clearBDShare()
+    $("#new-feature").click(function() {
+        $("#new-feature-modal").modal("show")
+    })
     window.forShare = $routeParams.forShare || 0
     if (window.forShare) {
         window.config.token = $routeParams.token
@@ -430,6 +430,7 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
 
     $scope.searchUser();
 }]).controller('indexCtl', ['$scope', '$location', function($scope, $location) {
+    clearBDShare()
     $.fn.textWidth = function() {
         var html_org = $(this).html();
         var html_calc = '<span>' + html_org + '</span>';
@@ -561,11 +562,15 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
             }
         }
     });
+    $('html').on("typeahead:selected", function() {
+        $("#lookup").click()
+    })
     setTimeout(function() {
         $("#index-input").trigger("focus")
     }, 300)
 
 }]).controller('navCtl', ['$scope', '$location', function($scope, $location) {
+    clearBDShare()
     $scope.search = function() {
         if ($scope.sw.replace(/\s/g, "") != "") {
             window.bigcache = {}
@@ -573,6 +578,7 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
         }
     };
 }]).controller('aboutCtl', ['$scope', '$location', function($scope, $location) {
+    clearBDShare()
     $scope.search = function() {
         if ($scope.sw.replace(/\s/g, "") != "") {
             window.bigcache = {}
