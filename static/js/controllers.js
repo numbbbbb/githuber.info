@@ -431,7 +431,6 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
     $scope.searchUser();
 }]).controller('indexCtl', ['$scope', '$location', function($scope, $location) {
     clearBDShare()
-    $("body").children().first().css("height", "100%")
     $.fn.textWidth = function() {
         var html_org = $(this).html();
         var html_calc = '<span>' + html_org + '</span>';
