@@ -160,9 +160,9 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
                         success: function(data) {
 
                             barrier.barrierNumber--
-                                if ("status" in data || $.isEmptyObject(data)) {
-                                    return
-                                }
+                            if (repo.fork || "status" in data || $.isEmptyObject(data)) {
+                                return
+                            }
                             $(document).trigger(utf8_to_b64(url), JSON.stringify(data))
                             $.each(data, function(language, lines) {
                                 if (isNaN(lines)) {
