@@ -207,7 +207,7 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
                             value: bytes
                         });
                     });
-                    $("#byte-chart").height(data.length * 40);
+                    $("#byte-chart").height(data.length * 40 + 150);
                     data.sort(function(a, b) {
                         return a.value - b.value
                     });
