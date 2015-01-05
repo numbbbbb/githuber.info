@@ -98,6 +98,14 @@
                         </div>
                     </div>
                     <div class="row spec-info" style="margin-top:30px;padding:0px;text-align:center;">
+                        <div class="row" ng-class="{loading : !dayChart.isLoaded, hidden : dayChart.isLoaded}"><div class="loader"></div></div>
+                        <div class="col-md-12" style="height:600px;" id="day-chart" ng-class="{hidden : !dayChart.isSuccessLoaded}">
+                        </div>
+                        <div class="col-md-12" id="byte-chart" ng-class="{hidden : !dayChart.isErrorLoaded}" style="text-align:center;">
+                            <p style="font-size:20px;">{{githuber.login}}的每日动态无法获取= =</p>
+                        </div>
+                    </div>
+                    <div class="row spec-info" style="margin-top:30px;padding:0px;text-align:center;">
                         <div class="row" ng-class="{loading : !starChart.isLoaded, hidden : starChart.isLoaded}"><div class="loader"></div></div>
                         <div class="col-md-12" style="height:600px;" id="star-chart" ng-class="{hidden : !starChart.isSuccessLoaded}">
                         </div>
@@ -115,14 +123,7 @@
                             <p style="font-size:20px;">{{githuber.login}}根本就没有项目(╯￣Д￣)╯╘═╛</p>
                         </div>
                     </div>
-                    <div class="row spec-info" style="margin-top:30px;padding:0px;text-align:center;">
-                        <div class="row" ng-class="{loading : !dayChart.isLoaded, hidden : dayChart.isLoaded}"><div class="loader"></div></div>
-                        <div class="col-md-12" style="height:600px;" id="day-chart" ng-class="{hidden : !dayChart.isSuccessLoaded}">
-                        </div>
-                        <div class="col-md-12" id="byte-chart" ng-class="{hidden : !dayChart.isErrorLoaded}" style="text-align:center;">
-                            <p style="font-size:20px;">{{githuber.login}}的每日动态无法获取= =</p>
-                        </div>
-                    </div>
+                    
                 </div>
             </div>
             <div class="row" ng-class="{hidden: githuber.isErrorLoaded}">
