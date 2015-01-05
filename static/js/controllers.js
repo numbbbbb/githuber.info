@@ -127,6 +127,7 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
                     $scope.githuber.isSuccessLoaded = true;
                     $scope.githuber.followers = $.digits($scope.githuber.followers)
                     $scope.githuber.public_repos = $.digits($scope.githuber.public_repos)
+                    $scope.githuber.day = Math.floor((((new Date()).getTime()) - new Date(data.created_at))/(1000*60*60*24))
                     $scope.$digest();
                 },
                 error: function(data) {
