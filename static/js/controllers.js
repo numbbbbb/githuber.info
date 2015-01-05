@@ -146,7 +146,7 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
                 var week = {}
                 var day = {}
                 var temp = {}
-                var category = []
+                var category = ['']
                 $.map(data.usage.events, function(event, i) {
                     temp[event.type.replace("Event", "")] = event
                     category.push(event.type.replace("Event", ""))
@@ -160,6 +160,9 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
                 })
                 var week_series = []
                 $.map(category, function(type, i) {
+                    if (type == '') {
+                        return
+                    }
                     week_series.push({
                         name: type,
                         type: 'bar',
@@ -170,6 +173,9 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
                 var week_option = {
                     title: {
                         text: '周平均动态',
+                    },
+                    grid: {
+                        y: "80"
                     },
                     tooltip: {
                         trigger: 'axis',
@@ -195,6 +201,9 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
                 drawChart("week-chart", week_option, "bar");
                 day_series = []
                 $.map(category, function(type, i) {
+                    if (type == '') {
+                        return
+                    }
                     day_series.push({
                         name: type,
                         type: 'bar',
@@ -205,6 +214,9 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
                 var day_option = {
                     title: {
                         text: '日平均动态',
+                    },
+                    grid: {
+                        y: "80"
                     },
                     tooltip: {
                         trigger: 'axis',
