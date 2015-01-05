@@ -51,6 +51,8 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
     $scope.githuber = {};
     $scope.byteChart = {};
     $scope.starChart = {};
+    $scope.weekChart = {};
+    $scope.dayChart = {};
     var Barrier = function() { // 用于等待多个ajax完成
         this.barrierNumber = 0
         this.checkFinish = function(cb) {
@@ -113,6 +115,7 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
                     if (!window.forShare) {
                         $scope.generateShareImg()
                     }
+                    getActivityInfo($scope.targetUser)
                     getCodeLines($scope.targetUser);
                     getStarredInfo($scope.targetUser);
                     repoInitial($scope.targetUser);
@@ -134,6 +137,99 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
             });
         }
     };
+    var getActivityInfo = function(targetUser) {
+        $.ajax({
+            url: "https://osrc.dfm.io/" + targetUser + ".json",
+            dataType: "jsonp",
+            success: function(data) {
+                var week = {}
+                var day = {}
+                var temp = {}
+                var category = []
+                $.map(data.usage.events, function(event, i) {
+                    temp[event.type.replace("Event", "")] = event
+                    category.push(event.type.replace("Event", ""))
+                })
+                $.each(temp, function(type, info) {
+                    day[type] = info.day
+                    
+                    week[type] = info.week
+                    var s = week[type].shift()
+                    week[type].push(s)
+                })
+                var week_series = []
+                $.map(category, function(type, i) {
+                    week_series.push({
+                        name: type,
+                        type: 'bar',
+                        stack: '每周平均活跃度',
+                        data: week[type]
+                    })
+                })
+                var week_option = {
+                    title: {
+                        text: '周平均动态',
+                    },
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: { // 坐标轴指示器，坐标轴触发有效
+                            type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+                        }
+                    },
+                    legend: {
+                        data: category
+                    },
+                    xAxis: [{
+                        type: 'category',
+                        data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+                    }],
+                    yAxis: [{
+                        type: 'value'
+                    }],
+                    series: week_series
+                };
+                $scope.weekChart.isLoaded = true;
+                $scope.weekChart.isSuccessLoaded = true;
+                $scope.$digest();
+                drawChart("week-chart", week_option, "bar");
+                day_series = []
+                $.map(category, function(type, i) {
+                    day_series.push({
+                        name: type,
+                        type: 'bar',
+                        stack: '每日平均活跃度',
+                        data: day[type]
+                    })
+                })
+                var day_option = {
+                    title: {
+                        text: '日平均动态',
+                    },
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: { // 坐标轴指示器，坐标轴触发有效
+                            type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+                        }
+                    },
+                    legend: {
+                        data: category
+                    },
+                    xAxis: [{
+                        type: 'category',
+                        data: ['00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00', '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00', '24:00']
+                    }],
+                    yAxis: [{
+                        type: 'value'
+                    }],
+                    series: day_series
+                };
+                $scope.dayChart.isLoaded = true;
+                $scope.dayChart.isSuccessLoaded = true;
+                $scope.$digest();
+                drawChart("day-chart", day_option, "bar");
+            }
+        });
+    }
     var getCodeLines = function(targetUser) {
         $.ajax({
             url: "https://api.github.com/users/" + targetUser + "/repos?page=1&per_page=10000",
@@ -148,10 +244,15 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
                 var barrier = new Barrier();
                 barrier.barrierNumber = data.length;
                 $.map(data, function(repo, i) {
+                    if (repo.fork) {
+                        barrier.barrierNumber--
+                        return
+                    }
                     $scope.ownedRepoInfos[repo.id] = {
                         description: repo.description,
                         name: repo.name,
                         stars: repo.stargazers_count,
+                        url: repo.html_url
                     };
                     var url = "https://api.github.com/repos/" + targetUser + "/" + repo.name + "/languages"
                     $.ajax({
@@ -196,6 +297,7 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
                             '<h2>' + repo.name + ' <span class="label label-' + (i >= 3 ? 'default' : 'warning') + '">' + repo.stars + ' Stars</span></h2>' +
                             '<p style="font-size:16px;">' + repo.description + '</p>' +
                             '<button type="button" class="btn btn-default readme-btn" data-id="' + repo.id + '">查看readme</button>' +
+                            '<a target="_blank" class="btn btn-primary repo-btn" href="' + repo.url + '">项目主页</a>' +
                             '</div>' +
                             '</div>')
                     })
