@@ -76,7 +76,7 @@
                                     {{githuber.name || githuber.login}}有<span style="font-size:34px;" class="info-number">{{githuber.followers}}</span>个粉丝
                                 </li>
                                 <li><span style="font-size:34px;" class="info-number">{{githuber.public_repos}}</span>个项目</li>
-                                <li><span style="font-size:34px;" class="info-number">{{githuber.codings}}</span>比特代码</li>
+                                <li><span style="font-size:34px;" class="info-number">{{githuber.codings}}</span>字节代码</li>
                             </ul>
                         </div>
                     </div>
@@ -97,7 +97,7 @@
                             <p style="font-size:20px;">{{githuber.login}}根本就没有项目(╯￣Д￣)╯╘═╛</p>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row" style="margin-top:30px;padding:0px;text-align:center;">
                         <div class="row" ng-class="{loading : !starChart.isLoaded, hidden : starChart.isLoaded}"><div class="loader"></div></div>
                         <div class="col-md-12" style="height:600px;" id="star-chart" ng-class="{hidden : !starChart.isSuccessLoaded}">
                         </div>
@@ -106,6 +106,22 @@
                         </div>
                         <!--   <div class="col-md-6" style="height:600px;" id="contribution-chart">
                             </div> -->
+                    </div>
+                    <div class="row" style="margin-top:30px;padding:0px;text-align:center;">
+                        <div class="row" ng-class="{loading : !dayChart.isLoaded, hidden : dayChart.isLoaded}"><div class="loader"></div></div>
+                        <div class="col-md-12" style="height:600px;" id="day-chart" ng-class="{hidden : !dayChart.isSuccessLoaded}">
+                        </div>
+                        <div class="col-md-12" id="byte-chart" ng-class="{hidden : !dayChart.isErrorLoaded}" style="text-align:center;">
+                            <p style="font-size:20px;">{{githuber.login}}的每日动态无法获取= =</p>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top:30px;padding:0px;text-align:center;">
+                        <div class="row" ng-class="{loading : !weekChart.isLoaded, hidden : weekChart.isLoaded}"><div class="loader"></div></div>
+                        <div class="col-md-12" style="height:600px;" id="week-chart" ng-class="{hidden : !weekChart.isSuccessLoaded}">
+                        </div>
+                        <div class="col-md-12" id="byte-chart" ng-class="{hidden : !weekChart.isErrorLoaded}" style="text-align:center;">
+                            <p style="font-size:20px;">{{githuber.login}}的每周动态无法获取= =</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -139,7 +155,7 @@
                 这个按钮是什么呢？可能是加入待选列表，可能是多人横向对比，可能是导出详细信息，可能是.....
             </p>
             <p>
-                这个问题交给你，你想要什么呢？请点击右下角的“提点建议”告诉我们。下一个版本中我们一定会让这个按钮“给你好看”！
+                这个问题交给你，你想要什么呢？请点击右上角的“提点建议”告诉我们。下一个版本中我们一定会让这个按钮“给你好看”！
             </p>
             </div>
             <div class="modal-footer">
