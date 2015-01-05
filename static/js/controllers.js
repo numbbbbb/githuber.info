@@ -104,7 +104,7 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
     }
 
     var getUserInfo = function(targetUser) {
-        var info = ['login', 'avatar_url', 'name', 'company', 'email', 'followers', 'public_repos'];
+        var info = ['login', 'avatar_url', 'name', 'company', 'email', 'followers', 'public_repos', 'created_at'];
         if ($scope.targetUser != "") {
             var url = "https://api.github.com/users/" + targetUser;
             $.ajax({
@@ -135,7 +135,7 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
                     $scope.githuber.isErrorLoaded = true;
                     $scope.$digest();
                 }
-            });
+            }, true);
         }
     };
     var getActivityInfo = function(targetUser) {
