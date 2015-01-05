@@ -15,7 +15,7 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
     }
     var smallWindow = $(window).width() < 768
     if (!smallWindow) {
-        $("#spec-info").css("padding", "30px")
+        $(".spec-info").css("padding", "30px")
     }
     $("#repo-modal-content").height($(window).height() - $(window).height() / 4 - 60)
     $(document).trigger("github_id", $routeParams.targetUser)
