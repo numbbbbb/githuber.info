@@ -90,32 +90,6 @@
 
                     <h2 class="infoNoteLabel">特性分析</h2>
                     <div class="row spec-info" style="margin-top:30px;padding:0px;text-align:center;">
-                        <div class="row" ng-class="{loading : !weekChart.isLoaded, hidden : weekChart.isLoaded}"><div class="loader"></div></div>
-                        <div class="col-md-12" style="height:600px;" id="week-chart" ng-class="{hidden : !weekChart.isSuccessLoaded}">
-                        </div>
-                        <div class="col-md-12" id="byte-chart" ng-class="{hidden : !weekChart.isErrorLoaded}" style="text-align:center;">
-                            <p style="font-size:20px;">{{githuber.login}}的每周动态无法获取= =</p>
-                        </div>
-                    </div>
-                    <div class="row spec-info" style="margin-top:30px;padding:0px;text-align:center;">
-                        <div class="row" ng-class="{loading : !dayChart.isLoaded, hidden : dayChart.isLoaded}"><div class="loader"></div></div>
-                        <div class="col-md-12" style="height:600px;" id="day-chart" ng-class="{hidden : !dayChart.isSuccessLoaded}">
-                        </div>
-                        <div class="col-md-12" id="byte-chart" ng-class="{hidden : !dayChart.isErrorLoaded}" style="text-align:center;">
-                            <p style="font-size:20px;">{{githuber.login}}的每日动态无法获取= =</p>
-                        </div>
-                    </div>
-                    <div class="row spec-info" style="margin-top:30px;padding:0px;text-align:center;">
-                        <div class="row" ng-class="{loading : !starChart.isLoaded, hidden : starChart.isLoaded}"><div class="loader"></div></div>
-                        <div class="col-md-12" style="height:600px;" id="star-chart" ng-class="{hidden : !starChart.isSuccessLoaded}">
-                        </div>
-                        <div class="col-md-12" id="byte-chart" ng-class="{hidden : !starChart.isErrorLoaded}" style="text-align:center;">
-                            <p style="font-size:20px;">{{githuber.login}}没有Star任何项目(╯￣Д￣)╯╘═╛</p>
-                        </div>
-                        <!--   <div class="col-md-6" style="height:600px;" id="contribution-chart">
-                            </div> -->
-                    </div>
-                    <div class="row spec-info" style="margin-top:30px;padding:0px;text-align:center;">
                         <div class="row" ng-class="{loading : !byteChart.isLoaded, hidden : byteChart.isLoaded}"><div class="loader"></div></div>
                         <div class="col-md-12" id="byte-chart" ng-class="{hidden : !byteChart.isSuccessLoaded}">
                         </div>
@@ -123,7 +97,32 @@
                             <p style="font-size:20px;">{{githuber.login}}根本就没有项目(╯￣Д￣)╯╘═╛</p>
                         </div>
                     </div>
-                    
+                    <div class="row spec-info" style="margin-top:30px;padding:0px;text-align:center;">
+                        <div class="row" ng-class="{loading : !weekChart.isLoaded, hidden : weekChart.isLoaded}"><div class="loader"></div></div>
+                        <div class="col-md-12" style="height:600px;" id="week-chart" ng-class="{hidden : !weekChart.isSuccessLoaded}">
+                        </div>
+                        <div class="col-md-12" id="week-chart" ng-class="{hidden : !weekChart.isErrorLoaded}" style="text-align:center;">
+                            <p style="font-size:20px;">{{githuber.login}}的每周动态无法获取= =</p>
+                        </div>
+                    </div>
+                    <div class="row spec-info" style="margin-top:30px;padding:0px;text-align:center;">
+                        <div class="row" ng-class="{loading : !dayChart.isLoaded, hidden : dayChart.isLoaded}"><div class="loader"></div></div>
+                        <div class="col-md-12" style="height:600px;" id="day-chart" ng-class="{hidden : !dayChart.isSuccessLoaded}">
+                        </div>
+                        <div class="col-md-12" id="day-chart" ng-class="{hidden : !dayChart.isErrorLoaded}" style="text-align:center;">
+                            <p style="font-size:20px;">{{githuber.login}}的每日动态无法获取= =</p>
+                        </div>
+                    </div>
+                    <div class="row spec-info" style="margin-top:30px;padding:0px;text-align:center;">
+                        <div class="row" ng-class="{loading : !starChart.isLoaded, hidden : starChart.isLoaded}"><div class="loader"></div></div>
+                        <div class="col-md-12" style="height:600px;" id="star-chart" ng-class="{hidden : !starChart.isSuccessLoaded}">
+                        </div>
+                        <div class="col-md-12" id="star-chart" ng-class="{hidden : !starChart.isErrorLoaded}" style="text-align:center;">
+                            <p style="font-size:20px;">{{githuber.login}}没有Star任何项目(╯￣Д￣)╯╘═╛</p>
+                        </div>
+                        <!--   <div class="col-md-6" style="height:600px;" id="contribution-chart">
+                            </div> -->
+                    </div>
                 </div>
             </div>
             <div class="row" ng-class="{hidden: githuber.isErrorLoaded}">

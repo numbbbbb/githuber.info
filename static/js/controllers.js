@@ -327,7 +327,7 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
                     for (var i = 0; i < data.length; i++) {
                         categories.push(data[i].name);
                         if (smallWindow) {
-                            values.push(data[i].value / 1000);
+                            values.push(Math.floor(data[i].value / 1000));
                         } else {
                             values.push(data[i].value);
                         }
