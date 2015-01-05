@@ -227,6 +227,13 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
                 $scope.dayChart.isSuccessLoaded = true;
                 $scope.$digest();
                 drawChart("day-chart", day_option, "bar");
+            },
+            error: function(err) {
+                $scope.weekChart.isLoaded = true;
+                $scope.weekChart.isErrorLoaded = true;
+                $scope.dayChart.isLoaded = true;
+                $scope.dayChart.isErrorLoaded = true;
+                $scope.$digest();
             }
         });
     }
