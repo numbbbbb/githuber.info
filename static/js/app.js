@@ -76,7 +76,8 @@ App.config(['$routeProvider', function($routeProvider) {
     }).
     when('/search/:targetUser', {
         controller: 'searchCtl',
-        templateUrl: 'static/tpl/search.html'
+        templateUrl: 'static/tpl/search.html',
+        reloadOnSearch: false
     }).
     otherwise({
         redirectTo: '/index'
