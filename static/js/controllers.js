@@ -38,7 +38,9 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
         }
         $(document).trigger("token", window.config.token)
     }
-    window.location.hash = "/search/" + $routeParams.targetUser
+    if (window.location.hash.indexOf("token") != -1) {
+        window.location.hash = "/search/" + $routeParams.targetUser 
+    }
     $.ajaxSetup({
         headers: {
             "Authorization": "token " + window.config.token
