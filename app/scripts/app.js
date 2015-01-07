@@ -1,4 +1,23 @@
-// init
+// Basic Init
+require.config({
+  paths: {
+    echarts: '/static/js'
+  }
+})
+
+function drawChart(id, option, type) {
+  require(
+    [
+      'echarts',
+      'echarts/chart/' + type
+    ],
+    function(ec) {
+      var myChart = ec.init(document.getElementById(id))
+      myChart.setOption(option)
+    }
+  )
+}
+
 var db = new LocalDB("githuber.info");
 var collection = db.collection("userInfo");
 
@@ -58,28 +77,29 @@ $(function() {
     }
 })
 
-
 // Angular app
 var App = angular.module('App', ['ngRoute']);
 App.config(['$routeProvider', function($routeProvider) {
     $routeProvider.
     when('/index', {
         controller: 'indexCtl',
-        templateUrl: '/static/tpl/index.html'
+        templateUrl: 'views/index.html'
     }).
     when('/about', {
         controller: 'aboutCtl',
-        templateUrl: '/static/tpl/about.html'
+        templateUrl: 'views/about.html'
     }).
     when('/donate', {
-        templateUrl: '/static/tpl/donate.html'
+        templateUrl: 'views/donate.html'
     }).
     when('/search/:targetUser', {
         controller: 'searchCtl',
-        templateUrl: 'static/tpl/search.html',
+        templateUrl: 'views/search.html',
         reloadOnSearch: false
     }).
     otherwise({
         redirectTo: '/index'
     });
 }]);
+
+
