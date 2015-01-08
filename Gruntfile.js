@@ -16,10 +16,8 @@ module.exports = function (grunt) {
 
   // Define the configuration for all the tasks
   grunt.initConfig({
-
     // Project settings
     githuber: appConfig,
-
     // Watches files for changes and runs tasks based on the changed files
     watch: {
       bower: {
@@ -139,7 +137,8 @@ module.exports = function (grunt) {
     filerev: {
       dist: {
         src: [
-          '<%= githuber.dist %>/scripts/{,*/}*.js',
+          '<%= githuber.dist %>/scripts/*.js',
+          '<%= githuber.dist %>/scripts/bigcache/*.js',
           '<%= githuber.dist %>/styles/{,*/}*.css',
           '<%= githuber.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
           '<%= githuber.dist %>/styles/fonts/*'
@@ -151,7 +150,7 @@ module.exports = function (grunt) {
     // concat, minify and revision files. Creates configurations in memory so
     // additional tasks can operate on them
     useminPrepare: {
-      html: '<%= githuber.app %>/index.html',
+      html: ['<%= githuber.app %>/index.html', '<%= githuber.app %>/views/*.html'],
       options: {
         dest: '<%= githuber.dist %>',
         flow: {
@@ -270,6 +269,7 @@ module.exports = function (grunt) {
           cwd: '<%= githuber.app %>',
           dest: '<%= githuber.dist %>',
           src: [
+            'scripts/chart/*.js',
             '*.{ico,png,txt}',
             '.htaccess',
             '*.html',

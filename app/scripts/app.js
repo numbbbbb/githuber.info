@@ -1,7 +1,7 @@
 // Basic Init
 require.config({
   paths: {
-    echarts: '/static/js'
+    echarts: '/scripts'
   }
 })
 
@@ -72,8 +72,8 @@ $(function() {
     $("#feedback-main").click(function() {
         return false;
     })
-    $.digits = function(text){ 
-        return text.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"); 
+    $.digits = function(text){
+        return text.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
     }
 })
 
