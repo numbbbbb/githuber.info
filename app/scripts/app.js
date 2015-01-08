@@ -79,7 +79,7 @@ $(function() {
 
 // Angular app
 var App = angular.module('App', ['ngRoute']);
-App.config(['$routeProvider', function($routeProvider) {
+App.config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
     $routeProvider.
     when('/index', {
         controller: 'indexCtl',
@@ -100,6 +100,7 @@ App.config(['$routeProvider', function($routeProvider) {
     otherwise({
         redirectTo: '/index'
     });
+    $locationProvider.html5Mode(true);
 }]);
 
 
