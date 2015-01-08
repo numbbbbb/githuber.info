@@ -555,6 +555,7 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
 
     $scope.searchUser();
 }]).controller('indexCtl', ['$scope', '$location', function($scope, $location) {
+    $(".support-logo").css({"transform": "scale(" + ($(window).height() / 1200) + ")"})
     clearBDShare()
     $.fn.textWidth = function() {
         var html_org = $(this).html();
@@ -565,6 +566,7 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
         return width;
     };
     $("#slogan").parent().height($(window).height() / 4)
+    $("#search-part").height($(window).height() - $("#slogan").parent().height() - 100 - 71 - parseFloat($(".container-fluid.ng-scope").css("margin-top").replace("px", "")) - $(".support-logo").height());
     $("#slogan").css({
         "paddingLeft": ($("#our-name").textWidth() - $("#slogan").textWidth() - 3) + "px"
     })
