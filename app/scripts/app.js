@@ -100,7 +100,7 @@ App.config(['$locationProvider', '$routeProvider', function($locationProvider, $
     otherwise({
         redirectTo: '/index'
     });
-    $locationProvider.html5Mode(true);
+    // $locationProvider.html5Mode(true);
 }]);
 
 
