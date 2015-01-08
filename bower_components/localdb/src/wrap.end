@@ -1,0 +1,13 @@
+
+  if ( typeof define === "function" && define.amd ) {
+    define( "localdb", [], function() {
+      return LocalDB;
+    });
+  }
+
+  if (!noGlobal) {
+    window.LocalDB = LocalDB
+  }
+
+  return LocalDB
+}));

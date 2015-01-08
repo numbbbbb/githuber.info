@@ -1,0 +1,26 @@
+/**
+ * logest item in an array
+ * Copyright (c) 2014 Jon Schlinkert <https://github.com/jonschlinkert>
+ * Licensed under the MIT License (MIT).
+ */
+
+// node_modules
+var fs = require('fs');
+var expect = require('chai').expect;
+var longest = require('../');
+var arr = JSON.parse(fs.readFileSync('test/fixtures/arr.json').toString());
+
+// Tests
+describe('longest', function() {
+  it('Should return the length of the longest item in the given array', function() {
+    var expected = longest(arr).length;
+    var actual = 32;
+    expect(actual).to.eql(expected);
+  });
+
+  it('Should return the longest item in the given array', function() {
+    var expected = longest(arr);
+    var actual = 'assemble-contrib-anchors-example';
+    expect(actual).to.eql(expected);
+  });
+});

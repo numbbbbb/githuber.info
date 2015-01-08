@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Index</title>
+    
+    
+    
+    
+    
+    <meta property="og:title" content=""/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:image" content=""/>
+    
+    <meta property="og:url" content=""/>
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <script src="scripts/jquery.min.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/jaguar.css">
+    
+    
+    <script>
+    var config = {"monospaceLinks":true,"cleverLinks":true,"default":{"outputSourceFiles":true},"applicationName":"LocalDB","disqus":"","googleAnalytics":"","openGraph":{"title":"","type":"website","image":"","site_name":"","url":""},"meta":{"title":"","description":"","keyword":""},"linenums":false};
+    </script>
+    
+
+    
+</head>
+<body>
+<div id="wrap" class="clearfix">
+    
+<div class="navigation">
+    <h3 class="applicationName"><a href="index.html">LocalDB</a></h3>
+
+    <div class="search">
+        <input id="search" type="text" class="form-control input-sm" placeholder="Search Documentations">
+    </div>
+    <ul class="list">
+    
+        <li class="item" data-name="Collection">
+            <span class="title">
+                <a href="Collection.html">Collection</a>
+                
+            </span>
+            <ul class="members itemMembers">
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+            <ul class="methods itemMembers">
+            
+            <span class="subtitle">Methods</span>
+            
+                <li data-name="Collection#drop"><a href="Collection.html#drop">drop</a></li>
+            
+                <li data-name="Collection#find"><a href="Collection.html#find">find</a></li>
+            
+                <li data-name="Collection#findOne"><a href="Collection.html#findOne">findOne</a></li>
+            
+                <li data-name="Collection#insert"><a href="Collection.html#insert">insert</a></li>
+            
+                <li data-name="Collection#remove"><a href="Collection.html#remove">remove</a></li>
+            
+                <li data-name="Collection#update"><a href="Collection.html#update">update</a></li>
+            
+            </ul>
+            <ul class="events itemMembers">
+            
+            </ul>
+        </li>
+    
+        <li class="item" data-name="LocalDB">
+            <span class="title">
+                <a href="LocalDB.html">LocalDB</a>
+                
+            </span>
+            <ul class="members itemMembers">
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+            <ul class="methods itemMembers">
+            
+            <span class="subtitle">Methods</span>
+            
+                <li data-name="LocalDB.getSupport"><a href="LocalDB.html#getSupport">getSupport</a></li>
+            
+                <li data-name="LocalDB.getTime"><a href="LocalDB.html#getTime">getTime</a></li>
+            
+                <li data-name="LocalDB.getTimestamp"><a href="LocalDB.html#getTimestamp">getTimestamp</a></li>
+            
+                <li data-name="LocalDB.getVersion"><a href="LocalDB.html#getVersion">getVersion</a></li>
+            
+                <li data-name="LocalDB.init"><a href="LocalDB.html#init">init</a></li>
+            
+                <li data-name="LocalDB#collection"><a href="LocalDB.html#collection">collection</a></li>
+            
+                <li data-name="LocalDB#options"><a href="LocalDB.html#options">options</a></li>
+            
+            </ul>
+            <ul class="events itemMembers">
+            
+            </ul>
+        </li>
+    
+    </ul>
+</div>
+    <div class="main">
+        <h1 class="page-title" data-filename="index.html">Index</h1>
+        
+
+
+    
+
+
+    <h3> </h3>
+
+
+
+
+
+
+
+
+    
+
+
+
+
+    <section>
+        <article class="readme"><h1>localDB</h1>
+<hr>
+<p><a href="http://spmjs.io/package/localdb"><img src="http://spmjs.io/badge/localdb" alt="spm package"></a>
+<a href="https://travis-ci.org/wh1100717/localDB"><img src="https://api.travis-ci.org/wh1100717/localDB.svg?branch=master" alt="Build Status"></a>
+<a href="https://coveralls.io/r/wh1100717/localDB?branch=master"><img src="https://img.shields.io/coveralls/wh1100717/localDB.svg" alt="Coverage Status"></a>
+<a href="LICENSE"><img src="http://img.shields.io/badge/license-MIT-blue.svg?style=flat" alt="MIT License"></a></p>
+<p><strong><a href="https://github.com/wh1100717/localDB">LocalDB</a></strong> 为开发者提供简单、易用又强大的浏览器端数据存取接口，其被设计用来为 WEB 应用、手机 H5 应用、网页游戏引擎提供浏览器端持久化存储方案。</p>
+<h2>Feature</h2>
+<ul>
+<li>基于 JSON 文档风格的存储方式</li>
+<li>支持多种数据格式的存储，例如：函数、正则表达式</li>
+<li>支持基于文档的富查询及排序功能</li>
+<li>支持 AMD/CMD/Standalone 等多种模块加载方式</li>
+<li>支持数据存取加密功能</li>
+<li>智能存储引擎切换</li>
+<li>支持域白名单功能，实现跨域共享数据，独特的跨域数据共享解决方案</li>
+<li>独特的域数据模块化解决方案</li>
+<li>高安全性(可以通过更改proxy来隐藏数据所存储的真实域)</li>
+<li>支持 <a href="https://www.promisejs.org/">Promise</a> 或 Callback 异步编程</li>
+<li>支持 <a href="http://bsonspec.org/">BSON</a> objectId</li>
+</ul>
+<h2>Installation</h2>
+<h4>By Bower</h4>
+<pre><code class="lang-bash">$ bower install localdb</code></pre>
+<h4>By SPM</h4>
+<pre><code class="lang-bash">$ spm install localdb</code></pre>
+<p>通过 <a href="http://bower.io/">bower</a> 安装或者直接下载独立库文件的用户，可以直接在html页面中引用该js文件</p>
+<pre><code class="lang-html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;script type=&quot;text/javascript&quot; src=&quot;dist/0.0.1/localdb.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;/body&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+    var db = new LocalDB(&quot;foo&quot;)
+&lt;/script&gt;
+&lt;/html&gt;</code></pre>
+<p>LocalDB 支持 <a href="http://requirejs.org/">requirejs</a> 作为其模块加载器，具体用法如下：</p>
+<pre><code class="lang-html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;script type=&quot;text/javascript&quot; src=&quot;emaples/require.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;/body&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+    require(['dist/0.0.1/localdb'],function(LocalDB){
+        var db = new LocalDB(&quot;foo&quot;)
+    }
+&lt;/script&gt;
+&lt;/html&gt;</code></pre>
+<p>LocalDB 支持 <a href="http://seajs.org/docs/">seajs</a> 作为其模块加载器，通过 <a href="http://spmjs.io/">SPM</a> 安装或者直接下载 seajs 版本的库文件的用户可以利用 <a href="http://seajs.org/docs/">seajs</a> 来加载 <a href="https://github.com/wh1100717/localDB">localDB</a></p>
+<pre><code class="lang-html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;script type=&quot;text/javascript&quot; src=&quot;exmaples/sea.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;/body&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+    seajs.use('localdb-seajs.js', function(LocalDB){
+        var db = new LocalDB(&quot;foo&quot;)
+    })
+&lt;/script&gt;
+&lt;/html&gt;</code></pre>
+<h2>Getting Started</h2>
+<pre><code class="lang-javascript">// 创建/获取名为`foo`的db
+var db = new LocalDB(&quot;foo&quot;)
+// 创建/获取该db中名为`bar`的collection
+var collection = db.collection(&quot;bar&quot;)
+// 插入数据
+collection.insert({
+    a: 5,
+    b: &quot;abc&quot;,
+    c: /hell.*ld/,
+    d: {e: 4, f: &quot;5&quot;},
+    g: function(h){return h*3},
+    i: [1,2,3]
+}).then(function(err){
+    // 查询数据
+    // 目前支持添加的数据格式为数字、字符串、正则表达式、对象、函数和数组。
+    collection.find({
+        // `where`表示查询条件，相当于`select a,b from table where b == &quot;abc&quot;`中的`where`语句。
+        where: {
+            a: {$gt: 3, $lt: 10},
+            b: &quot;abc&quot;
+        },
+        // `projection`表示根据查询的条件构造选择数据内容。
+        projection: {
+            a:1,
+            b:1
+        }
+    })
+}).then(function(data, err){
+    // 其表示更新`a`的值为5的数据，设置其`b`的值为`new_string`，设置其`i`的值为`[3,2,1]`
+    collection.update({
+        $set: {
+            b: &quot;new_string&quot;,
+            i: [3,2,1]
+        }
+    },{
+        where: {
+            a: 5
+        }
+    })
+}).then(function(err){
+    // 其表示删除`a`的值大于3、小于10并且不等于5的数据。
+    collection.remove({
+        where: {
+            a: {$gt: 3, $lt: 10, $ne: 5}
+        }
+    })
+})</code></pre>
+<h2>API Reference</h2>
+<p>具体的API请参考<a href="http://localdb.emptystack.net">这里</a></p>
+<h2>Get Involved</h2>
+<ol>
+<li><a href="https://github.com/wh1100717/localDB/fork">Fork LocalDB</a><ol>
+<li>将Fork后的LocalDB项目clone到本地</li>
+<li>命令行执行 <code>git branch develop-own</code> 来创建一个新分支</li>
+<li>执行 <code>git checkout develop</code> 切换到新创建的分支</li>
+<li>执行 <code>git remote add upstream https://github.com/wh1100717/localDB.git</code> 将主干库添加为远端库</li>
+<li>执行 <code>git remote update</code> 来更新主干库上的最新代码</li>
+<li>执行 <code>git fetch upstream/master</code> 拉取最新代码到本地</li>
+<li>执行 <code>git rebase upstream/master</code> 进行本地代码合并</li>
+</ol>
+</li>
+<li>项目根目录执行 <code>npm install</code> 安装项目所需要的库和工具</li>
+<li>修改源码或者测试用例</li>
+<li>执行 <code>grunt test</code> 来测试修改的内容是否能跑通所有测试用例</li>
+<li>如果测试通过，则将代码提交到remote</li>
+<li>在Github你Fork的项目中有一个pull request按钮，点击提交代码合并</li>
+</ol>
+<h2>Support Feature</h2>
+<h3><a href="http://docs.mongodb.org/manual/reference/operator/query/">Query Operators</a></h3>
+<h5>Comparison</h5>
+<ul>
+<li>[X] <a href="http://docs.mongodb.org/manual/reference/operator/query/gt/#op._S_gt">$gt</a><br>
+Matches values that are greater than the value specified in the query.</li>
+<li>[X] <a href="http://docs.mongodb.org/manual/reference/operator/query/gte/#op._S_gte">$gte</a><br>
+Matches values that are greater than or equal to the value specified in the query.</li>
+<li>[X] <a href="http://docs.mongodb.org/manual/reference/operator/query/lt/#op._S_lt">$lt</a><br>
+Matches values that are less than the value specified in the query.</li>
+<li>[X] <a href="http://docs.mongodb.org/manual/reference/operator/query/lte/#op._S_lte">$lte</a><br>
+Matches values that are less than or equal to the value specified in the query.</li>
+<li>[X] <a href="http://docs.mongodb.org/manual/reference/operator/query/ne/#op._S_ne">$ne</a><br>
+Matches all values that are not equal to the value specified in the query.</li>
+<li>[X] <a href="http://docs.mongodb.org/manual/reference/operator/query/in/#op._S_in">$in</a><br>
+Matches any of the values that exist in an array specified in the query.</li>
+<li>[X] <a href="http://docs.mongodb.org/manual/reference/operator/query/nin/#op._S_nin">$nin</a><br>
+Matches values that do not exist in an array specified to the query.    </li>
+</ul>
+<h5>Logical</h5>
+<ul>
+<li>[X] <a href="http://docs.mongodb.org/manual/reference/operator/query/or/#op._S_or">$or</a><br>
+Joins query clauses with a logical <strong>OR</strong> returns all documents that match the conditions of either clause.</li>
+<li>[X] <a href="http://docs.mongodb.org/manual/reference/operator/query/and/#op._S_and">$and</a><br>
+Joins query clauses with a logical <strong>AND</strong> returns all documents that match the conditions of both clauses.</li>
+<li>[X] <a href="http://docs.mongodb.org/manual/reference/operator/query/not/#op._S_not">$not</a><br>
+Inverts the effect of a query expression and returns documents that do not match the query expression.</li>
+<li>[X] <a href="http://docs.mongodb.org/manual/reference/operator/query/nor/#op._S_nor">$nor</a><br>
+Joins query clauses with a logical <strong>NOR</strong> returns all documents that fail to match both clauses.</li>
+</ul>
+<h5>Element</h5>
+<ul>
+<li>[X] <a href="http://docs.mongodb.org/manual/reference/operator/query/exists/#op._S_exists">$exists</a><br>
+Matches documents that have the specified field.</li>
+<li><p>[X] <a href="http://docs.mongodb.org/manual/reference/operator/query/type/#op._S_type">$type</a><br>
+Selects documents if a field is of the specified type.</p>
+<blockquote>
+<p>Note: <br>
+It is different from the <strong>$type</strong> API in MongoDB.<br>
+It is really easy to determine the type of element in javascript.<br>
+Support type input string: <code>string</code> | <code>object</code> | <code>function</code> | <code>array</code> | <code>number</code></p>
+</blockquote>
+</li>
+</ul>
+<h5>Evaluation</h5>
+<ul>
+<li>[X] <a href="http://docs.mongodb.org/manual/reference/operator/query/mod/#op._S_mod">$mod</a><br>
+Performs a modulo operation on the value of a field and selects documents with a specified result.</li>
+<li>[X] <a href="http://docs.mongodb.org/manual/reference/operator/query/regex/#op._S_regex">$regex</a><br>
+Selects documents where values match a specified regular expression.</li>
+<li>[ ] <a href="http://docs.mongodb.org/manual/reference/operator/query/text/#op._S_text">$text</a><br>
+Performs text search.</li>
+<li>[ ] <a href="http://docs.mongodb.org/manual/reference/operator/query/where/#op._S_where">$where</a><br>
+Matches documents that satisfy a JavaScript expression.</li>
+</ul>
+<h5>Array</h5>
+<ul>
+<li>[X] <a href="http://docs.mongodb.org/manual/reference/operator/query/all/#op._S_all">$all</a><br>
+Matches arrays that contain all elements specified in the query.</li>
+<li>[X] <a href="http://docs.mongodb.org/manual/reference/operator/query/elemMatch/#op._S_elemMatch">$elemMatch</a><br>
+Selects documents if element in the array field matches all the specified <strong>$elemMatch</strong> condition.</li>
+<li>[X] <a href="http://docs.mongodb.org/manual/reference/operator/query/size/#op._S_size">$size</a><br>
+Selects documents if the array field is a specified size.</li>
+</ul>
+<h5>Projection Operators</h5>
+<ul>
+<li>[X] <a href="http://docs.mongodb.org/manual/reference/operator/projection/positional/#proj._S_">$</a><br>
+Projects the first element in an array that matches the query condition.</li>
+<li>[X] <a href="http://docs.mongodb.org/manual/reference/operator/projection/elemMatch/#proj._S_elemMatch">$elemMatch</a><br>
+Projects only the first element from an array that matches the specified <strong>$elemMatch</strong> condition.</li>
+<li>[ ] <a href="http://docs.mongodb.org/manual/reference/operator/projection/meta/#proj._S_meta">$meta</a><br>
+Projects the document’s score assigned during <strong>$text</strong> operation.</li>
+<li>[ ] <a href="http://docs.mongodb.org/manual/reference/operator/projection/slice/#proj._S_slice">$slice</a><br>
+Limits the number of elements projected from an array. Supports skip and limit slices.</li>
+</ul>
+<h3><a href="http://docs.mongodb.org/manual/reference/operator/update/">Update Operators</a></h3>
+<h5>Fields</h5>
+<ul>
+<li>[X] <a href="http://docs.mongodb.org/manual/reference/operator/update/inc/#up._S_inc">$inc</a><br>
+Increments the value of the field by the specified amount.</li>
+<li>[X] <a href="http://docs.mongodb.org/manual/reference/operator/update/mul/#up._S_mul">$mul</a><br>
+Multiplies the value of the field by the specified amount.</li>
+<li>[X] <a href="http://docs.mongodb.org/manual/reference/operator/update/rename/#up._S_rename">$rename</a><br>
+Renames a field.</li>
+<li>[ ] <a href="http://docs.mongodb.org/manual/reference/operator/update/setOnInsert/#up._S_setOnInsert">$setOnInsert</a><br>
+Sets the value of a field upon document creation during an upsert. Has no effect on update operations that modify existing documents.</li>
+<li>[X] <a href="http://docs.mongodb.org/manual/reference/operator/update/set/#up._S_set">$set</a><br>
+Sets the value of a field in a document.</li>
+<li>[X] <a href="http://docs.mongodb.org/manual/reference/operator/update/unset/#up._S_unset">$unset</a><br>
+Removes the specified field from a document.</li>
+<li>[X] <a href="http://docs.mongodb.org/manual/reference/operator/update/min/#up._S_min">$min</a><br>
+Only updates the field if the specified value is less than the existing field value.</li>
+<li>[X] <a href="http://docs.mongodb.org/manual/reference/operator/update/max/#up._S_max">$max</a><br>
+Only updates the field if the specified value is greater than the existing field value.</li>
+<li>[ ] <a href="http://docs.mongodb.org/manual/reference/operator/update/currentDate/#up._S_currentDate">$currentDate</a><br>
+Sets the value of a field to current date, either as a Date or a Timestamp.</li>
+</ul>
+<h5>Array</h5>
+<ul>
+<li>[ ] <a href="http://docs.mongodb.org/manual/reference/operator/update/positional/#up._S_">$</a><br>
+Acts as a placeholder to update the first element that matches the query condition in an update.</li>
+<li>[ ] <a href="http://docs.mongodb.org/manual/reference/operator/update/addToSet/#up._S_addToSet">$addToSet</a><br>
+Adds elements to an array only if they do not already exist in the set.</li>
+<li>[ ] <a href="http://docs.mongodb.org/manual/reference/operator/update/pop/#up._S_pop">$pop</a><br>
+Removes the first or last item of an array.</li>
+<li>[ ] <a href="http://docs.mongodb.org/manual/reference/operator/update/pullAll/#up._S_pullAll">$pullAll</a><br>
+Removes all matching values from an array.</li>
+<li>[ ] <a href="http://docs.mongodb.org/manual/reference/operator/update/pull/#up._S_pull">$pull</a><br>
+Removes all array elements that match a specified query.</li>
+<li>[ ] <a href="http://docs.mongodb.org/manual/reference/operator/update/pushAll/#up._S_pushAll">$pushAll</a><br>
+Deprecated. Adds several items to an array.</li>
+<li>[ ] <a href="http://docs.mongodb.org/manual/reference/operator/update/push/#up._S_push">$push</a><br>
+Adds an item to an array.</li>
+</ul>
+<h5>Modifiers</h5>
+<ul>
+<li>[ ] <a href="http://docs.mongodb.org/manual/reference/operator/update/each/#up._S_each">$each</a><br>
+Modifies the <strong>$push</strong> and <strong>$addToSet</strong> operators to append multiple items for array updates.</li>
+<li>[ ] <a href="http://docs.mongodb.org/manual/reference/operator/update/slice/#up._S_slice">$slice</a><br>
+Modifies the <strong>$push</strong> operator to limit the size of updated arrays.</li>
+<li>[ ] <a href="http://docs.mongodb.org/manual/reference/operator/update/sort/#up._S_sort">$sort</a><br>
+Modifies the <strong>$push</strong> operator to reorder documents stored in an array.</li>
+<li>[ ] <a href="http://docs.mongodb.org/manual/reference/operator/update/position/#up._S_position">$position</a><br>
+Modifies the <strong>$push</strong> operator to specify the position in the array to add elements.</li>
+</ul>
+<h5>Bitwise</h5>
+<ul>
+<li>[ ] <a href="http://docs.mongodb.org/manual/reference/operator/update/bit/#up._S_bit">$bit</a><br>
+Performs bitwise <strong>AND</strong>, <strong>OR</strong>, and <strong>XOR</strong> updates of integer values.</li>
+</ul>
+<h5>Isolation</h5>
+<ul>
+<li>[ ] <a href="http://docs.mongodb.org/manual/reference/operator/update/isolated/#up._S_isolated">$isolated</a><br>
+Modifies behavior of multi-updates to increase the isolation of the operation.</li>
+</ul></article>
+    </section>
+
+
+
+
+
+
+        
+
+        <footer>
+            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Tue Jan 06 2015 20:21:03 GMT+0800 (CST)
+        </footer>
+    </div>
+</div>
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+<script src="scripts/main.js"></script>
+</body>
+</html>

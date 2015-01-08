@@ -1,0 +1,23 @@
+{
+  "name": "localDB",
+  "version": "0.1.0",
+  "description": "local database using localStorage",
+  "repo": "wh1100717/localDB",
+  "keywords": [
+    "localdb",
+    "localstorage",
+    "sessionstorage",
+    "postMessage",
+    "html5"
+  ],
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://mit-license.org"
+    }
+  ],
+  "main": "dist/0.0.1/localdb.js",
+  "scripts": [
+    "dsit/0.0.1/localdb.js"
+  ]
+}

@@ -1,0 +1,8 @@
+_site
+sea-modules
+node_modules
+.git
+examples
+tests
+test
+coverage

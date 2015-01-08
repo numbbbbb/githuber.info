@@ -1,0 +1,28 @@
+{
+  "name": "localDB",
+  "version": "0.1.0",
+  "description": "local database using localStorage",
+  "homepage": "https://github.com/wh1100717/localDB",
+  "author": {
+    "name": "wh1100717",
+    "email": "me@emptystack.net"
+  },
+  "main": "dist/0.1.0/localdb.js",
+  "keywords": [
+    "localdb",
+    "localstorage",
+    "sessionstorage",
+    "postMessage",
+    "html5"
+  ],
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://mit-license.org"
+    }
+  ],
+  "ignore": [
+    "coverage/",
+    "node_modules/"
+  ]
+}

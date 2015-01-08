@@ -661,6 +661,7 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
 
     $scope.searchUser();
 }]).controller('indexCtl', ['$scope', '$location', function($scope, $location) {
+    $(".support-logo").css({"transform": "scale(" + ($(window).height() / 1200) + ")"});
     clearBDShare()
     $(".support-logo").css({"transform": "scale(" + ($(window).height() / 1200) + ")"})
     $.fn.textWidth = function() {
