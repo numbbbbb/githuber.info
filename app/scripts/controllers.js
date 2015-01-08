@@ -39,7 +39,7 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
         $(document).trigger("token", window.config.token)
     }
     if (window.location.hash.indexOf("token") != -1) {
-        window.location.hash = "/search/" + $routeParams.targetUser 
+        window.location.hash = "/search/" + $routeParams.targetUser
     }
     $.ajaxSetup({
         headers: {
@@ -156,7 +156,7 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
                 })
                 $.each(temp, function(type, info) {
                     day[type] = info.day
-                    
+
                     week[type] = info.week
                     var s = week[type].shift()
                     week[type].push(s)
@@ -556,6 +556,7 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
     $scope.searchUser();
 }]).controller('indexCtl', ['$scope', '$location', function($scope, $location) {
     clearBDShare()
+    $(".support-logo").css({"transform": "scale(" + ($(window).height() / 1200) + ")"})
     $.fn.textWidth = function() {
         var html_org = $(this).html();
         var html_calc = '<span>' + html_org + '</span>';
@@ -565,6 +566,7 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
         return width;
     };
     $("#slogan").parent().height($(window).height() / 4)
+    $("#search-part").height($(window).height() - $("#slogan").parent().height() - 100 - 71 - parseFloat($(".container-fluid.ng-scope").css("margin-top").replace("px", "")) - $(".support-logo").height());
     $("#slogan").css({
         "paddingLeft": ($("#our-name").textWidth() - $("#slogan").textWidth() - 3) + "px"
     })
@@ -668,8 +670,8 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
                     }
                 })
             }
-            stid = setTimeout(searchUsername, 300) 
-            nowFunc = searchUsername 
+            stid = setTimeout(searchUsername, 300)
+            nowFunc = searchUsername
         }
     };
 

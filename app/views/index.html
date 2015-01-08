@@ -13,11 +13,22 @@
                 <div class="col-lg-4 col-lg-offset-4 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1 searchBar">
                     <div class="row">
                         <form ng-submit="search()">
-                            <div class="col-xs-9" style="padding:0;height:400px;">
+                            <div class="col-xs-9" style="padding:0;height:350px;" id="search-part">
                                 <input ng-model="sw" id="index-input" placeholder="请输入GitHub用户名或姓名">
                             </div>
                             <button type="submit" class="col-xs-3 btn-success btn" id="lookup">查看</button>
                         </form>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <div style="text-align:center;">
+                        <p>
+                            <a target="_blank" href="https://www.upyun.com/index.html">
+                                <img src="/static/img/upyun_logo.png" alt="" style="opacity:0.8;" class="support-logo">
+                            </a>
+                        </p>
                     </div>
                 </div>
             </div>
