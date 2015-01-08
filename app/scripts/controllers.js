@@ -22,7 +22,7 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
     if (!window.config) {
         window.config = {}
     }
-    var debug = true
+    var debug = false
     if (debug) {
         window.config.token = "acd18045340051e7bd1e1a4bd6e4f2571c475e53"
     } else {
