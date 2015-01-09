@@ -5,6 +5,7 @@ var clearBDShare = function() {
         window._bd_share_main = null
     }
 App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routeParams) {
+    $('#bar-search').show(0)
     clearBDShare()
     $("#new-feature").click(function() {
         $("#new-feature-modal").modal("show")
@@ -555,6 +556,7 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
 
     $scope.searchUser();
 }]).controller('indexCtl', ['$scope', '$location', function($scope, $location) {
+    $('#bar-search').hide(0)
     $(".support-logo").css({"transform": "scale(" + ($(window).height() / 1200) + ")"});
     clearBDShare()
     $(".support-logo").css({"transform": "scale(" + ($(window).height() / 1200) + ")"})
@@ -706,6 +708,7 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
         }
     };
 }]).controller('aboutCtl', ['$scope', '$location', function($scope, $location) {
+    $('#bar-search').show(0)
     clearBDShare()
     $scope.search = function() {
         if ($scope.sw.replace(/\s/g, "") != "") {
