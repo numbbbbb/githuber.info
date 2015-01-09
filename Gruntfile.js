@@ -137,6 +137,7 @@ module.exports = function (grunt) {
     filerev: {
       dist: {
         src: [
+          // '!<%= githuber.dist %>/scripts/vendor.*',
           '<%= githuber.dist %>/scripts/*.js',
           '<%= githuber.dist %>/scripts/bigcache/*.js',
           '<%= githuber.dist %>/styles/{,*/}*.css',
@@ -255,8 +256,16 @@ module.exports = function (grunt) {
 
     // Replace Google CDN references
     // cdnify: {
+    //   options: {
+    //     rewriter: function (url) {
+    //       if (url.indexOf('vendor') != 0)
+    //         return url; // leave data URIs untouched
+    //       else
+    //         return 'http://staticfile00.b0.upaiyun.com/' + url; // add query string to all other URLs
+    //     }
+    //   },
     //   dist: {
-    //     html: ['<%= githuber.dist %>/*.html']
+    //     html: '<%= githuber.dist %>/*.html'
     //   }
     // },
 
