@@ -1,9 +1,3 @@
-var App = angular.module('App');
-var clearBDShare = function() {
-        $(".bdshare-slide-button-box").remove()
-        window._bd_share_is_recently_loaded = false
-        window._bd_share_main = null
-    }
 App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routeParams) {
     $('#bar-search').show(0)
     clearBDShare()
@@ -23,7 +17,7 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
     if (!window.config) {
         window.config = {}
     }
-    var debug = false
+    var debug = false;
     if (debug) {
         window.config.token = "acd18045340051e7bd1e1a4bd6e4f2571c475e53"
     } else {
@@ -699,26 +693,4 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
         $("#index-input").trigger("focus")
     }, 300)
 
-}]).controller('navCtl', ['$scope', '$location', function($scope, $location) {
-    clearBDShare()
-    $scope.search = function() {
-        if ($scope.sw.replace(/\s/g, "") != "") {
-            window.bigcache = {}
-            $location.path("/search/" + $scope.sw);
-        }
-    };
-}]).controller('aboutCtl', ['$scope', '$location', function($scope, $location) {
-    $('#bar-search').show(0)
-    clearBDShare()
-    $scope.search = function() {
-        if ($scope.sw.replace(/\s/g, "") != "") {
-            window.bigcache = {}
-            $location.path("/search/" + $scope.sw);
-        }
-    };
-    $(".label-info").hover(function() {
-        $(this).css("cursor", "pointer")
-    }).click(function() {
-        window.open($(this).data("url"))
-    })
 }]);
