@@ -263,3 +263,6 @@ p {
 .info-number {
   font-family: Constantia, Georgia;
 }
+.suggestionDrop {
+  cursor: pointer;
+}
