@@ -18,20 +18,39 @@ function drawChart(id, option, type) {
   )
 }
 
-var db = new LocalDB("githuber.info");
+var db = new LocalDB("githuber.info", {
+    expire: "none",
+    encrypt: true
+});
 var collection = db.collection("userInfo");
 
-function updateLocalDB() {
-    collection.drop();
-    collection.insert(window.config);
-}
-collection.find().then(function(data) {
-    if (data.length) {
-        window.config = data[0];
+collection.find({
+    where: {
+        _id: "info"
+    }
+}).then(function(data, err){
+    if (data.length > 0) {
+        window.config = data[0].config
     } else {
-        window.config = {};
+        window.config = {}
+        collection.insert({
+            _id: "info",
+            config: window.config
+        })
     }
 })
+
+function updateLocalDB() {
+    collection.update({
+        $set: {
+            config: window.config
+        }
+    },{
+        where: {
+            _id: "info"
+        }
+    })
+}
 
 function utf8_to_b64(str) {
     return window.btoa(unescape(encodeURIComponent(str)));
