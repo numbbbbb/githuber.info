@@ -26,7 +26,7 @@ module.exports = function (grunt) {
       },
       js: {
         files: ['<%= githuber.app %>/scripts/{,*/}*.js'],
-        tasks: ['newer:jshint:all'],
+        // tasks: ['newer:jshint:all'],
         options: {
           livereload: '<%= connect.options.livereload %>'
         }
@@ -36,7 +36,10 @@ module.exports = function (grunt) {
         tasks: ['newer:copy:styles', 'autoprefixer']
       },
       gruntfile: {
-        files: ['Gruntfile.js']
+        files: ['Gruntfile.js'],
+        options: {
+          livereload: '<%= connect.options.livereload %>'
+        }
       },
       livereload: {
         options: {
@@ -82,18 +85,18 @@ module.exports = function (grunt) {
     },
 
     // Make sure code styles are up to par and there are no obvious mistakes
-    jshint: {
-      options: {
-        jshintrc: '.jshintrc',
-        reporter: require('jshint-stylish')
-      },
-      all: {
-        src: [
-          'Gruntfile.js',
-          '<%= githuber.app %>/scripts/{,*/}*.js'
-        ]
-      }
-    },
+    // jshint: {
+    //   options: {
+    //     jshintrc: '.jshintrc',
+    //     reporter: require('jshint-stylish')
+    //   },
+    //   all: {
+    //     src: [
+    //       'Gruntfile.js',
+    //       '<%= githuber.app %>/scripts/{,*/}*.js'
+    //     ]
+    //   }
+    // },
 
     // Empties folders to start fresh
     clean: {
