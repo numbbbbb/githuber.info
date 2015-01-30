@@ -7,6 +7,7 @@ body {
 p, li {
   font-size: 18px;
 }
+a:link { text-decoration: none; }
 .table td, .table th {
   text-align: center;
 }
@@ -16,6 +17,7 @@ p, li {
   border: 1px solid #e6e8e9;
   margin-top: 30px;
 }
+
 .infoNoteLabel {
   margin: 0px;
   margin-left: -15px;
@@ -25,6 +27,19 @@ p, li {
   text-align: center;
   color: white;
   font-size: 18px;
+}
+@media screen and (max-width: 600px) {
+  .infoNoteLabel{
+    margin: 0px;
+    margin-left: -15px;
+    padding: 5px;
+    background-color: black;
+    width: 110%;
+    text-align: center;
+    color: white;
+    font-size: 18px;
+  }
+
 }
 #codeChart {
   height: 400px;
@@ -265,4 +280,126 @@ p {
 }
 .suggestionDrop {
   cursor: pointer;
+}
+
+/*rank页*/
+.rank-table {
+  margin-top: 30px;
+}
+.rank-table img{
+  width: 60px;
+  height: 60px;
+}
+.rank-table.table tr td{
+  line-height: 60px;
+  max-width: 80px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.rank-table .rank1 {
+
+}
+.rank-table .rank2 {
+
+}
+.rank-table .rank3 {
+
+}
+.report-entry {
+  text-align: center;
+  margin-top: 40px;
+}
+.section {
+  text-align: center;
+  margin: 20px;
+  border-bottom: solid 3px;
+}
+.section p{
+  font-size: 36px;
+}
+.github-report .cover{
+  padding: 20px 0;
+  text-align: center;
+}
+.github-report .cover h1.title{
+}
+.github-report .cover h1.title:nth-of-type(2){
+  margin-top:-10px;
+}
+.github-report .cover h2.title{
+  color: rgb(122,122,122);
+  font-size: 11px;
+}
+.github-report .foreword p{
+  text-indent: 2em;
+}
+.github-report .foreword .author{
+  text-align: right;
+}
+.github-report .staff span {
+  font-size: 18px;
+}
+.github-report .staff p {
+  text-indent: 2em;
+}
+.github-report .infoNoteContent{
+  margin: 20px;
+}
+.instro{
+  margin-top: 100px;
+  border-bottom: 2px solid #000;
+}
+.instro p {
+  text-indent: 2em;
+}
+.instro-12{
+  margin: 40px 20px;
+  text-indent: 2em;
+  border-bottom: 2px solid #000;
+}
+.instro-3 p {
+  text-indent: 2em;
+  margin-top: 70px;
+}
+
+.instro-3 {
+  border-bottom: 2px solid #000;
+}
+.interview-title{
+  display: block;
+  font-size: 36px;
+  margin: 40px 20px 20px 20px;
+}
+.interview-q{
+  margin-left: 20px;
+}
+.interview-q span{
+  color: #0099CC;
+}
+.interview-q p {
+  text-indent: 2em;
+}
+.interview-a{
+  margin: 20px 0px 20px 20px;
+  padding: 20px;
+  border: 4px #1790cf dashed;
+}
+.interview-a span{
+  color: #FF6633;
+}
+.interview-a p {
+  text-indent: 2em;
+}
+.interview-a p:nth-of-type(1) {
+  text-indent: 0em;
+}
+.average table td:nth-of-type(1){
+  width: 40%;
+}
+.average table td:nth-of-type(2){
+  width: 30%;
+}
+.average table td:nth-of-type(3){
+  width: 30%;
 }

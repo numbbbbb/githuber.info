@@ -4,18 +4,35 @@ var clearBDShare = function() {
     window._bd_share_main = null
 }
 
-function drawChart(id, option, type) {
+function drawChart(id, option, type, theme) {
   require(
     [
       'echarts',
       'echarts/chart/' + type
     ],
     function(ec) {
-      var myChart = ec.init(document.getElementById(id))
-      myChart.setOption(option)
+      var myChart = ec.init(document.getElementById(id));
+      if (theme) {
+        require(['echarts/chart/theme/' + theme], function(tarTheme){
+            myChart.setTheme(tarTheme);
+        });
+      }
+      myChart.setOption(option);
     }
   )
 }
+
+function IsRemote()
+{
+   var userAgentInfo = navigator.userAgent;
+   var Agents = new Array("Android", "iPhone", "SymbianOS", "Windows Phone", "iPad", "iPod");
+   var flag = false;
+   for (var v = 0; v < Agents.length; v++) {
+       if (userAgentInfo.indexOf(Agents[v]) > 0) { flag = true; break; }
+   }
+   return flag;
+}
+
 
 var db = new LocalDB("githuber.info");
 var collection = db.collection("userInfo");

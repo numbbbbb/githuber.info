@@ -1,0 +1,32 @@
+<div class="container-fluid" style="margin-top:50px;">
+	<div class="row">
+		<div class="col-lg-8 col-lg-offset-2 infoNote">
+				<h2 class="infoNoteLabel">排行榜</h2>
+				<table class="table table-striped rank-table">
+					<tr>
+						<td>排名</td>
+						<td>头像</td>
+						<td>用户名</td>
+						<td>姓名</td>
+						<td>地区</td>
+						<td>语言</td>
+						<td>项目数</td>
+						<td>Star数</td>
+						<td>follow数</td>
+					</tr>
+					<tr ng-repeat="user in rank_data track by $index" ng-class="getRankClass($index)">
+						<td>{{$index + 1}}</td>
+						<td>
+							<img src="{{user.gravater}}"></td>
+						<td>{{user.username}}</td>
+						<td>{{user.name}}</td>
+						<td>{{user.location}}</td>
+						<td>{{user.language}}</td>
+						<td>{{user.repos}}</td>
+						<td>{{user.stars}}</td>
+						<td>{{user.follows}}</td>
+					</tr>
+				</table>
+		</div>
+	</div>
+</div>
