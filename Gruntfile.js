@@ -47,6 +47,7 @@ module.exports = function (grunt) {
         },
         files: [
           '<%= githuber.app %>/{,*/}*.html',
+          '<%= githuber.app %>/views/*.html',
           '.tmp/styles/{,*/}*.css',
           '<%= githuber.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
         ]
