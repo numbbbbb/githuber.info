@@ -12,7 +12,9 @@ App.controller('indexCtl', ['$scope', '$location', function($scope, $location) {
         return width;
     };
     $("#slogan").parent().height($(window).height() / 5)
-    // $("#search-part").height($(window).height() - $("#slogan").parent().height() - 100 - 71 - parseFloat($(".container-fluid.ng-scope").css("margin-top").replace("px", "")) - $(".support-logo").height());
+    var subHeight = $(window).height() - $("#slogan").parent().height() - 100 - 71 - $(".report-entry").outerHeight() - parseFloat($(".container-fluid.ng-scope").css("margin-top").replace("px", "")) - $(".support-logo").height()
+    $("#search-part").height(parseInt(subHeight * 2 / 3));
+    $(".report-entry").css('margin-bottom', parseInt(subHeight * 1 / 3))
     $("#slogan").css({
         "paddingLeft": ($("#our-name").textWidth() - $("#slogan").textWidth() - 3) + "px"
     });
