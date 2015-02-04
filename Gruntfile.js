@@ -282,7 +282,7 @@ module.exports = function (grunt) {
           cwd: '<%= githuber.app %>',
           dest: '<%= githuber.dist %>',
           src: [
-            'scripts/chart/*.js',
+            'scripts/chart/{,*/}*.js',
             '*.{ico,png,txt}',
             '.htaccess',
             '*.html',

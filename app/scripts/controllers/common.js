@@ -12,7 +12,7 @@ function drawChart(id, option, type, theme) {
         ],
         function(ec) {
             var myChart = ec.init(document.getElementById(id));
-            if (theme) {
+            if (theme != "default") {
                 require(['echarts/chart/theme/' + theme], function(tarTheme) {
                     myChart.setTheme(tarTheme);
                 });
