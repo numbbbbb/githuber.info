@@ -316,6 +316,7 @@ p {
   box-shadow: 2px 3px 1px rgba(0, 0, 0, 0.15), -1px 0px 0px rgba(0, 0, 0, 0.03), 1px 0px 0px rgba(0, 0, 0, 0.03), 0px 1px 0px rgba(0, 0, 0, 0.12);
   border: 1px solid #e6e8e9;
   padding-right: 20px;
+  width: 14%;
 }
 .navbar-side a{
   color: rgb(118, 118, 118);;
