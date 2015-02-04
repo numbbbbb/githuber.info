@@ -1,6 +1,24 @@
-App.controller('reportCtl', ['$scope', '$location', function($scope, $location) {
-    $('#bar-search').show(0)
-    clearBDShare()
+App.controller('reportCtl', ['$scope', '$location', 'anchorScroll', function($scope, $location, anchorScroll) {
+    $('#bar-search').show(0);
+    clearBDShare();
+    var sidebarEventListener = function(){
+        $(window).scroll(function(){
+            if ($(window).scrollTop()+100 >= $('#foreword').offset().top) {
+                $(".navbar-side").css({
+                    position: "fixed",
+                    top: "100px"
+                });
+            } else {
+                $(".navbar-side").css({
+                    position: "absolute",
+                    top: "50px"
+                });
+            }
+        });
+    };
+    $scope.targetTo = function(id) {
+        anchorScroll.toView(id, true);
+    }
     var stat = {
         person: {
             language: {
@@ -2022,8 +2040,10 @@ App.controller('reportCtl', ['$scope', '$location', function($scope, $location) 
     var isRemote = IsRemote();
     if (isRemote) {
         rowWidth = window.innerWidth;
+        $(".navbar-side").css('display','none')
     } else {
         rowWidth = $('#stat_person_code').width();
+        sidebarEventListener();
     }
     var person = [
         {"name":"language","type":"bar"},
@@ -2083,13 +2103,13 @@ App.controller('reportCtl', ['$scope', '$location', function($scope, $location) 
     //     });
     // }
     // console.log(JSON.stringify(comp_org));
-    for (var i=0,l=other.length;i<l;i++) {
-        $("#"+other[i].name).width(rowWidth*2).height(rowWidth/3*2);
-        drawChart(other[i].name, otherGraph[other[i].name], other[i].type, otherGraph[other[i].name].theme);
-        if (isRemote) {
-            $("#"+other[i].name).css("margin-left", "-40px");
-        }
-    }
+    // for (var i=0,l=other.length;i<l;i++) {
+    //     $("#"+other[i].name).width(rowWidth*2).height(rowWidth/3*2);
+    //     drawChart(other[i].name, otherGraph[other[i].name], other[i].type, otherGraph[other[i].name].theme);
+    //     if (isRemote) {
+    //         $("#"+other[i].name).css("margin-left", "-40px");
+    //     }
+    // }
     for (var i=0,l=person.length;i<l;i++) {
         $("#stat_person_"+person[i].name).width(rowWidth).height(rowWidth/3*2);
         drawChart("stat_person_"+person[i].name, stat.person[person[i].name], person[i].type, "blue");
@@ -2112,17 +2132,23 @@ App.controller('reportCtl', ['$scope', '$location', function($scope, $location) 
         }
     }
     for (var i=0,l=comp_person.length;i<l;i++) {
-        $("#comp_person_"+comp_person[i].name).width(rowWidth*3/2).height(rowWidth/2);
-        drawChart("comp_person_"+comp_person[i].name, comp.person[comp_person[i].name], comp_person[i].type, "green");
         if (isRemote) {
+            $("#comp_person_"+comp_person[i].name).width(rowWidth).height(rowWidth);
             $("#comp_person_"+comp_person[i].name).css("margin-left", "-40px");
+        } else {
+            $("#comp_person_"+comp_person[i].name).width(rowWidth*3/2).height(rowWidth/2);
         }
+        drawChart("comp_person_"+comp_person[i].name, comp.person[comp_person[i].name], comp_person[i].type, "green");
     }
     for (var i=0,l=comp_repo.length;i<l;i++) {
         if (comp_repo[i].name == "code" || comp_repo[i].name == "branch") {
             $("#comp_repo_"+comp_repo[i].name).width(rowWidth).height(rowWidth/3*2);
         } else {
-            $("#comp_repo_"+comp_repo[i].name).width(rowWidth*3/2).height(rowWidth/2);
+            if (isRemote) {
+                $("#comp_repo_"+comp_repo[i].name).width(rowWidth).height(rowWidth);
+            } else {
+                $("#comp_repo_"+comp_repo[i].name).width(rowWidth*3/2).height(rowWidth/2);
+            }
         }
         drawChart("comp_repo_"+comp_repo[i].name, comp.repo[comp_repo[i].name], comp_repo[i].type, "default");
         if (isRemote) {
@@ -2131,7 +2157,11 @@ App.controller('reportCtl', ['$scope', '$location', function($scope, $location) 
     }
     for (var i=0,l=comp_org.length;i<l;i++) {
         if (comp_org[i].name == "star" || comp_org[i].name == "branch") {
-            $("#comp_org_"+comp_org[i].name).width(rowWidth * 3/2).height(rowWidth/3*2);
+            if (isRemote) {
+                $("#comp_org_"+comp_org[i].name).width(rowWidth).height(rowWidth);
+            } else {
+                $("#comp_org_"+comp_org[i].name).width(rowWidth * 3/2).height(rowWidth/3*2);
+            }
             drawChart("comp_org_"+comp_org[i].name, comp.org[comp_org[i].name], comp_org[i].type, "default");
         } else {
             $("#comp_org_"+comp_org[i].name).width(rowWidth).height(rowWidth/3*2);
@@ -2141,6 +2171,5 @@ App.controller('reportCtl', ['$scope', '$location', function($scope, $location) 
             $("#comp_org_"+comp_org[i].name).css("margin-left", "-40px");
         }
     }
-    console.log(stat);
     //window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"我正在#GitHuber.info#看2014年GitHub中国开发者年度报告，你也来看看吧 @GitHuber_info","bdMini":"1","bdMiniList":["weixin","tsina","qzone","sqq","douban","renren","huaban","youdao","mail","linkedin","copy"],"bdPic":"http://staticfile00.b0.upaiyun.com/report_share.png","bdStyle":"0","bdSize":"16"},"slide":{"type":"slide","bdImg":"0","bdPos":"right","bdTop":"150.5"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
 }]);

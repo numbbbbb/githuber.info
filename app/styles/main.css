@@ -7,7 +7,13 @@ body {
 p, li {
   font-size: 18px;
 }
+a {
+  cursor: pointer;
+}
 a:link { text-decoration: none; }
+a:hover {
+  text-decoration: none;
+}
 .table td, .table th {
   text-align: center;
 }
@@ -297,14 +303,43 @@ p {
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.rank-table .rank1 {
-
+.navsidebar {
+  position: relative;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
 }
-.rank-table .rank2 {
-
+.navbar-side {
+  position: absolute;
+  z-index: 2;
+  top: 50px;
+  background: none repeat scroll 0% 0% #FFF;
+  box-shadow: 2px 3px 1px rgba(0, 0, 0, 0.15), -1px 0px 0px rgba(0, 0, 0, 0.03), 1px 0px 0px rgba(0, 0, 0, 0.03), 0px 1px 0px rgba(0, 0, 0, 0.12);
+  border: 1px solid #e6e8e9;
+  padding-right: 20px;
 }
-.rank-table .rank3 {
-
+.navbar-side a{
+  color: rgb(118, 118, 118);;
+}
+.navbar-side a:hover{
+  color: #1790cf;
+}
+.navbar-side li{
+  list-style-type: none;
+}
+.navbar-side ul{
+  padding-left: 15px;
+}
+.navbar-side ul > li{
+  margin-top: 15px;
+}
+.navbar-side ul a{
+  font-size: 18px;
+}
+.navbar-side ul ul a{
+  font-size: 14px;
+}
+.navbar-side ul ul > li{
+  margin-top: 5px;
 }
 .report-entry {
   text-align: center;
@@ -319,8 +354,11 @@ p {
   font-size: 36px;
 }
 .github-report .cover{
-  padding: 20px 0;
+  box-sizing: border-box;
+  padding: 20vh 0;
+  height: 95vh;
   text-align: center;
+  margin-top: 0px;
 }
 .github-report .cover h1.title{
 }

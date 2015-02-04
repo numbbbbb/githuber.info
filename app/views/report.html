@@ -1,15 +1,40 @@
 <div class="container-fluid github-report" style="margin-top:50px;">
 	<div class="row">
-		<div class="col-lg-8 col-lg-offset-2 infoNote cover">
+		<div class="col-lg-12 infoNote cover">
 			<h1 class="title">GitHub 中国开发者年度报告</h1>
 			<h1 class="title">{2014}</h1>
 			<h2 class="title">GitHuber.info 团队出品</h2>
 			<img src="images/report_cover.png">
 		</div>
 	</div>
+    <nav class="navsidebar">
+		<div class="navbar-side">
+			<ul>
+				<li><a ng-click="targetTo('#foreword')">前言</a></li>
+				<li><a ng-click="targetTo('#cn_analyse')">中国开发者数据统计</a></li>
+				<li><a ng-click="targetTo('#cn_us_compar')">中美开发者对比</a></li>
+				<li><a ng-click="targetTo('#compar_average')">各项平均值对比</a></li>
+				<li>
+					<a ng-click="targetTo('#interview')">国内开源项目作者采访</a>
+					<ul>
+						<li><a ng-click="targetTo('#interv-echarts')">ECharts@林峰</a></li>
+						<li><a ng-click="targetTo('#interv-thinkjs')">ThinkJS@李成银</a></li>
+						<li><a ng-click="targetTo('#interv-cocos2d-x')">Cocos2d-x@林顺</a></li>
+						<li><a ng-click="targetTo('#interv-pen')">Pen@小鱼</a></li>
+						<li><a ng-click="targetTo('#interv-vuejs')">VueJs@尤雨溪</a></li>
+					</ul>
+				</li>
+			</ul>
+			<hr>
+			<ul>
+				<li><a href="http://pan.baidu.com/s/1hqeR1BI">PDF版下载</a></li>
+				<li><a href="http://weibo.com/u/5443462476">关注我们@GitHuber_info</a></li>
+			</ul>
+		</div>
+  	</nav>
 	<div class="row">
 		<div class="col-lg-8 col-lg-offset-2 infoNote foreword">
-			<h2 class="infoNoteLabel">前言</h2>
+			<h2 class="infoNoteLabel" id='foreword'>前言</h2>
 			<div class="col-lg-12" id="overview"></div>
 			<div class="infoNoteContent">
 				<p>不知道从什么时候开始，GitHub 成为了潮流，没有个把 Star 上街都不好意思和人打招呼。由于做了 GitHuber.info，我们有机会接触到很多 GitHub 的数据，加上<a href="http://weibo.com/qiyeminglu">@Python爱好者</a> 的建议，的建议，我们决定自己抓取、分析数据，做一个报告出来，让大家对中国开发者在 GitHub 上的现状有更具体的了解。</p>
@@ -29,7 +54,7 @@
 	</div>
 	<div class="row">
 		<div class="col-lg-8 col-lg-offset-2 infoNote">
-			<h2 class="infoNoteLabel">中国开发者数据统计</h2>
+			<h2 class="infoNoteLabel" id='cn_analyse'>中国开发者数据统计</h2>
 			<div class="infoNoteContent">
 				<div class="row section">
 					<p>个人信息</p>
@@ -97,9 +122,7 @@
 				<div class="row">
 					<div class="col-lg-6" id="stat_repo_code"></div>
 					<div class="col-lg-6 instro">
-						<p>
-							       单个项目的代码量大多集中在 1 万到 10 万字节这个区间，
-前端项目大多短小精悍，或许与此有关。之后我们会统计不同语言的项目代码量分布，看看各个语言的繁琐程度。						</p>
+						<p> 单个项目的代码量大多集中在 1 万到 10 万字节这个区间，前端项目大多短小精悍，或许与此有关。之后我们会统计不同语言的项目代码量分布，看看各个语言的繁琐程度。</p>
 					</div>
 				</div>
 				<div class="row">
@@ -241,7 +264,7 @@
 	</div>
 	<div class="row">
 		<div class="col-lg-8 col-lg-offset-2 infoNote">
-			<h2 class="infoNoteLabel">中美开发者对比</h2>
+			<h2 class="infoNoteLabel" id="cn_us_compar">中美开发者对比</h2>
 			<div class="infoNoteContent">
 				<div class="row section">
 					<p>个人对比</p>
@@ -320,10 +343,9 @@
 			</div>
 		</div>
 	</div>
-
 	<div class="row">
 		<div class="col-lg-8 col-lg-offset-2 infoNote average">
-			<h2 class="infoNoteLabel">各项平均值对比</h2>
+			<h2 class="infoNoteLabel" id='compar_average'>各项平均值对比</h2>
 			<div class="infoNoteContent">
 				<div class="row">
 					<table class="table table-striped">
@@ -440,10 +462,12 @@
 	</div>
 	<div class="row">
 		<div class="col-lg-8 col-lg-offset-2 infoNote interview">
-			<h2 class="infoNoteLabel">国内优秀开源项目作者采访</h2>
+			<h2 class="infoNoteLabel" id="interview">国内优秀开源项目作者采访</h2>
 			<div class="infoNoteContent">
-				<div class="row">
-					<span class="interview-title"><a href="https://github.com/ecomfe/echarts">ECharts</a></span>
+				<div class="row" id="interv-echarts">
+					<span class="interview-title">
+						<a href="https://github.com/ecomfe/echarts">ECharts</a>
+					</span>
 					<p class="interview-q"><span>G：</span>介绍一下你自己吧。</p>
 					<div class="interview-a">
 						<p><span>林峰：</span>林峰，开源中国 @Kener-林峰，GitHub @kener ，微博 @Kener-林峰，百度商业前端通用技术组，数据可视化方向负责人，资深前端研发工程师。喜欢设计，热爱编程，ZRender，ECharts 作者，目前专注于数据可视化方面的研究工作。</p>
@@ -460,8 +484,7 @@
 					<div class="interview-a">
 						<p><span>林峰：</span>最佳不敢当，只是一直在认真的做一件自己感兴趣，对公司也对领域有价值的事情而已。这是 ECharts 的第 19 个月，每天习惯性的看看 ECharts 的 Star 数，每到整百的时刻就记录一下仿佛已经融入到生活里。感谢领导们的信任让我们团队大多都可以随心所欲的工作，我们不用担心查岗，没事出去参加个交流甚至跑去看个展览熏陶一下啦，喜欢的话在咖啡厅呆上一天也都可以。这种信任给予的自由并没有减少工作时间或降低效率，我相信我们团队的小伙伴们都早已习惯了随时随地工作（餐厅、地铁、机场甚至医院），关键的是大家也愿意自发的工作，或许这也是造就 ECharts 很多天马行空的 feature 诞生的因素，已经数不清有多少个大晚上 hi 里突然蹦出小伙伴创造的杰作（我们早已穷尽了相互吹 NB 拍马屁的词语了），也忘记了自己多少回半夜突发灵感爬起来敲代码了。编程本身就是一件创造性的工作，更不用说我们做到还是一件与艺术结合的事情，如果你并不真正喜欢，只把他作为朝九晚五的差事，你也就不会有创造力了。</p>
 
-						<p>很感谢陪伴 ECharts 一路走来的各位，沈毅，祖明，董睿，宿爽，红启，杨骥，叮叮，黄悦，同兵，太云，周扬，世威，胡瑶，德城师兄，李湛总，志敏总，陈为老师等等，当然，可能还包括您。所有印象深刻的事件也都与你们有关，ECharts 1.1.0 发布微博是我们第一条转发过 500 的微博（还好没被抓）。1.3 后我们被誉为“可视化领域的后起之秀”出现在各大主流技术媒体上，拿下了当年中国 10 大热门开源项目。1.4 后已经有了三种不同编程语言的 ECharts 版本，Why ECharts 的分享在R语言，数据库等大会上出现。2.0 前夕我们在公司各大电子屏上面放了“比 ECharts 更好用的图表即将出现”的宣传海报引来很多关心我们的朋友“声援”，一个不大不小的惊喜，2.0 发布我们刷了微信几乎所有与大数据相关的大V公众号头条，这是我们对自己发起的挑战和超越。2014年 6 月 30 我们为 ECharts 办了第一个生日会，从此有了小鲸鱼的形象。2.0 后我们团队基于 ECharts 的应用百度图说上线开始公测。北京、上海、广州、杭州、武汉、哈尔滨、西安，各种活动，各种公司，已经数不清做过多少次分享了。我们还带着小鲸鱼去了硅谷让美帝同学知道我们的厉害，我们去了广州，在酒店里我们通宵的准备了第二天的分享，还把图说正式发布了，让我们高兴的是活动第二天上了广州日报的头条。2.1.8 ECharts 的英文官网终于上线也开启了我们国际化的征程，成为了中国第一个也是目前唯一一个入选了 GitHub Explorer Data Visualization 板块的开源项目，短短2个月后 Jaroslav Benc 带来了 Datamatic ECharts edition （英文版的图说）让我们倍感压力，老外（此处为尊称）程序员太 NB 了！登录 GitHub 热门榜单，star 破 5000，百度人气、知识图谱、世界杯等合作项目的上线等等，回想起来历历在目，有太多值得纪念的时刻，感谢有你。
-</p>
+						<p>很感谢陪伴 ECharts 一路走来的各位，沈毅，祖明，董睿，宿爽，红启，杨骥，叮叮，黄悦，同兵，太云，周扬，世威，胡瑶，德城师兄，李湛总，志敏总，陈为老师等等，当然，可能还包括您。所有印象深刻的事件也都与你们有关，ECharts 1.1.0 发布微博是我们第一条转发过 500 的微博（还好没被抓）。1.3 后我们被誉为“可视化领域的后起之秀”出现在各大主流技术媒体上，拿下了当年中国 10 大热门开源项目。1.4 后已经有了三种不同编程语言的 ECharts 版本，Why ECharts 的分享在R语言，数据库等大会上出现。2.0 前夕我们在公司各大电子屏上面放了“比 ECharts 更好用的图表即将出现”的宣传海报引来很多关心我们的朋友“声援”，一个不大不小的惊喜，2.0 发布我们刷了微信几乎所有与大数据相关的大V公众号头条，这是我们对自己发起的挑战和超越。2014年 6 月 30 我们为 ECharts 办了第一个生日会，从此有了小鲸鱼的形象。2.0 后我们团队基于 ECharts 的应用百度图说上线开始公测。北京、上海、广州、杭州、武汉、哈尔滨、西安，各种活动，各种公司，已经数不清做过多少次分享了。我们还带着小鲸鱼去了硅谷让美帝同学知道我们的厉害，我们去了广州，在酒店里我们通宵的准备了第二天的分享，还把图说正式发布了，让我们高兴的是活动第二天上了广州日报的头条。2.1.8 ECharts 的英文官网终于上线也开启了我们国际化的征程，成为了中国第一个也是目前唯一一个入选了 GitHub Explorer Data Visualization 板块的开源项目，短短2个月后 Jaroslav Benc 带来了 Datamatic ECharts edition （英文版的图说）让我们倍感压力，老外（此处为尊称）程序员太 NB 了！登录 GitHub 热门榜单，star 破 5000，百度人气、知识图谱、世界杯等合作项目的上线等等，回想起来历历在目，有太多值得纪念的时刻，感谢有你。</p>
 					</div>
 					<p class="interview-q"><span>G：</span>ECharts 目前还面临哪些问题呢，未来有什么发展计划吗？</p>
 					<div class="interview-a">
@@ -483,7 +506,7 @@
 					</div>
 					<p class="interview-q"><span>G：</span>最后来聊聊开源吧，你觉得开源对大多数普通程序员来说意义何在呢？大家都听过开源、GitHub，但是就像那些大道理一样，真正做的时候往往无法进行结合，你觉得程序员应该如何充分利用GitHub呢？</p>
 					<div class="interview-a">
-						<p><span>林峰</span>太有意义了，学习啊！看大牛们的代码是一种幸福，从模仿到领悟到融入自己的程序里，这就是成长。身边很多大牛们都把 GitHub 视为游乐场或者玩具店，不是说儿戏了，是要有玩家的态度和享受玩的快乐，要在上面学会折腾，GitHub 上有无数好的项目，多动手，多折腾，尝试融入到这些开源社区去做些贡献，一开始哪怕就是跟 Issue 凑热闹，给些使用反馈，文档错别字纠正都是有意义的，然后就是贡献自己的想法，帮助别人解决问题，当你开始贡献代码，或许你就能体会到开源对你的意义。</p>
+						<p><span>林峰：</span>太有意义了，学习啊！看大牛们的代码是一种幸福，从模仿到领悟到融入自己的程序里，这就是成长。身边很多大牛们都把 GitHub 视为游乐场或者玩具店，不是说儿戏了，是要有玩家的态度和享受玩的快乐，要在上面学会折腾，GitHub 上有无数好的项目，多动手，多折腾，尝试融入到这些开源社区去做些贡献，一开始哪怕就是跟 Issue 凑热闹，给些使用反馈，文档错别字纠正都是有意义的，然后就是贡献自己的想法，帮助别人解决问题，当你开始贡献代码，或许你就能体会到开源对你的意义。</p>
 					</div>
 					<p class="interview-q"><span>G：</span>2014 年国内开源界涌现出很多优秀的开源项目，大多数似乎都有公司的介入，这一点上国外的优秀开源项目也很类似，往往有大公司的程序员是核心贡献者。你觉得公司在开源项目中扮演的是什么角色呢？在当前国内的大环境下，如何在公司中做一个成功的开源项目呢？</p>
 					<div class="interview-a">
@@ -492,7 +515,7 @@
 						<p>PS：我们离成功还远着呢，还没到分享成功经验的时候。</p>
 					</div>
 				</div>
-				<div class="row">
+				<div class="row" id="interv-thinkjs">
 					<span class="interview-title"><a href="https://github.com/75team/thinkjs">ThinkJS</a></span>
 					<p class="interview-q"><span>G：</span>介绍一下你自己吧。</p>
 					<div class="interview-a">
@@ -531,7 +554,7 @@
 						<p>此外，大家更喜欢用国外开源项目还有一个原因，就是国外的项目更加稳定，不太容易出现项目无人维护的情况。国内的开源项目有时候开发者会放弃并停止更新，这样依赖这些项目构建的项目就会很难处理，而国外的开源项目即使维护者停止更新，他也会找到其他人继续维护，比如前段时间的 Express，这就让用户很有安全感。</p>
 					</div>
 				</div>
-				<div class="row">
+				<div class="row" id="interv-cocos2d-x">
 					<span class="interview-title"><a href="https://github.com/cocos2d/cocos2d-x">Cocos2d-x</a></span>
 					<p class="interview-q"><span>G：</span>请简单介绍一下你自己吧。</p>
 					<div class="interview-a">
@@ -570,7 +593,7 @@
 						<p>GitHub 在全球的火爆程度无需多表，提供非常高效的项目开发协作机制，是了解开源项目运作机制的很好入口。在 GitHub 上，开发人员可以随时与全世界的人共享代码，也允许接受来自全球不同地方的人贡献各种 idea，代码片段，也是社区交流的基础，越来越多的开源项目迁移到 GitHub 上。最后，欢迎各位加入 Cocos2d-x 开源项目社区，成为我们社区的一份子，实现自己的游戏梦想。</p>
 					</div>
 				</div>
-				<div class="row">
+				<div class="row" id="interv-pen">
 					<span class="interview-title"><a href="https://github.com/sofish/pen">Pen</a></span>
 					<p class="interview-q"><span>G：</span>请简单介绍一下你自己吧。</p>
 					<div class="interview-a">
@@ -612,7 +635,7 @@
 						<p>对于 GitHub，他只是工作/协作平台，这样的平台还有更多选择。不过我一直用它，是因为其他产品都做的太丑，无论是细节还是体验，而我更愿意选择好用的工具，即使付费。</p>
 					</div>
 				</div>
-				<div class="row">
+				<div class="row" id="interv-vuejs">
 					<span class="interview-title"><a href="https://github.com/yyx990803/vue">Vue.js</a></span>
 					<p class="interview-q"><span>G：</span>请简单介绍一下你自己吧。</p>
 					<div class="interview-a">
