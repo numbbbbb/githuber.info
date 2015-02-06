@@ -90,7 +90,7 @@ App.controller('reportCtl', ['$scope', '$location', 'anchorScroll', function($sc
                 ],
                 series : [
                     {
-                        name:'语言数',
+                        name:'人数',
                         type:'bar',
                         itemStyle: {
                             normal: {
@@ -134,7 +134,7 @@ App.controller('reportCtl', ['$scope', '$location', 'anchorScroll', function($sc
                 ],
                 series : [
                     {
-                        name:'语言数',
+                        name:'人数',
                         type:'bar',
                         itemStyle: {
                             normal: {
@@ -178,7 +178,7 @@ App.controller('reportCtl', ['$scope', '$location', 'anchorScroll', function($sc
                 ],
                 series : [
                     {
-                        name:'语言数',
+                        name:'人数',
                         type:'bar',
                         itemStyle: {
                             normal: {
@@ -222,7 +222,7 @@ App.controller('reportCtl', ['$scope', '$location', 'anchorScroll', function($sc
                 ],
                 series : [
                     {
-                        name:'语言数',
+                        name:'人数',
                         type:'bar',
                         itemStyle: {
                             normal: {
@@ -266,7 +266,7 @@ App.controller('reportCtl', ['$scope', '$location', 'anchorScroll', function($sc
                 ],
                 series : [
                     {
-                        name:'语言数',
+                        name:'人数',
                         type:'bar',
                         itemStyle: {
                             normal: {
@@ -310,7 +310,7 @@ App.controller('reportCtl', ['$scope', '$location', 'anchorScroll', function($sc
                 ],
                 series : [
                     {
-                        name:'语言数',
+                        name:'人数',
                         type:'bar',
                         itemStyle: {
                             normal: {
@@ -356,7 +356,7 @@ App.controller('reportCtl', ['$scope', '$location', 'anchorScroll', function($sc
                 ],
                 series : [
                     {
-                        name:'语言数',
+                        name:'项目数',
                         type:'bar',
                         itemStyle: {
                             normal: {
@@ -395,12 +395,12 @@ App.controller('reportCtl', ['$scope', '$location', 'anchorScroll', function($sc
                 yAxis : [
                     {
                         type : 'value',
-                      name: '人数'
+                      name: '项目数'
                     }
                 ],
                 series : [
                     {
-                        name:'语言数',
+                        name:'项目数',
                         type:'bar',
                         itemStyle: {
                             normal: {
@@ -432,7 +432,7 @@ App.controller('reportCtl', ['$scope', '$location', 'anchorScroll', function($sc
                 xAxis : [
                     {
                       type : 'category',
-                      name : '个数',
+                      name : '项目数',
                         data :['0-5', '6-50', '51-500', '>=501']
                   }
                 ],
@@ -444,7 +444,7 @@ App.controller('reportCtl', ['$scope', '$location', 'anchorScroll', function($sc
                 ],
                 series : [
                     {
-                        name:'语言数',
+                        name:'项目数',
                         type:'bar',
                         itemStyle: {
                             normal: {
@@ -488,7 +488,7 @@ App.controller('reportCtl', ['$scope', '$location', 'anchorScroll', function($sc
                 ],
                 series : [
                     {
-                        name:'语言数',
+                        name:'项目数',
                         type:'bar',
                         itemStyle: {
                             normal: {
@@ -527,12 +527,12 @@ App.controller('reportCtl', ['$scope', '$location', 'anchorScroll', function($sc
                 yAxis : [
                     {
                         type : 'value',
-                      name: '人数'
+                      name: '项目数'
                     }
                 ],
                 series : [
                     {
-                        name:'语言数',
+                        name:'项目数',
                         type:'bar',
                         itemStyle: {
                             normal: {
@@ -578,7 +578,7 @@ App.controller('reportCtl', ['$scope', '$location', 'anchorScroll', function($sc
                 ],
                 series : [
                     {
-                        name:'语言数',
+                        name:'组织数',
                         type:'bar',
                         itemStyle: {
                             normal: {
@@ -617,12 +617,12 @@ App.controller('reportCtl', ['$scope', '$location', 'anchorScroll', function($sc
                 yAxis : [
                     {
                         type : 'value',
-                      name: '人数'
+                      name: '个数'
                     }
                 ],
                 series : [
                     {
-                        name:'语言数',
+                        name:'组织数',
                         type:'bar',
                         itemStyle: {
                             normal: {
@@ -661,12 +661,12 @@ App.controller('reportCtl', ['$scope', '$location', 'anchorScroll', function($sc
                 yAxis : [
                     {
                         type : 'value',
-                      name: '项目数'
+                      name: '个数'
                     }
                 ],
                 series : [
                     {
-                        name:'语言数',
+                        name:'组织数',
                         type:'bar',
                         itemStyle: {
                             normal: {
@@ -705,12 +705,12 @@ App.controller('reportCtl', ['$scope', '$location', 'anchorScroll', function($sc
                 yAxis : [
                     {
                         type : 'value',
-                      name: '人数'
+                      name: '个数'
                     }
                 ],
                 series : [
                     {
-                        name:'语言数',
+                        name:'组织数',
                         type:'bar',
                         itemStyle: {
                             normal: {
@@ -749,12 +749,12 @@ App.controller('reportCtl', ['$scope', '$location', 'anchorScroll', function($sc
                 yAxis : [
                     {
                         type : 'value',
-                      name: '人数'
+                      name: '个数'
                     }
                 ],
                 series : [
                     {
-                        name:'语言数',
+                        name:'组织数',
                         type:'bar',
                         itemStyle: {
                             normal: {
@@ -793,12 +793,12 @@ App.controller('reportCtl', ['$scope', '$location', 'anchorScroll', function($sc
                 yAxis : [
                     {
                         type : 'value',
-                      name: '人数'
+                      name: '个数'
                     }
                 ],
                 series : [
                     {
-                        name:'语言数',
+                        name:'组织数',
                         type:'bar',
                         itemStyle: {
                             normal: {
