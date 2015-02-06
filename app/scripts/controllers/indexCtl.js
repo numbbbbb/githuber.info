@@ -1,4 +1,5 @@
 App.controller('indexCtl', ['$scope', '$location', function($scope, $location) {
+
     $('#bar-search').hide(0)
     $(".support-logo").css({"transform": "scale(" + ($(window).height() / 1200) + ")"});
     clearBDShare()
