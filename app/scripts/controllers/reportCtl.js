@@ -2042,7 +2042,8 @@ App.controller('reportCtl', ['$scope', '$location', 'anchorScroll', function($sc
         rowWidth = window.innerWidth;
         $(".navbar-side").css('display','none')
     } else {
-        rowWidth = $('#stat_person_code').width();
+        //某些情况有bug 故-1
+        rowWidth = $('#stat_person_code').width() - 1;
         sidebarEventListener();
     }
     var person = [

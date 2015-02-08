@@ -20,10 +20,10 @@ App.config(['$locationProvider', '$routeProvider', function($locationProvider, $
     when('/donate', {
         templateUrl: 'views/donate.html'
     }).
-    when('/rank', {
-        controller: 'rankCtl',
-        templateUrl: 'views/rank.html'
-    }).
+    // when('/rank', {
+    //     controller: 'rankCtl',
+    //     templateUrl: 'views/rank.html'
+    // }).
     when('/report', {
         controller: 'reportCtl',
         templateUrl: 'views/report.html'
