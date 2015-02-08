@@ -287,22 +287,6 @@ p {
 .suggestionDrop {
   cursor: pointer;
 }
-
-/*rank页*/
-.rank-table {
-  margin-top: 30px;
-}
-.rank-table img{
-  width: 60px;
-  height: 60px;
-}
-.rank-table.table tr td{
-  line-height: 60px;
-  max-width: 80px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
 .navsidebar {
   position: relative;
   margin-bottom: 20px;
@@ -489,4 +473,55 @@ p {
     right: 30px;
     bottom: 30px;
   }
+}
+
+/*rank页*/
+.githuber-rank .full-rank {
+  float: none;
+  margin-left: auto;
+  margin-right: auto;
+}
+.githuber-rank .language-rank {
+  float: none;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0px;
+}
+.githuber-rank .language-rank .infoNoteLabel{
+  margin-left: 0px;
+  width: 30%;
+}
+.githuber-rank .rank-table {
+  margin-top: 30px;
+  width: 90%;
+  margin-left: 5%;
+}
+.githuber-rank .full-rank .rank-table img{
+  width: 60px;
+  height: 60px;
+}
+.githuber-rank .full-rank .rank-table.table tr td{
+  line-height: 40px;
+  max-width: 80px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.infoNoteLabel.javascript-color{
+  background-color: #f15501;
+}
+.infoNoteLabel.css-color{
+  background-color: #f15501;
+}
+.infoNoteLabel.python-color{
+  background-color: #3581ba;
+}
+.infoNoteLabel.ruby-color{
+  background-color: #701516;
+}
+.infoNoteLabel.obeject-c-color{
+  background-color: #f15501;
+}
+.infoNoteLabel.c-color{
+  background-color: #555;
 }
