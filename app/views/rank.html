@@ -1,32 +1,51 @@
-<div class="container-fluid" style="margin-top:50px;">
+<div class="container-fluid githuber-rank" style="margin-top:50px;">
 	<div class="row">
-		<div class="col-lg-8 col-lg-offset-2 infoNote">
-				<h2 class="infoNoteLabel">排行榜</h2>
-				<table class="table table-striped rank-table">
-					<tr>
-						<td>排名</td>
-						<td>头像</td>
-						<td>用户名</td>
-						<td>姓名</td>
-						<td>地区</td>
-						<td>语言</td>
-						<td>项目数</td>
-						<td>Star数</td>
-						<td>follow数</td>
-					</tr>
-					<tr ng-repeat="user in rank_data track by $index" ng-class="getRankClass($index)">
-						<td>{{$index + 1}}</td>
-						<td>
-							<img src="{{user.gravater}}"></td>
-						<td>{{user.username}}</td>
-						<td>{{user.name}}</td>
-						<td>{{user.location}}</td>
-						<td>{{user.language}}</td>
-						<td>{{user.repos}}</td>
-						<td>{{user.stars}}</td>
-						<td>{{user.follows}}</td>
-					</tr>
-				</table>
+		<div class="col-lg-9 infoNote full-rank">
+			<h2 class="infoNoteLabel">{{full_rank.name}}</h2>
+			<table class="table table-striped rank-table">
+				<tr>
+					<td>排名</td>
+					<td>姓名</td>
+					<td>位置</td>
+					<td>仓库数</td>
+					<td>粉丝数</td>
+					<td>天数</td>
+					<td>分数</td>
+				</tr>
+				<tr ng-repeat="user in full_rank.data track by $index" ng-class="getRankClass($index)">
+					<td>{{$index + 1}}</td>
+					<td>{{user.name}}</td>
+					<td>{{user.location}}</td>
+					<td>{{user.repos}}</td>
+					<td>{{user.followers}}</td>
+					<td>{{user.days}}</td>
+					<td>{{user.score}}</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<div class="row" ng-show="isDetail">
+		<div class="col-lg-9 language-rank">
+			<div class="col-lg-4" ng-repeat="language in languages">
+				<div class="infoNote">
+					<h2 class="infoNoteLabel {{language.name}}-color">{{language.name}}</h2>
+					<div class="row">
+						<button class="btn btn-success col-lg-offset-9">更多</button>
+					</div>
+					<table class="table table-striped rank-table">
+						<tr>
+							<td>排名</td>
+							<td>姓名</td>
+							<td>分数</td>
+						</tr>
+						<tr ng-repeat="user in language.data track by $index" ng-class="getRankClass($index)">
+							<td>{{$index + 1}}</td>
+							<td>{{user.name}}</td>
+							<td>{{user.score}}</td>
+						</tr>
+					</table>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>
