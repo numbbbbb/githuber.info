@@ -19,7 +19,7 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
     }
     var debug = false;
     if (debug) {
-        window.config.token = "acd18045340051e7bd1e1a4bd6e4f2571c475e53"
+        window.config.token = "dc682377021baf45c13" + "f8ea77bd2633d88633512"
     } else {
         if (window.config && window.config.token) {
             var token = window.config.token
@@ -138,21 +138,26 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
     };
     var getActivityInfo = function(targetUser) {
         $.ajax({
-            url: "https://osrc.dfm.io/" + targetUser + ".json",
-            dataType: "jsonp",
+            url: "http://api.githuber.info/events?login=" + targetUser,
+            dataType: "json",
+            method: "GET",
             success: function(data) {
                 var week = {}
                 var day = {}
                 var temp = {}
                 var category = ['']
-                $.map(data.usage.events, function(event, i) {
-                    temp[event.type.replace("Event", "")] = event
-                    category.push(event.type.replace("Event", ""))
+                $.map(data[targetUser], function(event, i) {
+                    temp[i.replace("Event", "")] = event
+                    category.push(i.replace("Event", ""))
                 })
+                var offset = - Math.round((new Date().getTimezoneOffset()) / 60)
                 $.each(temp, function(type, info) {
-                    day[type] = info.day
-
-                    week[type] = info.week
+                    temp = info[1]
+                    day[type] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+                    for (var k = 0;k < 24; k++) {
+                        day[type][k] = temp[(k + offset) < 0 ? (k + offset) + 24 : (k + offset) % 24]
+                    }
+                    week[type] = info[0]
                     var s = week[type].shift()
                     week[type].push(s)
                 })
@@ -164,13 +169,13 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
                     week_series.push({
                         name: type,
                         type: 'bar',
-                        stack: '每周平均活跃度',
+                        stack: '周动态分布',
                         data: week[type]
                     })
                 })
                 var week_option = {
                     title: {
-                        text: '周平均动态',
+                        text: '周动态分布',
                     },
                     grid: {
                         y: "80"
@@ -205,13 +210,13 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
                     day_series.push({
                         name: type,
                         type: 'bar',
-                        stack: '每日平均活跃度',
+                        stack: '日动态分布',
                         data: day[type]
                     })
                 })
                 var day_option = {
                     title: {
-                        text: '日平均动态',
+                        text: '日动态分布',
                     },
                     grid: {
                         y: "80"
