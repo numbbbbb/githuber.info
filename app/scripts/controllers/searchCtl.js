@@ -142,6 +142,14 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
             dataType: "json",
             method: "GET",
             success: function(data) {
+                if ('msg' in data) {
+                    $scope.weekChart.isLoaded = true;
+                    $scope.weekChart.isErrorLoaded = true;
+                    $scope.dayChart.isLoaded = true;
+                    $scope.dayChart.isErrorLoaded = true;
+                    $scope.$digest();
+                    return
+                }
                 var week = {}
                 var day = {}
                 var temp = {}
