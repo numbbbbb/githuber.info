@@ -20,10 +20,14 @@ App.config(['$locationProvider', '$routeProvider', function($locationProvider, $
     when('/donate', {
         templateUrl: 'views/donate.html'
     }).
-    // when('/rank', {
-    //     controller: 'rankCtl',
-    //     templateUrl: 'views/rank.html'
-    // }).
+    when('/rank/:target', {
+        controller: 'rankCtl',
+        templateUrl: 'views/rank.html'
+    }).
+    when('/rank', {
+        controller: 'rankCtl',
+        templateUrl: 'views/rank.html'
+    }).
     when('/report', {
         controller: 'reportCtl',
         templateUrl: 'views/report.html'
@@ -40,3 +44,6 @@ App.config(['$locationProvider', '$routeProvider', function($locationProvider, $
 }]);
 
 
+// $.getJSON("http://staticfile00.b0.upaiyun.com/test2.json", {}, function(response){
+//     console.dir(response);
+// });

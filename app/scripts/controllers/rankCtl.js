@@ -1,4 +1,5 @@
-App.controller('rankCtl', ['$scope', '$location', function($scope, $location) {
+App.controller('rankCtl', ['$scope', '$location', '$routeParams', function($scope, $location, $routeParams) {
+    var target = $routeParams.target;
     $('#bar-search').show(0);
     clearBDShare();
     $scope.full_rank = {
@@ -6,7 +7,7 @@ App.controller('rankCtl', ['$scope', '$location', function($scope, $location) {
         data: []
     };
     $scope.isDetail = true;
-    $scope.languages = [];
+    $scope.languages = {};
     $scope.getRankClass = function(index) {
         if (index == 0) {
             return "rank1";
@@ -18,9 +19,11 @@ App.controller('rankCtl', ['$scope', '$location', function($scope, $location) {
             return "";
         }
     };
+    $scope.getDetail = function(language) {
+        $location.path("/rank/" + language);
+    };
     var fake_user = {
         name: 'XXX',
-        // gravater: "https://avatars.githubusercontent.com/u/2572987?v=3",
         followers: 322,
         stars: 3222,
         repos: 222,
@@ -34,11 +37,14 @@ App.controller('rankCtl', ['$scope', '$location', function($scope, $location) {
     }
     for (var i=0, l=6; i<l; i++) {
         var temp = {};
-        temp.name = "name";
+        temp.name = "name" + i;
         temp.data = [];
         for (var j=0, l=10;j<l;j++) {
             temp.data.push(fake_user);
         }
-        $scope.languages.push(temp);
+        $scope.languages['name' +i] = temp;
+    }
+    if (target) {
+        $scope.full_rank = $scope.languages.name1;
     }
 }]);
