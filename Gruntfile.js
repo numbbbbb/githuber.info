@@ -32,8 +32,8 @@ module.exports = function (grunt) {
         }
       },
       styles: {
-        files: ['<%= githuber.app %>/styles/{,*/}*.css'],
-        tasks: ['newer:copy:styles', 'autoprefixer']
+        files: ['<%= githuber.app %>/styles/{,*/}*.less'],
+        tasks: ['newer:copy:styles', 'less:development']
       },
       gruntfile: {
         files: ['Gruntfile.js'],
@@ -48,7 +48,7 @@ module.exports = function (grunt) {
         files: [
           '<%= githuber.app %>/{,*/}*.html',
           '<%= githuber.app %>/views/*.html',
-          '.tmp/styles/{,*/}*.css',
+          '<%= githuber.app %>/styles/{,*/}*.css',
           '<%= githuber.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
         ]
       }
@@ -113,21 +113,49 @@ module.exports = function (grunt) {
       },
       server: '.tmp'
     },
-
-    // Add vendor prefixed styles
-    autoprefixer: {
-      options: {
-        browsers: ['last 1 version']
-      },
-      dist: {
+    less: {
+      development: {
+        options: {
+          paths: ["styles"]
+        },
         files: [{
           expand: true,
-          cwd: '.tmp/styles/',
-          src: '{,*/}*.css',
-          dest: '.tmp/styles/'
+          cwd: '.tmp/styles/less/',
+          src: '*.less',
+          dest: '<%= githuber.app %>/styles/',
+          ext: '.css'
+        }]
+      },
+      production: {
+        options: {
+          paths: ["styles"],
+          plugins: [
+            new (require('less-plugin-autoprefix'))({browsers: ["last 2 versions"]})
+          ]
+        },
+        files: [{
+          expand: true,
+          cwd: '.tmp/styles/less/',
+          src: '*.less',
+          dest: '<%= githuber.dist %>/styles/',
+          ext: '.css'
         }]
       }
     },
+    // Add vendor prefixed styles
+    // autoprefixer: {
+    //   options: {
+    //     browsers: ['last 1 version']
+    //   },
+    //   dist: {
+    //     files: [{
+    //       expand: true,
+    //       cwd: '.tmp/styles/',
+    //       src: '{,*/}*.css',
+    //       dest: '.tmp/styles/'
+    //     }]
+    //   }
+    // },
 
     // Automatically inject Bower components into the app
     wiredep: {
@@ -306,7 +334,7 @@ module.exports = function (grunt) {
         expand: true,
         cwd: '<%= githuber.app %>/styles',
         dest: '.tmp/styles/',
-        src: '{,*/}*.css'
+        src: '**/*.less'
       }
     },
 
@@ -334,7 +362,8 @@ module.exports = function (grunt) {
       'clean:server',
       'wiredep',
       'concurrent:server',
-      'autoprefixer',
+      'less:development',
+      // 'autoprefixer',
       'connect:livereload',
       'watch'
     ]);
@@ -350,7 +379,8 @@ module.exports = function (grunt) {
     'wiredep',
     'useminPrepare',
     'concurrent:dist',
-    'autoprefixer',
+    'less:production',
+    // 'autoprefixer',
     'concat',
     'ngAnnotate',
     'copy:dist',

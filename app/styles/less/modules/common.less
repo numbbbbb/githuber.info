@@ -1,0 +1,46 @@
+html, body {
+  height: 100%;
+}
+body {
+  background-image:url('/images/bg.png');
+}
+p, li {
+  font-size: 18px;
+}
+a {
+  cursor: pointer;
+}
+a:link { text-decoration: none; }
+a:hover {
+  text-decoration: none;
+}
+.table td, .table th {
+  text-align: center;
+}
+.infoNote {
+  background: none repeat scroll 0% 0% #FFF;
+  box-shadow: 2px 3px 1px rgba(0, 0, 0, 0.15), -1px 0px 0px rgba(0, 0, 0, 0.03), 1px 0px 0px rgba(0, 0, 0, 0.03), 0px 1px 0px rgba(0, 0, 0, 0.12);
+  border: 1px solid #e6e8e9;
+  margin-top: 30px;
+}
+
+.infoNoteLabel {
+  margin: 0px;
+  margin-left: -15px;
+  padding: 5px;
+  background-color: black;
+  width: 12%;
+  text-align: center;
+  color: white;
+  font-size: 18px;
+  @media screen and (max-width: 600px) {
+    margin: 0px;
+    margin-left: -15px;
+    padding: 5px;
+    background-color: black;
+    width: 110%;
+    text-align: center;
+    color: white;
+    font-size: 18px;
+  }
+}
