@@ -143,19 +143,19 @@ module.exports = function (grunt) {
       }
     },
     // Add vendor prefixed styles
-    // autoprefixer: {
-    //   options: {
-    //     browsers: ['last 1 version']
-    //   },
-    //   dist: {
-    //     files: [{
-    //       expand: true,
-    //       cwd: '.tmp/styles/',
-    //       src: '{,*/}*.css',
-    //       dest: '.tmp/styles/'
-    //     }]
-    //   }
-    // },
+    autoprefixer: {
+      options: {
+        browsers: ['last 1 version']
+      },
+      dist: {
+        files: [{
+          expand: true,
+          cwd: '.tmp/styles/',
+          src: '{,*/}*.css',
+          dest: '.tmp/styles/'
+        }]
+      }
+    },
 
     // Automatically inject Bower components into the app
     wiredep: {
@@ -363,7 +363,7 @@ module.exports = function (grunt) {
       'wiredep',
       'concurrent:server',
       'less:development',
-      // 'autoprefixer',
+      'autoprefixer',
       'connect:livereload',
       'watch'
     ]);
@@ -380,7 +380,7 @@ module.exports = function (grunt) {
     'useminPrepare',
     'concurrent:dist',
     'less:production',
-    // 'autoprefixer',
+    'autoprefixer',
     'concat',
     'ngAnnotate',
     'copy:dist',
