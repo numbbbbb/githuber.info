@@ -1,17 +1,6 @@
 /*首页*/
-/*搜索页*/
-#codeChart {
-  height: 400px;
-}
-#starChart {
-  height: 400px;
-}
-.readme-btn,
-.repo-btn {
-  margin-bottom: 20px;
-  margin-right: 10px;
-}
 .searchBar input {
+  border-radius: 0;
   -webkit-transition: all 0.3s ease-in-out;
   -moz-transition: all 0.3s ease-in-out;
   -ms-transition: all 0.3s ease-in-out;
@@ -43,6 +32,18 @@ textarea:focus {
   background-color: #51cbee;
   border-radius: 0;
   border-color: #51cbee;
+}
+/*搜索页*/
+#codeChart {
+  height: 400px;
+}
+#starChart {
+  height: 400px;
+}
+.readme-btn,
+.repo-btn {
+  margin-bottom: 20px;
+  margin-right: 10px;
 }
 .donateNotice {
   padding: 0px 13px;
