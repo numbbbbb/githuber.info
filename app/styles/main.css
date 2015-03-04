@@ -513,21 +513,24 @@ a:hover {
   width: 90%;
   margin-left: 5%;
 }
-.infoNoteLabel.javascript-color {
-  background-color: #f15501;
+.infoNoteLabel.JavaScript-color {
+  background-color: #f1e05a;
 }
-.infoNoteLabel.css-color {
-  background-color: #f15501;
+.infoNoteLabel.CSS-color {
+  background-color: #563d7c;
 }
-.infoNoteLabel.python-color {
+.infoNoteLabel.Python-color {
   background-color: #3581ba;
 }
-.infoNoteLabel.ruby-color {
+.infoNoteLabel.Ruby-color {
   background-color: #701516;
 }
-.infoNoteLabel.obeject-c-color {
-  background-color: #f15501;
+.infoNoteLabel.Objective-C-color {
+  background-color: #438eff;
 }
-.infoNoteLabel.c-color {
+.infoNoteLabel.C-color {
   background-color: #555;
+}
+.infoNoteLabel.PHP-color {
+  background-color: #4F5D95;
 }
