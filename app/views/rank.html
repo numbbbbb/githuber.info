@@ -1,7 +1,7 @@
 <div class="container-fluid githuber-rank" style="margin-top:50px;">
 	<div class="row">
 		<div class="col-lg-9 infoNote full-rank">
-			<h2 class="infoNoteLabel">{{full_rank.name}}</h2>
+			<h2 class="infoNoteLabel {{full_rank.name}}-color">{{full_rank.name}}</h2>
 			<table class="table table-striped rank-table">
 				<tr>
 					<td>排名</td>
@@ -12,12 +12,12 @@
 					<td>天数</td>
 					<td>分数</td>
 				</tr>
-				<tr ng-repeat="user in full_rank.data track by $index" ng-class="getRankClass($index)">
+				<tr ng-repeat="user in full_rank.data.slice(0,50) track by $index" ng-class="getRankClass($index)">
 					<td>{{$index + 1}}</td>
-					<td>{{user.name}}</td>
-					<td>{{user.location}}</td>
-					<td>{{user.repos}}</td>
-					<td>{{user.followers}}</td>
+					<td>{{user.l}}</td>
+					<td>{{user.lo}}</td>
+					<td>{{user.pr}}</td>
+					<td>{{user.fs}}</td>
 					<td>{{user.days}}</td>
 					<td>{{user.score}}</td>
 				</tr>
@@ -38,9 +38,9 @@
 							<td>姓名</td>
 							<td>分数</td>
 						</tr>
-						<tr ng-repeat="user in language.data track by $index" ng-class="getRankClass($index)">
+						<tr ng-repeat="user in language.data.slice(0,10) track by $index" ng-class="getRankClass($index)">
 							<td>{{$index + 1}}</td>
-							<td>{{user.name}}</td>
+							<td>{{user.l}}</td>
 							<td>{{user.score}}</td>
 						</tr>
 					</table>
