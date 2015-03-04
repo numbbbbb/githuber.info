@@ -12,7 +12,6 @@
 					<td>仓库数</td>
 					<td>粉丝数</td>
 					<td>天数</td>
-					<td>分数</td>
 				</tr>
 				<tr ng-repeat="user in full_rank_data track by $index" class="rankInfo" ng-class="getRankClass($index)">
 					<td>{{$index + 1}}</td>
@@ -22,7 +21,6 @@
 					<td>{{user.pr}}</td>
 					<td>{{user.fs}}</td>
 					<td>{{user.days}}</td>
-					<td>{{user.score}}</td>
 				</tr>
 			</table>
 		</div>
@@ -39,12 +37,10 @@
 						<tr>
 							<td>排名</td>
 							<td>姓名</td>
-							<td>分数</td>
 						</tr>
 						<tr ng-repeat="user in language.data.slice(0,10) track by $index" ng-class="getRankClass($index)">
 							<td>{{$index + 1}}</td>
 							<td><a href="https://github.com/{{user.l}}" target="_blank">{{user.l}}</a></td>
-							<td>{{user.score}}</td>
 						</tr>
 					</table>
 				</div>
