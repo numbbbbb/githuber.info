@@ -1,10 +1,12 @@
 <div class="container-fluid githuber-rank" style="margin-top:50px;">
 	<div class="row">
 		<div class="col-lg-9 infoNote full-rank">
+			<a class="switch" id="switch" ng-class="{'reversal': full_rank_switch}" ng-click="switchFullRank()"></a>
 			<h2 class="infoNoteLabel {{full_rank.name}}-color">{{full_rank.name}}</h2>
 			<table class="table table-striped rank-table">
 				<tr>
 					<td>排名</td>
+					<td>用户名</td>
 					<td>姓名</td>
 					<td>位置</td>
 					<td>仓库数</td>
@@ -12,9 +14,10 @@
 					<td>天数</td>
 					<td>分数</td>
 				</tr>
-				<tr ng-repeat="user in full_rank.data.slice(0,50) track by $index" ng-class="getRankClass($index)">
+				<tr ng-repeat="user in full_rank_data track by $index" class="rankInfo" ng-class="getRankClass($index)">
 					<td>{{$index + 1}}</td>
-					<td><a href="https://github.com/{{user.l}}">{{user.l}}</a></td>
+					<td><a href="https://github.com/{{user.l}}" target="_blank">{{user.l}}</a></td>
+					<td>{{user.n}}</td>
 					<td>{{user.lo}}</td>
 					<td>{{user.pr}}</td>
 					<td>{{user.fs}}</td>
@@ -40,7 +43,7 @@
 						</tr>
 						<tr ng-repeat="user in language.data.slice(0,10) track by $index" ng-class="getRankClass($index)">
 							<td>{{$index + 1}}</td>
-							<td><a href="https://github.com/{{user.l}}">{{user.l}}</a></td>
+							<td><a href="https://github.com/{{user.l}}" target="_blank">{{user.l}}</a></td>
 							<td>{{user.score}}</td>
 						</tr>
 					</table>

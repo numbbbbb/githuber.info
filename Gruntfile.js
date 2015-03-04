@@ -32,7 +32,7 @@ module.exports = function (grunt) {
         }
       },
       styles: {
-        files: ['<%= githuber.app %>/styles/{,*/}*.less'],
+        files: ['<%= githuber.app %>/styles/less/{,*/}*.less',],
         tasks: ['newer:copy:styles', 'less:development']
       },
       gruntfile: {
@@ -116,7 +116,10 @@ module.exports = function (grunt) {
     less: {
       development: {
         options: {
-          paths: ["styles"]
+          paths: ["styles"],
+          plugins: [
+            new (require('less-plugin-autoprefix'))({browsers: ["last 2 versions"]})
+          ]
         },
         files: [{
           expand: true,
