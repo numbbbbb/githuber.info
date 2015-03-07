@@ -150,6 +150,9 @@ p {
   #slogan {
     font-size: 19px;
   }
+  .navsidebar {
+    display: none;
+  }
 }
 @media (max-width: 991px) {
   #our-name {
