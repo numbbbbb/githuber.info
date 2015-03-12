@@ -315,97 +315,100 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
                             }
                         })
                     });
-                    barrier.checkFinish(function() {
-                        var allRepos = []
-                        $.each($scope.ownedRepoInfos, function(id, repo) {
-                            repo.id = id
-                            allRepos.push(repo)
-                        });
-                        allRepos.sort(function(a, b) {
-                            return b.stars - a.stars
-                        });
-                        $.map(allRepos, function(repo, i) {
-                            $("#repo-details").append('<div class="row">' +
-                                '<div class="col-lg-10 col-lg-offset-1" style="border-bottom-width:1px;border-bottom-style:solid;border-bottom-color:#E8E8E8;">' +
-                                '<h2>' + repo.name + ' <span class="label label-' + (i >= 3 ? 'default' : 'warning') + '">' + repo.stars + ' Stars</span></h2>' +
-                                '<p style="font-size:16px;">' + repo.description + '</p>' +
-                                '<button type="button" class="btn btn-default readme-btn" data-id="' + repo.id + '">查看readme</button>' +
-                                '<a target="_blank" class="btn btn-primary repo-btn" href="' + repo.url + '">项目主页</a>' +
-                                '</div>' +
-                                '</div>')
-                        })
-                    });
+                    
                     if (data.length === 100 && ((last && last !== data[0].name) || !last)) {
                         last = data[0].name
-                        getCodeLinesAt(pageNumber + 1)
+                        barrier.checkFinish(function() {
+                            getCodeLinesAt(pageNumber + 1)
+                        });  
                     }
                     else {
-                        $(".readme-btn:last").closest("div").css("border-bottom", "none");
-                        var data = [];
-                        $.each($scope.languageBytesInOwnedRepos, function(language, bytes) {
-                            data.push({
-                                name: language,
-                                value: bytes
+                        barrier.checkFinish(function() {
+                            var allRepos = []
+                            $.each($scope.ownedRepoInfos, function(id, repo) {
+                                repo.id = id
+                                allRepos.push(repo)
                             });
-                        });
-                        $("#byte-chart").height(data.length * 40 + 150);
-                        data.sort(function(a, b) {
-                            return a.value - b.value
-                        });
-                        var categories = [];
-                        var values = [];
+                            allRepos.sort(function(a, b) {
+                                return b.stars - a.stars
+                            });
+                            $.map(allRepos, function(repo, i) {
+                                $("#repo-details").append('<div class="row">' +
+                                    '<div class="col-lg-10 col-lg-offset-1" style="border-bottom-width:1px;border-bottom-style:solid;border-bottom-color:#E8E8E8;">' +
+                                    '<h2>' + repo.name + ' <span class="label label-' + (i >= 3 ? 'default' : 'warning') + '">' + repo.stars + ' Stars</span></h2>' +
+                                    '<p style="font-size:16px;">' + repo.description + '</p>' +
+                                    '<button type="button" class="btn btn-default readme-btn" data-id="' + repo.id + '">查看readme</button>' +
+                                    '<a target="_blank" class="btn btn-primary repo-btn" href="' + repo.url + '">项目主页</a>' +
+                                    '</div>' +
+                                    '</div>')
+                            })
+                            $(".readme-btn:last").closest("div").css("border-bottom", "none");
+                            var data = [];
+                            $.each($scope.languageBytesInOwnedRepos, function(language, bytes) {
+                                data.push({
+                                    name: language,
+                                    value: bytes
+                                });
+                            });
+                            $("#byte-chart").height(data.length * 40 + 150);
+                            data.sort(function(a, b) {
+                                return a.value - b.value
+                            });
+                            var categories = [];
+                            var values = [];
 
-                        for (var i = 0; i < data.length; i++) {
-                            categories.push(data[i].name);
-                            if (smallWindow) {
-                                values.push(Math.floor(data[i].value / 1000));
-                            } else {
-                                values.push(data[i].value);
+                            for (var i = 0; i < data.length; i++) {
+                                categories.push(data[i].name);
+                                if (smallWindow) {
+                                    values.push(Math.floor(data[i].value / 1000));
+                                } else {
+                                    values.push(data[i].value);
+                                }
                             }
-                        }
-                        $scope.githuber.codings = values.reduce(function(x, y) {
-                            return x + y
-                        }, 0)
-                        if (smallWindow) {
-                            $scope.githuber.codings = $scope.githuber.codings * 1000
-                        }
-                        $scope.githuber.codings = $.digits($scope.githuber.codings)
-                        var option = {
-                            title: {
-                                text: '代码量统计',
-                                subtext: '单位：字节'
-                            },
-                            tooltip: {
-                                trigger: 'axis'
-                            },
-                            xAxis: [{
-                                axisLabel: {
-                                    formatter: function(value) {
-                                        if (smallWindow) {
-                                            return value + "K"
-                                        } else {
-                                            return value
-                                        }
-                                    },
-                                    rotate: $(window).width() < 768 ? -45 : 0
+                            $scope.githuber.codings = values.reduce(function(x, y) {
+                                return x + y
+                            }, 0)
+                            if (smallWindow) {
+                                $scope.githuber.codings = $scope.githuber.codings * 1000
+                            }
+                            $scope.githuber.codings = $.digits($scope.githuber.codings)
+                            var option = {
+                                title: {
+                                    text: '代码量统计',
+                                    subtext: '单位：字节'
                                 },
-                                type: 'value',
-                                boundaryGap: [0, 0],
-                            }],
-                            yAxis: [{
-                                type: 'category',
-                                data: categories
-                            }],
-                            series: [{
-                                name: '代码量',
-                                type: 'bar',
-                                data: values
-                            }]
-                        };
-                        $scope.byteChart.isLoaded = true;
-                        $scope.byteChart.isSuccessLoaded = true;
-                        $scope.$digest();
-                        drawChart("byte-chart", option, "bar");
+                                tooltip: {
+                                    trigger: 'axis'
+                                },
+                                xAxis: [{
+                                    axisLabel: {
+                                        formatter: function(value) {
+                                            if (smallWindow) {
+                                                return value + "K"
+                                            } else {
+                                                return value
+                                            }
+                                        },
+                                        rotate: $(window).width() < 768 ? -45 : 0
+                                    },
+                                    type: 'value',
+                                    boundaryGap: [0, 0],
+                                }],
+                                yAxis: [{
+                                    type: 'category',
+                                    data: categories
+                                }],
+                                series: [{
+                                    name: '代码量',
+                                    type: 'bar',
+                                    data: values
+                                }]
+                            };
+                            $scope.byteChart.isLoaded = true;
+                            $scope.byteChart.isSuccessLoaded = true;
+                            $scope.$digest();
+                            drawChart("byte-chart", option, "bar");
+                        })
                     }
                 }
             })
