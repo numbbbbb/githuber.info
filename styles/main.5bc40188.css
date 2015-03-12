@@ -142,6 +142,9 @@ p {
   #slogan {
     font-size: 20px;
   }
+  .navsidebar {
+    display: none;
+  }
 }
 @media (max-width: 1199px) {
   #our-name {
@@ -247,7 +250,7 @@ body {
   height: 100%;
 }
 body {
-  background-image: url('/images/bg.4a317eef.png');
+  background-image: url('/images/bg.a51847bf.png');
 }
 p,
 li {
@@ -292,6 +295,51 @@ a:hover {
     text-align: center;
     color: white;
     font-size: 18px;
+  }
+}
+.cd-top {
+  display: inline-block;
+  height: 40px;
+  width: 40px;
+  position: fixed;
+  bottom: 100px;
+  right: 10px;
+  z-index: 10;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+  /* image replacement properties */
+  overflow: hidden;
+  text-indent: 100%;
+  white-space: nowrap;
+  background: rgba(232, 98, 86, 0.8) url(/images/cd-top-arrow.866cf65d.svg) no-repeat center 50%;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity .3s 0s, visibility 0s .3s;
+}
+.cd-top.cd-is-visible {
+  /* the button becomes visible */
+  visibility: visible;
+  opacity: 1;
+}
+.cd-top.cd-fade-out {
+  /* if the user keeps scrolling down, the button is out of focus and becomes less visible */
+  opacity: .5;
+}
+.cd-top:hover {
+  background-color: #e86256;
+  opacity: 1;
+}
+@media only screen and (min-width: 768px) {
+  .cd-top {
+    right: 20px;
+    bottom: 20px;
+  }
+}
+@media only screen and (min-width: 1024px) {
+  .cd-top {
+    height: 60px;
+    width: 60px;
+    right: 30px;
+    bottom: 30px;
   }
 }
 /*报告页*/
@@ -429,56 +477,18 @@ a:hover {
 .average table td:nth-of-type(3) {
   width: 30%;
 }
-.cd-top {
-  display: inline-block;
-  height: 40px;
-  width: 40px;
-  position: fixed;
-  bottom: 100px;
-  right: 10px;
-  z-index: 10;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
-  /* image replacement properties */
-  overflow: hidden;
-  text-indent: 100%;
-  white-space: nowrap;
-  background: rgba(232, 98, 86, 0.8) url(/images/cd-top-arrow.866cf65d.svg) no-repeat center 50%;
-  visibility: hidden;
-  opacity: 0;
-  transition: opacity .3s 0s, visibility 0s .3s;
-}
-.cd-top.cd-is-visible {
-  /* the button becomes visible */
-  visibility: visible;
-  opacity: 1;
-}
-.cd-top.cd-fade-out {
-  /* if the user keeps scrolling down, the button is out of focus and becomes less visible */
-  opacity: .5;
-}
-.cd-top:hover {
-  background-color: #e86256;
-  opacity: 1;
-}
-@media only screen and (min-width: 768px) {
-  .cd-top {
-    right: 20px;
-    bottom: 20px;
-  }
-}
-@media only screen and (min-width: 1024px) {
-  .cd-top {
-    height: 60px;
-    width: 60px;
-    right: 30px;
-    bottom: 30px;
-  }
-}
 /*rank页*/
+.githuber-rank .animate-repeat {
+  line-height: 40px;
+  list-style: none;
+  box-sizing: border-box;
+}
 .githuber-rank .full-rank {
   float: none;
   margin-left: auto;
   margin-right: auto;
+  position: relative;
+  transition: 1s liner all;
 }
 .githuber-rank .full-rank .rank-table img {
   width: 60px;
@@ -490,6 +500,29 @@ a:hover {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+.githuber-rank .full-rank .switch {
+  position: absolute;
+  bottom: 21px;
+  right: 10px;
+  display: inline-block;
+  height: 40px;
+  width: 50px;
+  z-index: 10;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+  text-indent: 100%;
+  white-space: nowrap;
+  background: rgba(23, 144, 207, 0.4) url(/images/cd-top-arrow.866cf65d.svg) no-repeat center 50%;
+  transition: opacity .3s 0s, visibility 0s .3s;
+  -webkit-transform: rotateX(0deg);
+          transform: rotateX(0deg);
+}
+.githuber-rank .full-rank .switch:hover {
+  background: rgba(23, 144, 207, 0.8) url(/images/cd-top-arrow.866cf65d.svg) no-repeat center 50%;
+}
+.githuber-rank .full-rank .switch.reversal {
+  -webkit-transform: rotateX(180deg);
+          transform: rotateX(180deg);
 }
 .githuber-rank .language-rank {
   float: none;
@@ -506,21 +539,24 @@ a:hover {
   width: 90%;
   margin-left: 5%;
 }
-.infoNoteLabel.javascript-color {
-  background-color: #f15501;
+.infoNoteLabel.JavaScript-color {
+  background-color: #f1e05a;
 }
-.infoNoteLabel.css-color {
-  background-color: #f15501;
+.infoNoteLabel.CSS-color {
+  background-color: #563d7c;
 }
-.infoNoteLabel.python-color {
+.infoNoteLabel.Python-color {
   background-color: #3581ba;
 }
-.infoNoteLabel.ruby-color {
+.infoNoteLabel.Ruby-color {
   background-color: #701516;
 }
-.infoNoteLabel.obeject-c-color {
-  background-color: #f15501;
+.infoNoteLabel.Objective-C-color {
+  background-color: #438eff;
 }
-.infoNoteLabel.c-color {
+.infoNoteLabel.C-color {
   background-color: #555;
+}
+.infoNoteLabel.PHP-color {
+  background-color: #4F5D95;
 }
