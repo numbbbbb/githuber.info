@@ -6,7 +6,7 @@ require.config({
 })
 
 // Angular app
-var App = angular.module('App', ['ngRoute','ngAnimate']);
+var App = angular.module('App', ['ngRoute']);
 App.config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
     $routeProvider.
     when('/index', {

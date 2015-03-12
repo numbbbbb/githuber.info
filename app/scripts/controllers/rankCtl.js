@@ -4,7 +4,6 @@ App.controller('rankCtl', ['$scope', '$location', '$routeParams', 'anchorScroll'
     clearBDShare();
     if (!$scope.data) {
         $http.get("http://staticfile00.b0.upaiyun.com/rank.json").success( function(data) {
-            console.log("get");
             $scope.data = data;
             $scope.languages = data.languages;
             if (target) {

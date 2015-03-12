@@ -410,7 +410,7 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
                 }
             })
         }
-        getCodeLinesAt(1)  
+        getCodeLinesAt(1)
     };
     // 获取star的repo并统计语言
     var last = ''
