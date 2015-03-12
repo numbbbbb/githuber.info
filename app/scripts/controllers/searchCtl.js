@@ -261,148 +261,159 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
             }
         });
     }
+    var last = ''
     var getCodeLines = function(targetUser) {
-        $.ajax({
-            url: "https://api.github.com/users/" + targetUser + "/repos?page=1&per_page=10000",
-            dataType: "json",
-            method: "GET",
-            success: function(data) {
-                if (data == "") {
-                    $scope.byteChart.isLoaded = true;
-                    $scope.byteChart.isErrorLoaded = true;
-                    $scope.$digest();
-                }
-                var barrier = new Barrier();
-                barrier.barrierNumber = data.length;
-                $.map(data, function(repo, i) {
-                    if (repo.fork) {
-                        barrier.barrierNumber--
-                        return
+        var getCodeLinesAt = function(pageNumber) {
+            $.ajax({
+                url: "https://api.github.com/users/" + targetUser + "/repos?page=" + pageNumber + "&per_page=100",
+                dataType: "json",
+                method: "GET",
+                success: function(data) {
+                    if (data == "") {
+                        $scope.byteChart.isLoaded = true;
+                        $scope.byteChart.isErrorLoaded = true;
+                        $scope.$digest();
                     }
-                    $scope.ownedRepoInfos[repo.id] = {
-                        description: repo.description,
-                        name: repo.name,
-                        stars: repo.stargazers_count,
-                        url: repo.html_url
-                    };
-                    var url = "https://api.github.com/repos/" + targetUser + "/" + repo.name + "/languages"
-                    $.ajax({
-                        url: url,
-                        dataType: "json",
-                        success: function(data) {
-
+                    var barrier = new Barrier();
+                    barrier.barrierNumber = data.length;
+                    $.map(data, function(repo, i) {
+                        if (repo.fork) {
                             barrier.barrierNumber--
-                            if (repo.fork || "status" in data || $.isEmptyObject(data)) {
-                                return
-                            }
-                            $(document).trigger(utf8_to_b64(url), JSON.stringify(data))
-                            $.each(data, function(language, lines) {
-                                if (isNaN(lines)) {
+                            return
+                        }
+                        $scope.ownedRepoInfos[repo.id] = {
+                            description: repo.description,
+                            name: repo.name,
+                            stars: repo.stargazers_count,
+                            url: repo.html_url
+                        };
+                        var url = "https://api.github.com/repos/" + targetUser + "/" + repo.name + "/languages"
+                        $.ajax({
+                            url: url,
+                            dataType: "json",
+                            success: function(data) {
+
+                                barrier.barrierNumber--
+                                if (repo.fork || "status" in data || $.isEmptyObject(data)) {
                                     return
                                 }
-                                if (!(language in $scope.languageBytesInOwnedRepos)) {
-                                    $scope.languageBytesInOwnedRepos[language] = 0
+                                $(document).trigger(utf8_to_b64(url), JSON.stringify(data))
+                                $.each(data, function(language, lines) {
+                                    if (isNaN(lines)) {
+                                        return
+                                    }
+                                    if (!(language in $scope.languageBytesInOwnedRepos)) {
+                                        $scope.languageBytesInOwnedRepos[language] = 0
+                                    }
+                                    $scope.languageBytesInOwnedRepos[language] += lines
+                                });
+                            },
+                            statusCode: {
+                                403: function() {
+                                    barrier.barrierNumber--
                                 }
-                                $scope.languageBytesInOwnedRepos[language] += lines
+                            }
+                        })
+                    });
+                    barrier.checkFinish(function() {
+                        var allRepos = []
+                        $.each($scope.ownedRepoInfos, function(id, repo) {
+                            repo.id = id
+                            allRepos.push(repo)
+                        });
+                        allRepos.sort(function(a, b) {
+                            return b.stars - a.stars
+                        });
+                        $.map(allRepos, function(repo, i) {
+                            $("#repo-details").append('<div class="row">' +
+                                '<div class="col-lg-10 col-lg-offset-1" style="border-bottom-width:1px;border-bottom-style:solid;border-bottom-color:#E8E8E8;">' +
+                                '<h2>' + repo.name + ' <span class="label label-' + (i >= 3 ? 'default' : 'warning') + '">' + repo.stars + ' Stars</span></h2>' +
+                                '<p style="font-size:16px;">' + repo.description + '</p>' +
+                                '<button type="button" class="btn btn-default readme-btn" data-id="' + repo.id + '">查看readme</button>' +
+                                '<a target="_blank" class="btn btn-primary repo-btn" href="' + repo.url + '">项目主页</a>' +
+                                '</div>' +
+                                '</div>')
+                        })
+                    });
+                    if (data.length === 100 && ((last && last !== data[0].name) || !last)) {
+                        last = data[0].name
+                        getCodeLinesAt(pageNumber + 1)
+                    }
+                    else {
+                        $(".readme-btn:last").closest("div").css("border-bottom", "none");
+                        var data = [];
+                        $.each($scope.languageBytesInOwnedRepos, function(language, bytes) {
+                            data.push({
+                                name: language,
+                                value: bytes
                             });
-                        },
-                        statusCode: {
-                            403: function() {
-                                barrier.barrierNumber--
+                        });
+                        $("#byte-chart").height(data.length * 40 + 150);
+                        data.sort(function(a, b) {
+                            return a.value - b.value
+                        });
+                        var categories = [];
+                        var values = [];
+
+                        for (var i = 0; i < data.length; i++) {
+                            categories.push(data[i].name);
+                            if (smallWindow) {
+                                values.push(Math.floor(data[i].value / 1000));
+                            } else {
+                                values.push(data[i].value);
                             }
                         }
-                    })
-                });
-                barrier.checkFinish(function() {
-                    var allRepos = []
-                    $.each($scope.ownedRepoInfos, function(id, repo) {
-                        repo.id = id
-                        allRepos.push(repo)
-                    });
-                    allRepos.sort(function(a, b) {
-                        return b.stars - a.stars
-                    });
-                    $.map(allRepos, function(repo, i) {
-                        $("#repo-details").append('<div class="row">' +
-                            '<div class="col-lg-10 col-lg-offset-1" style="border-bottom-width:1px;border-bottom-style:solid;border-bottom-color:#E8E8E8;">' +
-                            '<h2>' + repo.name + ' <span class="label label-' + (i >= 3 ? 'default' : 'warning') + '">' + repo.stars + ' Stars</span></h2>' +
-                            '<p style="font-size:16px;">' + repo.description + '</p>' +
-                            '<button type="button" class="btn btn-default readme-btn" data-id="' + repo.id + '">查看readme</button>' +
-                            '<a target="_blank" class="btn btn-primary repo-btn" href="' + repo.url + '">项目主页</a>' +
-                            '</div>' +
-                            '</div>')
-                    })
-                    $(".readme-btn:last").closest("div").css("border-bottom", "none");
-                    var data = [];
-                    $.each($scope.languageBytesInOwnedRepos, function(language, bytes) {
-                        data.push({
-                            name: language,
-                            value: bytes
-                        });
-                    });
-                    $("#byte-chart").height(data.length * 40 + 150);
-                    data.sort(function(a, b) {
-                        return a.value - b.value
-                    });
-                    var categories = [];
-                    var values = [];
-
-                    for (var i = 0; i < data.length; i++) {
-                        categories.push(data[i].name);
+                        $scope.githuber.codings = values.reduce(function(x, y) {
+                            return x + y
+                        }, 0)
                         if (smallWindow) {
-                            values.push(Math.floor(data[i].value / 1000));
-                        } else {
-                            values.push(data[i].value);
+                            $scope.githuber.codings = $scope.githuber.codings * 1000
                         }
-                    }
-                    $scope.githuber.codings = values.reduce(function(x, y) {
-                        return x + y
-                    }, 0)
-                    if (smallWindow) {
-                        $scope.githuber.codings = $scope.githuber.codings * 1000
-                    }
-                    $scope.githuber.codings = $.digits($scope.githuber.codings)
-                    var option = {
-                        title: {
-                            text: '代码量统计',
-                            subtext: '单位：字节'
-                        },
-                        tooltip: {
-                            trigger: 'axis'
-                        },
-                        xAxis: [{
-                            axisLabel: {
-                                formatter: function(value) {
-                                    if (smallWindow) {
-                                        return value + "K"
-                                    } else {
-                                        return value
-                                    }
-                                },
-                                rotate: $(window).width() < 768 ? -45 : 0
+                        $scope.githuber.codings = $.digits($scope.githuber.codings)
+                        var option = {
+                            title: {
+                                text: '代码量统计',
+                                subtext: '单位：字节'
                             },
-                            type: 'value',
-                            boundaryGap: [0, 0],
-                        }],
-                        yAxis: [{
-                            type: 'category',
-                            data: categories
-                        }],
-                        series: [{
-                            name: '代码量',
-                            type: 'bar',
-                            data: values
-                        }]
-                    };
-                    $scope.byteChart.isLoaded = true;
-                    $scope.byteChart.isSuccessLoaded = true;
-                    $scope.$digest();
-                    drawChart("byte-chart", option, "bar");
-                });
-            }
-        })
+                            tooltip: {
+                                trigger: 'axis'
+                            },
+                            xAxis: [{
+                                axisLabel: {
+                                    formatter: function(value) {
+                                        if (smallWindow) {
+                                            return value + "K"
+                                        } else {
+                                            return value
+                                        }
+                                    },
+                                    rotate: $(window).width() < 768 ? -45 : 0
+                                },
+                                type: 'value',
+                                boundaryGap: [0, 0],
+                            }],
+                            yAxis: [{
+                                type: 'category',
+                                data: categories
+                            }],
+                            series: [{
+                                name: '代码量',
+                                type: 'bar',
+                                data: values
+                            }]
+                        };
+                        $scope.byteChart.isLoaded = true;
+                        $scope.byteChart.isSuccessLoaded = true;
+                        $scope.$digest();
+                        drawChart("byte-chart", option, "bar");
+                    }
+                }
+            })
+        }
+        getCodeLinesAt(1)  
     };
     // 获取star的repo并统计语言
+    var last = ''
     var getStarredInfo = function(targetUser) {
         var getStarredInfoAt = function(pageNumber) {
             var url = "https://api.github.com/users/" + targetUser + "/starred?page=" + pageNumber + "&per_page=100"
@@ -430,7 +441,8 @@ App.controller('searchCtl', ['$scope', '$routeParams', function($scope, $routePa
                     })
 
                     $(document).trigger(utf8_to_b64(url), JSON.stringify(temp))
-                    if (data.length === 100) {
+                    if (data.length === 100 && last && last !== data[0].name) {
+                        last = data[0].name
                         getStarredInfoAt(pageNumber + 1)
                     } else {
                         var data = []
