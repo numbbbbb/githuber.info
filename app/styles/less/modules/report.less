@@ -1,5 +1,6 @@
 /*报告页*/
 .navsidebar {
+  display: none;
   position: relative;
   margin-bottom: 20px;
   border: 1px solid transparent;
@@ -35,6 +36,11 @@
       }
     }
 
+  }
+}
+@media (min-width:1200px) {
+  .navsidebar {
+    display: block;
   }
 }
 .report-entry {
