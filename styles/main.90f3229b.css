@@ -532,7 +532,9 @@ a:hover {
 }
 .githuber-rank .language-rank .infoNoteLabel {
   margin-left: 0px;
-  width: 30%;
+  width: 40%;
+  overflow: hidden;
+  white-space: nowrap;
 }
 .githuber-rank .rank-table {
   margin-top: 30px;
@@ -559,4 +561,7 @@ a:hover {
 }
 .infoNoteLabel.PHP-color {
   background-color: #4F5D95;
+}
+.infoNoteLabel.Java-color {
+  background-color: #b07219;
 }
