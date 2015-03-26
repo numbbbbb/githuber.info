@@ -250,7 +250,7 @@ body {
   height: 100%;
 }
 body {
-  background-image: url('/images/bg.4a317eef.png');
+  background-image: url('/images/bg.png');
 }
 p,
 li {
@@ -310,7 +310,7 @@ a:hover {
   overflow: hidden;
   text-indent: 100%;
   white-space: nowrap;
-  background: rgba(232, 98, 86, 0.8) url(/images/cd-top-arrow.866cf65d.svg) no-repeat center 50%;
+  background: rgba(232, 98, 86, 0.8) url(/images/cd-top-arrow.svg) no-repeat center 50%;
   visibility: hidden;
   opacity: 0;
   transition: opacity .3s 0s, visibility 0s .3s;
@@ -512,13 +512,13 @@ a:hover {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
   text-indent: 100%;
   white-space: nowrap;
-  background: rgba(23, 144, 207, 0.4) url(/images/cd-top-arrow.866cf65d.svg) no-repeat center 50%;
+  background: rgba(23, 144, 207, 0.4) url(/images/cd-top-arrow.svg) no-repeat center 50%;
   transition: opacity .3s 0s, visibility 0s .3s;
   -webkit-transform: rotateX(0deg);
           transform: rotateX(0deg);
 }
 .githuber-rank .full-rank .switch:hover {
-  background: rgba(23, 144, 207, 0.8) url(/images/cd-top-arrow.866cf65d.svg) no-repeat center 50%;
+  background: rgba(23, 144, 207, 0.8) url(/images/cd-top-arrow.svg) no-repeat center 50%;
 }
 .githuber-rank .full-rank .switch.reversal {
   -webkit-transform: rotateX(180deg);
@@ -532,9 +532,7 @@ a:hover {
 }
 .githuber-rank .language-rank .infoNoteLabel {
   margin-left: 0px;
-  width: 40%;
-  overflow: hidden;
-  white-space: nowrap;
+  width: 30%;
 }
 .githuber-rank .rank-table {
   margin-top: 30px;
@@ -561,7 +559,4 @@ a:hover {
 }
 .infoNoteLabel.PHP-color {
   background-color: #4F5D95;
-}
-.infoNoteLabel.Java-color {
-  background-color: #b07219;
 }
