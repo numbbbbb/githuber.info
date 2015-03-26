@@ -1,0 +1,212 @@
+/*搜索页*/
+#codeChart {
+  height: 400px;
+}
+#starChart {
+  height: 400px;
+}
+.readme-btn, .repo-btn {
+  margin-bottom: 20px;
+  margin-right: 10px;
+}
+.donateNotice {
+  padding: 0px 13px;
+  font-size: 13px;
+  line-height: 17px;
+  color: #333;
+  font-weight: normal;
+  background-color: #F0F0F0;
+  position: relative;
+  border-bottom: 1px solid #DDD;
+  border-right: 1px solid #DDD;
+}
+.loading {
+  min-height: 400px;
+}
+.loader {
+  font-size: 90px;
+  text-indent: -9999em;
+  overflow: hidden;
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  margin: 0.8em auto;
+  position: relative;
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-animation: load6 1.7s infinite ease;
+  animation: load6 1.7s infinite ease;
+}
+@-webkit-keyframes load6 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+    box-shadow: 0 -0.83em 0 -0.4em #000000, 0 -0.83em 0 -0.42em #000000, 0 -0.83em 0 -0.44em #000000, 0 -0.83em 0 -0.46em #000000, 0 -0.83em 0 -0.477em #000000;
+  }
+  5%, 95% {
+    box-shadow: 0 -0.83em 0 -0.4em #000000, 0 -0.83em 0 -0.42em #000000, 0 -0.83em 0 -0.44em #000000, 0 -0.83em 0 -0.46em #000000, 0 -0.83em 0 -0.477em #000000;
+  }
+  10%, 59% {
+    box-shadow: 0 -0.83em 0 -0.4em #000000, -0.087em -0.825em 0 -0.42em #000000, -0.173em -0.812em 0 -0.44em #000000, -0.256em -0.789em 0 -0.46em #000000, -0.297em -0.775em 0 -0.477em #000000;
+  }
+  20% {
+    box-shadow: 0 -0.83em 0 -0.4em #000000, -0.338em -0.758em 0 -0.42em #000000, -0.555em -0.617em 0 -0.44em #000000, -0.671em -0.488em 0 -0.46em #000000, -0.749em -0.34em 0 -0.477em #000000;
+  }
+  38% {
+    box-shadow: 0 -0.83em 0 -0.4em #000000, -0.377em -0.74em 0 -0.42em #000000, -0.645em -0.522em 0 -0.44em #000000, -0.775em -0.297em 0 -0.46em #000000, -0.82em -0.09em 0 -0.477em #000000;
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+    box-shadow: 0 -0.83em 0 -0.4em #000000, 0 -0.83em 0 -0.42em #000000, 0 -0.83em 0 -0.44em #000000, 0 -0.83em 0 -0.46em #000000, 0 -0.83em 0 -0.477em #000000;
+  }
+}
+@keyframes load6 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+    box-shadow: 0 -0.83em 0 -0.4em #000000, 0 -0.83em 0 -0.42em #000000, 0 -0.83em 0 -0.44em #000000, 0 -0.83em 0 -0.46em #000000, 0 -0.83em 0 -0.477em #000000;
+  }
+  5%, 95% {
+    box-shadow: 0 -0.83em 0 -0.4em #000000, 0 -0.83em 0 -0.42em #000000, 0 -0.83em 0 -0.44em #000000, 0 -0.83em 0 -0.46em #000000, 0 -0.83em 0 -0.477em #000000;
+  }
+  10%, 59% {
+    box-shadow: 0 -0.83em 0 -0.4em #000000, -0.087em -0.825em 0 -0.42em #000000, -0.173em -0.812em 0 -0.44em #000000, -0.256em -0.789em 0 -0.46em #000000, -0.297em -0.775em 0 -0.477em #000000;
+  }
+  20% {
+    box-shadow: 0 -0.83em 0 -0.4em #000000, -0.338em -0.758em 0 -0.42em #000000, -0.555em -0.617em 0 -0.44em #000000, -0.671em -0.488em 0 -0.46em #000000, -0.749em -0.34em 0 -0.477em #000000;
+  }
+  38% {
+    box-shadow: 0 -0.83em 0 -0.4em #000000, -0.377em -0.74em 0 -0.42em #000000, -0.645em -0.522em 0 -0.44em #000000, -0.775em -0.297em 0 -0.46em #000000, -0.82em -0.09em 0 -0.477em #000000;
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+    box-shadow: 0 -0.83em 0 -0.4em #000000, 0 -0.83em 0 -0.42em #000000, 0 -0.83em 0 -0.44em #000000, 0 -0.83em 0 -0.46em #000000, 0 -0.83em 0 -0.477em #000000;
+  }
+}
+.hidden {
+  display: none;
+}
+.emailHint {
+  text-align: center;
+  padding: 10px;
+}
+p {
+  word-wrap: break-word;
+}
+@media (min-width:1200px) {
+  #our-name {
+    font-size: 90px;
+  }
+  #slogan {
+    font-size: 20px;
+  }
+  .navsidebar {
+    display: none;
+  }
+}
+@media (max-width:1199px) {
+  #our-name {
+    font-size: 70px;
+  }
+  #slogan {
+    font-size: 19px;
+  }
+}
+@media (max-width:991px) {
+  #our-name {
+    font-size: 63px;
+  }
+  #slogan {
+    font-size: 18px;
+  }
+}
+@media (max-width:767px) {
+  #our-name {
+    font-size: 43px;
+  }
+  #slogan {
+    font-size: 14px;
+  }
+}
+@media (min-width:768px) {
+  .adapt-br {
+    display: none;
+  }
+}
+#feedback-div {
+  position: fixed;
+  bottom: -340px;
+  right: 20px;
+  width: 200px;
+  height: 380px;
+  background-color: #666;
+  color: white;
+  border-radius: 10px 10px 0 0;
+}
+#feedback-div:hover {
+  cursor: pointer;
+}
+#feedback-title {
+  border-bottom: 1px solid #ccc;
+  text-align: center;
+  padding: 5px 20px 10px 20px;
+  font-size: 20px;
+}
+.feedback-part {
+  width: 90%;
+  margin: 0 auto;
+  margin-top: 8px;
+}
+.label {
+  text-shadow: none;
+}
+.twitter-typeahead {
+  width: 100%;
+}
+.tt-hint {
+  color: #999;
+  width: 100%;
+}
+.tt-input {
+  width: 100%;
+}
+.tt-dropdown-menu {
+  width: 100%;
+  margin-top: 12px;
+  padding: 8px 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+  -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+  -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+}
+.tt-suggestion {
+  padding: 3px 20px;
+  font-size: 18px;
+  line-height: 24px;
+}
+.tt-suggestion.tt-cursor {
+  color: #fff;
+  background-color: #0097cf;
+}
+.tt-suggestion p {
+  margin: 0;
+}
+.search-avatar {
+  height: 40px;
+  width: 40px;
+  margin-right: 10px;
+}
+.info-number {
+  font-family: Constantia, Georgia;
+}
+.suggestionDrop {
+  cursor: pointer;
+}
