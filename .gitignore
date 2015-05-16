@@ -2,3 +2,12 @@ node_modules/
 dist/
 .tmp/
 bower_components/
+
+Thumbs.db
+.DS_Store
+
+*.swp
+*.swo
+
+find_fattest_objects.sh
+purge_objects.sh
