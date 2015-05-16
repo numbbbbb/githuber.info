@@ -1,44 +1,36 @@
-App.controller('rankCtl', ['$scope', '$location', function($scope, $location) {
+App.controller('rankCtl', ['$scope', '$location', '$routeParams', 'anchorScroll', '$http', function($scope, $location, $routeParams, anchorScroll, $http) {
+    var target = $routeParams.target;
     $('#bar-search').show(0);
     clearBDShare();
-    $scope.full_rank = {
-        name: "sss",
-        data: []
-    };
+    if (!$scope.data) {
+        $http.get("http://staticfile00.b0.upaiyun.com/rank.json").success( function(data) {
+            $scope.data = data;
+            $scope.languages = data.languages;
+            if (target) {
+                $scope.full_rank = $scope.languages[target];
+            } else {
+                $scope.full_rank = data.full_rank;
+            }
+            $scope.full_rank_data = $scope.full_rank.data.slice(0,20);
+        });
+    }
+    $scope.full_rank_switch = true;
     $scope.isDetail = true;
-    $scope.languages = [];
-    $scope.getRankClass = function(index) {
-        if (index == 0) {
-            return "rank1";
-        } else if (index == 1) {
-            return "rank2";
-        } else if (index == 2) {
-            return "rank3"
+    $scope.switchFullRank = function(language) {
+        if ($scope.full_rank_switch) {
+            $scope.full_rank_data = $scope.full_rank.data;
         } else {
-            return "";
+            $scope.full_rank_data = $scope.full_rank.data.slice(0,20);
+            $('body,html').animate({
+                scrollTop: 800,
+            }, 500);
         }
+        $scope.full_rank_switch = !$scope.full_rank_switch;
+    }
+    $scope.getDetail = function(language) {
+        $location.path("/rank/" + language);
+        $('body,html').animate({
+            scrollTop: 0,
+        }, 500);
     };
-    var fake_user = {
-        name: 'XXX',
-        // gravater: "https://avatars.githubusercontent.com/u/2572987?v=3",
-        followers: 322,
-        stars: 3222,
-        repos: 222,
-        location: "China",
-        language: "Javascript",
-        score: 233,
-        days: 233
-    }
-    for (var i=0, l=10; i<l; i++) {
-        $scope.full_rank.data.push(fake_user);
-    }
-    for (var i=0, l=6; i<l; i++) {
-        var temp = {};
-        temp.name = "name";
-        temp.data = [];
-        for (var j=0, l=10;j<l;j++) {
-            temp.data.push(fake_user);
-        }
-        $scope.languages.push(temp);
-    }
 }]);

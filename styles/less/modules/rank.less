@@ -1,0 +1,106 @@
+/*rank页*/
+.githuber-rank {
+    .animate-repeat {
+    line-height:40px;
+    list-style:none;
+    box-sizing:border-box;
+  }
+
+  .full-rank {
+    float: none;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    transition: 1s liner all;
+    .rank-table img{
+      width: 60px;
+      height: 60px;
+    }
+    .rank-table.table tr td{
+      line-height: 40px;
+      max-width: 80px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    // .rankInfo {
+    //   display: block;
+    //   &.ng-move,&.ng-enter,&.ng-leave {
+    //     transition:all linear 0.5s;
+    //   }
+    //   &.ng-leave.ng-leave-active,&.ng-move,&.ng-enter {
+    //     opacity:0;
+    //     max-height:0;
+    //   }
+    //   &.ng-leave,&.ng-move.ng-move-active,&.ng-enter.ng-enter-active {
+    //     opacity:1;
+    //     max-height:40px;
+    //   }
+    // }
+    .switch {
+      position: absolute;
+      bottom: 21px;
+      right: 10px;
+      display: inline-block;
+      height: 40px;
+      width: 50px;
+      z-index: 10;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+      text-indent: 100%;
+      white-space: nowrap;
+      background: rgba(23,144,207,0.4) url(/images/cd-top-arrow.svg) no-repeat center 50%;
+      transition: opacity .3s 0s, visibility 0s .3s;
+      transform: rotateX(0deg);
+      &:hover {
+        background: rgba(23,144,207,0.8) url(/images/cd-top-arrow.svg) no-repeat center 50%;
+      }
+      &.reversal {
+        transform: rotateX(180deg);
+      }
+    }
+  }
+  .language-rank {
+    float: none;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0px;
+    .infoNoteLabel{
+      margin-left: 0px;
+      width: 40%;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+  }
+  .rank-table {
+    margin-top: 30px;
+    width: 90%;
+    margin-left: 5%;
+  }
+}
+
+.infoNoteLabel {
+  &.JavaScript-color{
+    background-color: #f1e05a;
+  }
+  &.CSS-color{
+    background-color: #563d7c;
+  }
+  &.Python-color{
+    background-color: #3581ba;
+  }
+  &.Ruby-color{
+    background-color: #701516;
+  }
+  &.Objective-C-color{
+    background-color: #438eff;
+  }
+  &.C-color{
+    background-color: #555;
+  }
+  &.PHP-color{
+    background-color: #4F5D95;
+  }
+  &.Java-color{
+    background-color: #b07219;
+  }
+}
