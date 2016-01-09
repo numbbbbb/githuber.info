@@ -16,12 +16,10 @@
     <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
 
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-    <!-- <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" /> -->
-    <!-- build:css(.) styles/vendor.css -->
-    <!-- bower:css -->
-    <!-- endbower -->
+    <!-- build:css(.) /styles/vendor.css -->
+    <link rel="stylesheet" href="bower_components/bootstrap-paper/dist/css/bootstrap.min.css" />
     <!-- endbuild -->
-    <link rel="stylesheet" href="http://staticfile00.b0.upaiyun.com/vendor.css" />
+    <!-- <link rel="stylesheet" href="http://staticfile00.b0.upaiyun.com/vendor.css" /> -->
     <!-- build:css(.tmp) /styles/main.css -->
     <link rel="stylesheet" href="/styles/main.css">
     <!-- endbuild -->
@@ -34,7 +32,7 @@
 
     <!-- Main App Content -->
     <div style="overflow:hidden;width:100%;">
-        <nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation" ng-controller="navCtl">
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation" ng-controller="navCtl">
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
@@ -56,7 +54,7 @@
                     </form>
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="/rank">排行榜</a>
-                        <li><a href="/report">GitHub 报告</a>
+                        <li><a href="#/report">GitHub 报告</a>
                         </li>
                         <li><a href="/donate">打赏</a>
                         </li>
@@ -112,25 +110,26 @@
     <!-- endbuild -->
 
 
-     <!-- <script src="bower_components/jquery/dist/jquery.js"></script>
-    // <script src="bower_components/angular/angular.js"></script>
-    // <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
-    // <script src="bower_components/angular-animate/angular-animate.js"></script>
-    // <script src="bower_components/angular-aria/angular-aria.js"></script>
-    // <script src="bower_components/angular-cookies/angular-cookies.js"></script>
-    // <script src="bower_components/angular-messages/angular-messages.js"></script>
-    // <script src="bower_components/angular-resource/angular-resource.js"></script>
-    // <script src="bower_components/angular-route/angular-route.js"></script>
-    // <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
-    // <script src="bower_components/angular-touch/angular-touch.js"></script>
-    // <script src="bower_components/localdb/dist/0.1.0/localdb.js"></script>
-    // <script src="bower_components/echarts/build/dist/echarts.js"></script>
-    // <script src="bower_components/typeahead.js/dist/typeahead.bundle.js"></script> -->
-   <!-- build:js(.) scripts/vendor.js -->
+   <!-- build:js(.) /scripts/vendor.js -->
     <!-- bower:js -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-aria/angular-aria.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-messages/angular-messages.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-touch/angular-touch.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="bower_components/localdb/dist/0.1.0/localdb.js"></script>
+    <script src="bower_components/echarts/build/dist/echarts.js"></script>
+    <script src="bower_components/typeahead.js/dist/typeahead.bundle.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
-    <script src="http://staticfile00.b0.upaiyun.com/vendor.js"></script>
+    <!-- <script src="http://staticfile00.b0.upaiyun.com/vendor.js"></script> -->
 
         <!-- build:js({.tmp,app}) /scripts/scripts.js -->
         <script src="scripts/app.js"></script>
@@ -144,8 +143,6 @@
         <script src="scripts/controllers/aboutCtl.js"></script>
         <script src="scripts/bigcache/av-mini.js"></script>
         <script src="scripts/bigcache/bigcache.js"></script>
-<!--         <script src="scripts/controllers/main.js"></script>
-        <script src="scripts/controllers/about.js"></script> -->
         <!-- endbuild -->
 </body>
 </html>

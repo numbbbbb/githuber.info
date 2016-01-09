@@ -6,7 +6,7 @@ require.config({
 })
 
 // Angular app
-var App = angular.module('App', ['ngRoute']);
+var App = angular.module('App', ['ngRoute', 'ui.bootstrap']);
 App.config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
     $routeProvider.
     when('/index', {
@@ -40,7 +40,7 @@ App.config(['$locationProvider', '$routeProvider', function($locationProvider, $
     otherwise({
         redirectTo: '/index'
     });
-    $locationProvider.html5Mode(true);
+    // $locationProvider.html5Mode(true);
 }]);
 
 

@@ -67,6 +67,53 @@ Object.size = function(obj) {
     return size;
 };
 
+function generateChartData(title, xAxis, yAxis, saries, legend) {
+    var series = [];
+    for (var index in saries) {
+        series.push({
+            name: saries[index].name,
+            type: saries[index].type,
+            itemStyle: {
+                normal: {
+                    label: {
+                        show: true,
+                        position: 'top'
+                    }
+                }
+            },
+            data: saries[index].data
+        });
+    };
+    var chartConfig = {
+        title: {
+            text: title,
+            subtext: '',
+            x: 'center'
+        },
+        legend: {
+            data: legend,
+            y: '10%'
+        },
+        tooltip: {
+            trigger: 'axis'
+        },
+        calculable: true,
+        xAxis: [{
+            type: xAxis.type,
+            name: xAxis.name,
+            data: xAxis.data
+        }],
+        yAxis: [{
+            type: yAxis.type,
+            name: yAxis.name
+        }],
+        series: series
+    };
+    return chartConfig;
+}
+
+
+
 $(function() {
     $(".navbar a").click(function() {
         $(".navbar-toggle").not(".collapsed").click()
