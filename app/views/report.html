@@ -10,15 +10,23 @@
     <nav class="navsidebar" ng-class="sideBarClass">
         <div class="navbar-side">
             <ul>
-                <li><a ng-click="targetTo('#foreword')">前言</a></li>
-                <li><a ng-click="targetTo('#cn_analyse')">中国开发者数据统计</a></li>
-                <li><a ng-click="targetTo('#cn_us_compar')">中美开发者对比</a></li>
-                <li><a ng-click="targetTo('#compar_average')">各项平均值对比</a></li>
+                <li class="section-title">
+                    <a ng-click="targetTo('#foreword')">前言</a>
+                    <ul class="section-content" >
+                        Some content
+                    </ul>
+                </li>
+                <li class="section-title">
+                    <a ng-click="targetTo('#cn_analyse')">中国开发者数据统计</a>
+                    <ul class="section-content">
+                        Some content
+                    </ul>
+                </li>
             </ul>
             <hr>
             <ul>
-                <li><a href="http://pan.baidu.com/s/1hqeR1BI">PDF版下载</a></li>
-                <li><a href="http://weibo.com/u/5443462476">关注我们@微博</a></li>
+                <li class="section-title"><a href="http://pan.baidu.com/s/1hqeR1BI">PDF版下载</a></li>
+                <li class="section-title"><a href="http://weibo.com/u/5443462476">关注我们@微博</a></li>
             </ul>
             <span class='hide-side-btn' ng-click="hideSideBar()"><i class="glyphicon glyphicon-chevron-left"></i></span>
         </div>
@@ -34,6 +42,7 @@
                         <div id="chart-china" class="chart"></div>
                     </uib-tab>
                     <uib-tab heading="中国数据">
+                        <div id="chart-map" class="chart"></div>
                     </uib-tab>
                     <uib-tab heading="美国数据">
                         <div id="chart-america"></div>

@@ -1,5 +1,8 @@
 App.controller('reportCtl', ['$scope', '$location', 'anchorScroll', function($scope, $location, anchorScroll) {
     $('#bar-search').show(0);
+    var chartDomList = ["#chart-map", "#chart-china"];
+    var DeviceWidth = $(window).width();
+    var ChartRaito = 9 / 16;
     clearBDShare();
     $scope.hideSideBar = function() {
         $scope.sideBarClass = ($scope.sideBarClass == "slide-left" ? "" : "slide-left");
@@ -28,6 +31,18 @@ App.controller('reportCtl', ['$scope', '$location', 'anchorScroll', function($sc
     }];
     var legend = ["test1", "test2"];
     var chartData = generateChartData("测试", xAxis, yAxis, saries, legend);
-    console.log(chartData);
-    drawChart("chart-china", chartData, "bar", "default");
+    var chartData2 = generateMapChartData();
+    setTimeout(function() {
+        for (var i in chartDomList) {
+            var dom = chartDomList[i];
+            console.log(dom);
+            $(dom).width(DeviceWidth / 6 * 4);
+            $(dom).height(DeviceWidth / 6 * 4 * ChartRaito);
+        }
+        drawChart("chart-china", chartData, "default");
+        window.chart = drawChart("chart-map", chartData2, "default");
+        chart.on('click', function(type, name, selected) {
+            console.log(type);
+        });
+    });
 }]);

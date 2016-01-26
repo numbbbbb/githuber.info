@@ -1,8 +1,6 @@
 .report-body {
     margin-top: 20px;
-    height: 1000px;
     .report-section {
-        height: 500px;
         background: white;
         box-shadow: 1px 1px 10px 0;
         .report-section-title {
@@ -27,6 +25,14 @@
     background: white;
     box-shadow: 1px 1px 10px 0;
     transition: left 1s;
+    .section-title {
+        a {
+            color: rgb(102, 102, 102);
+        }
+    }
+    .section-content {
+        color: rgb(102, 102, 102);
+    }
     &.slide-left {
         left: -210px;
         .hide-side-btn {
@@ -66,6 +72,6 @@
 }
 
 .chart {
-    width: 100%;
-    height: 400px;
+    display: inherit;
+    margin: 20px auto;
 }

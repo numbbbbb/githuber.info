@@ -1,10 +1,3 @@
-// Basic Init
-require.config({
-  paths: {
-    echarts: '/scripts'
-  }
-})
-
 // Angular app
 var App = angular.module('App', ['ngRoute', 'ui.bootstrap']);
 App.config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
